@@ -1,5 +1,13 @@
+import { Text, Box } from "@chakra-ui/react";
+
 function App() {
-  return <div className="App">The open-source BEB dimension browser</div>;
+  return (
+    <Box>
+      <Text fontSize="3xl" fontWeight="bold">
+        The open-sourced BEB dimension browser!
+      </Text>
+    </Box>
+  );
 }
 
 export default App;
