@@ -3,13 +3,14 @@ import { useParams } from "react-router-dom";
 
 import { PostFeedWithContext } from "../containers/post/PostFeedWithContext";
 import { CommunityContextProvider } from "../context/CommunityContext";
+import { ChannelContextProvider } from "../context/ChannelContext";
 
-const withDimensionContext = (Component) => {
+const withDimensionChannelContext = (Component) => {
   const Memo = React.memo(Component);
 
   // eslint-disable-next-line react/display-name
   return () => {
-    const { dimension } = useParams();
+    const { dimension, channelId } = useParams();
     const domain = React.useMemo(() => {
       return dimension?.split(".")?.[0];
     }, [dimension]);
@@ -18,13 +19,17 @@ const withDimensionContext = (Component) => {
     }, [dimension]);
     return (
       <CommunityContextProvider domain={domain} tld={tld}>
-        <Memo />
+        <ChannelContextProvider channelId={channelId}>
+          <Memo />
+        </ChannelContextProvider>
       </CommunityContextProvider>
     );
   };
 };
-const DimensionContent = () => {
+const DimensionChannelContent = () => {
   return <PostFeedWithContext></PostFeedWithContext>;
 };
 
-export const Dimension = withDimensionContext(DimensionContent);
+export const DimensionChannel = withDimensionChannelContext(
+  DimensionChannelContent
+);
