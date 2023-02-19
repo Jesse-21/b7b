@@ -9,7 +9,7 @@ const withDimensionContext = (Component) => {
 
   // eslint-disable-next-line react/display-name
   return () => {
-    const { dimension } = useParams();
+    const { dimension, channelId } = useParams();
     const domain = React.useMemo(() => {
       return dimension?.split(".")?.[0];
     }, [dimension]);
@@ -17,7 +17,7 @@ const withDimensionContext = (Component) => {
       return dimension?.split(".")?.[1];
     }, [dimension]);
     return (
-      <CommunityContextProvider domain={domain} tld={tld}>
+      <CommunityContextProvider domain={domain} tld={tld} channelId={channelId}>
         <Memo />
       </CommunityContextProvider>
     );
