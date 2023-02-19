@@ -9,6 +9,10 @@ export const GET_CHANNEL = gql`
       _id
       getChannelById(id: $id) {
         ...CoreChannelFields
+        currentAccountPermissions {
+          canRead
+          canWrite
+        }
       }
     }
   }
