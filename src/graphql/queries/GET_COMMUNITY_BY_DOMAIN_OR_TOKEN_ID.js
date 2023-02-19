@@ -17,6 +17,11 @@ export const GET_COMMUNITY_BY_DOMAIN_OR_TOKEN_ID = gql`
         tld: $tld
       ) {
         ...CoreCommunityFields
+        currentAccountPermissions {
+          canAdmin
+          canRead
+          canWrite
+        }
       }
     }
   }
