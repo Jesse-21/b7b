@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route, Outlet } from "react-router-dom";
 
 import { Home } from "./pages/Home";
+import { Dimension } from "./pages/Dimension";
 
 export const AppRoutes = () => {
   return (
@@ -17,7 +18,7 @@ export const AppRoutes = () => {
         }
       >
         <Route index element={<Home />} />
-        {/* <Route path="about" element={<About />} /> */}
+        <Route path="d/:domain" element={<Dimension />} />
         {/* <Route path="dashboard" element={<Dashboard />} /> */}
         {/* <Route path="*" element={<NoMatch />} /> */}
       </Route>
