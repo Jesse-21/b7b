@@ -32,7 +32,8 @@ const createDimensionAuthLink = (dimension) => {
 const createDimensionHttpLink = (dimension) => {
   // @TODO: query dimension's host URI from contract
   return createHttpLink({
-    uri: "https://protocol.beb.xyz/graphql",
+    // uri: "https://protocol.beb.xyz/graphql",
+    uri: "http://localhost:8080/graphql",
   });
 };
 

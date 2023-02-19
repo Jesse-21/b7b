@@ -14,7 +14,7 @@ PostFeedContext.displayName = "PostFeedContext";
 export const usePostFeedContext = () => React.useContext(PostFeedContext);
 
 export const PostFeedContextProvider = ({ children, limit, sort, filters }) => {
-  const [isEnd, setIsEnd] = React.useState(false);
+  // const [isEnd, setIsEnd] = React.useState(false);
   //   const [refreshLoading, setRefreshLoading] = React.useState(false);
 
   const { data, loading, error } = useQuery(GET_POST_FEED, {
@@ -33,7 +33,7 @@ export const PostFeedContextProvider = ({ children, limit, sort, filters }) => {
     <PostFeedContext.Provider
       value={{
         postFeed,
-        isEnd,
+        // isEnd,
         loading,
         error,
       }}

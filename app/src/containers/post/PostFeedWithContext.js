@@ -2,15 +2,13 @@ import React from "react";
 
 import { Text, Box } from "@chakra-ui/react";
 
-import { useParams } from "react-router-dom";
 import {
   PostFeedContextProvider,
   usePostFeedContext,
 } from "../../context/PostFeedContext";
+import { useCommunityContext } from "../../context/CommunityContext";
 
-const PostFeed = () => {
-  const { postFeed, loading, error } = usePostFeedContext();
-  //   console.log("rendered", postFeed);
+const PostFeedWrapper = ({ postFeed }) => {
   return (
     <Box>
       <Text fontSize="3xl" fontWeight="bold">
@@ -25,19 +23,33 @@ export const withPostFeedContext = (Component) => {
 
   // eslint-disable-next-line react/display-name
   return () => {
+    const { postFeed, loading, error } = usePostFeedContext();
+    return <Memo postFeed={postFeed} />;
+  };
+};
+export const withCommunityContext = (Component) => {
+  const Memo = React.memo(Component);
+
+  // eslint-disable-next-line react/display-name
+  return () => {
+    const { community } = useCommunityContext();
+    if (!community) return <>No community</>;
+
     return (
       <PostFeedContextProvider
         limit={10}
         sort="lastActivity"
         filters={{
-          explore: true,
+          community: community?._id,
           excludeChannels: true,
           excludeComments: true,
         }}
       >
-        <Memo />
+        <Memo communityId={community?._id} />
       </PostFeedContextProvider>
     );
   };
 };
-export const PostFeedWithContext = withPostFeedContext(PostFeed);
+export const PostFeedWithContext = withCommunityContext(
+  withPostFeedContext(PostFeedWrapper)
+);
