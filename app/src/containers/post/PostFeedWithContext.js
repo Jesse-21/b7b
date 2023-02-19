@@ -1,5 +1,4 @@
 import React from "react";
-
 import { Text, Box } from "@chakra-ui/react";
 
 import {
@@ -8,12 +7,14 @@ import {
 } from "../../context/PostFeedContext";
 import { useCommunityContext } from "../../context/CommunityContext";
 
+import { PostWithContext } from "./PostWithContext";
+
 const PostFeedWrapper = ({ postFeed }) => {
   return (
     <Box>
-      <Text fontSize="3xl" fontWeight="bold">
-        BEB dimension
-      </Text>
+      {postFeed?.map((post) => (
+        <PostWithContext key={post?._id} post={post} />
+      ))}
     </Box>
   );
 };
