@@ -1,7 +1,7 @@
 /* eslint-disable no-inline-comments */
 import { useLazyQuery } from "@apollo/client";
 
-import { GET_POST_FEED } from "../../gql/queries/GET_POST_FEED";
+import { GET_POST_FEED } from "../../graphql/queries/GET_POST_FEED";
 
 export const usePostFeed = () => {
   const [
