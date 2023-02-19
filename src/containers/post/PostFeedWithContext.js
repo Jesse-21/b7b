@@ -64,7 +64,7 @@ export const withChannelContext = (Component) => {
     const { channel, loading } = useChannelContext();
     if (loading) return <>Loading...</>;
     if (!channel?._id) return <>No channel</>;
-    // if (!community.currentAccountPermissions.canRead) return <>No access</>;
+    if (!channel.currentAccountPermissions.canRead) return <>No access</>;
 
     return (
       <PostFeedContextProvider
