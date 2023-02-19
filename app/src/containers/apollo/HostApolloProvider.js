@@ -9,10 +9,14 @@ export const HostApolloProvider = ({ children, dimension }) => {
   return <ApolloProvider client={client}>{children}</ApolloProvider>;
 };
 
+const MemoizedHostApolloProvider = React.memo(HostApolloProvider);
+
 export const HostApolloProviderWithParams = ({ children }) => {
   const { dimension } = useParams();
 
   return (
-    <HostApolloProvider dimension={dimension}>{children}</HostApolloProvider>
+    <MemoizedHostApolloProvider dimension={dimension}>
+      {children}
+    </MemoizedHostApolloProvider>
   );
 };
