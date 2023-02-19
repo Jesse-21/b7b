@@ -6,6 +6,7 @@ import {
   usePostFeedContext,
 } from "../../context/PostFeedContext";
 import { useCommunityContext } from "../../context/CommunityContext";
+import { useChannelContext } from "../../context/ChannelContext";
 
 import { PostWithContext } from "./PostWithContext";
 
@@ -28,6 +29,7 @@ export const withPostFeedContext = (Component) => {
     return <Memo postFeed={postFeed} />;
   };
 };
+
 export const withCommunityContext = (Component) => {
   const Memo = React.memo(Component);
 
@@ -53,6 +55,36 @@ export const withCommunityContext = (Component) => {
     );
   };
 };
+
+export const withChannelContext = (Component) => {
+  const Memo = React.memo(Component);
+
+  // eslint-disable-next-line react/display-name
+  return () => {
+    const { channel, loading } = useChannelContext();
+    if (loading) return <>Loading...</>;
+    if (!channel?._id) return <>No channel</>;
+    // if (!community.currentAccountPermissions.canRead) return <>No access</>;
+
+    return (
+      <PostFeedContextProvider
+        limit={10}
+        sort="lastActivity"
+        filters={{
+          channel: channel?._id,
+          excludeChannels: false,
+          excludeComments: true,
+        }}
+      >
+        <Memo channelId={channel?._id} />
+      </PostFeedContextProvider>
+    );
+  };
+};
 export const PostFeedWithContext = withCommunityContext(
+  withPostFeedContext(PostFeedWrapper)
+);
+
+export const PostFeedWithChannelContext = withChannelContext(
   withPostFeedContext(PostFeedWrapper)
 );

@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 
-import { PostFeedWithContext } from "../containers/post/PostFeedWithContext";
+import { PostFeedWithChannelContext } from "../containers/post/PostFeedWithContext";
 import { CommunityContextProvider } from "../context/CommunityContext";
 import { ChannelContextProvider } from "../context/ChannelContext";
 
@@ -27,7 +27,7 @@ const withDimensionChannelContext = (Component) => {
   };
 };
 const DimensionChannelContent = () => {
-  return <PostFeedWithContext></PostFeedWithContext>;
+  return <PostFeedWithChannelContext></PostFeedWithChannelContext>;
 };
 
 export const DimensionChannel = withDimensionChannelContext(
