@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route, Outlet } from "react-router-dom";
 
-import App from "./App";
+import { Home } from "./pages/Home";
 
 export const AppRoutes = () => {
   return (
@@ -16,7 +16,7 @@ export const AppRoutes = () => {
           </>
         }
       >
-        <Route index element={<App />} />
+        <Route index element={<Home />} />
         {/* <Route path="about" element={<About />} /> */}
         {/* <Route path="dashboard" element={<Dashboard />} /> */}
         {/* <Route path="*" element={<NoMatch />} /> */}

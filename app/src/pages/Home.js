@@ -1,6 +1,6 @@
 import { Text, Box } from "@chakra-ui/react";
 
-function App() {
+export const Home = () => {
   return (
     <Box>
       <Text fontSize="3xl" fontWeight="bold">
@@ -8,6 +8,4 @@ function App() {
       </Text>
     </Box>
   );
-}
-
-export default App;
+};
