@@ -30,10 +30,6 @@ export const CORE_POST_FIELDS = gql`
     channel {
       ...CoreChannelFields
     }
-    # currentAccountPermissions {
-    #   _id
-    #   canRead
-    # }
     parent {
       _id
       account {

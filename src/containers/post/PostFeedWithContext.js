@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, Box } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/layout";
 
 import {
   PostFeedContextProvider,
@@ -34,7 +34,7 @@ export const withCommunityContext = (Component) => {
   // eslint-disable-next-line react/display-name
   return () => {
     const { community } = useCommunityContext();
-    if (!community) return <>No community</>;
+    if (!community?._id) return <>No community</>;
 
     return (
       <PostFeedContextProvider
