@@ -2,6 +2,10 @@ import { ApolloClient, InMemoryCache, createHttpLink } from "@apollo/client";
 import { RetryLink } from "@apollo/client/link/retry";
 import { setContext } from "@apollo/client/link/context";
 import Cookies from "js-cookie";
+import { ethers } from "ethers";
+
+import { abi } from "./abis/DimensionResolver";
+import { getTokenIdFromLabel } from "./get-token-id-from-label";
 
 const retryLink = new RetryLink();
 
@@ -30,7 +34,15 @@ const createDimensionAuthLink = (dimension) => {
   });
 };
 const createDimensionHttpLink = (dimension) => {
-  // @TODO: query dimension's host URI from contract
+  const myContract = new ethers.Contract(
+    "0x2167A15c97fE3A28c0eebfA23a3368974A2b64E5",
+    abi,
+    new ethers.InfuraProvider("goerli")
+  );
+  const tokenId = getTokenIdFromLabel(dimension);
+  console.log(tokenId, "tokenId");
+  myContract.get(tokenId).then((res) => console.log(res));
+
   return createHttpLink({
     // uri: "https://protocol.beb.xyz/graphql",
     uri: "http://localhost:8080/graphql",
