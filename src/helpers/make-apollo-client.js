@@ -9,22 +9,16 @@ import { getTokenIdFromLabel } from "./get-token-id-from-label";
 
 const retryLink = new RetryLink();
 
-const createDimensionAuthKey = (dimension) => {
+const createDimensionAuthKey = (dimension, tld) => {
   if (!dimension) return "default-auth-token";
-  const split = dimension.split(".");
-  const locale = split[0];
-  const tld = split[1] || "beb";
 
-  const cleanLocale = locale.replace(/[^a-zA-Z0-9]/g, "").toLowerCase();
-  return `auth-token-${cleanLocale}-${tld}`;
+  return `auth-token-${dimension}-${tld}`;
 };
 const createDimensionAuthLink = (dimension) => {
   const authKey = createDimensionAuthKey(dimension);
   return setContext((_, { headers }) => {
-    // get the authentication token from local storage if it exists
     const token = Cookies.get(authKey);
 
-    // return the headers to the context so httpLink can read them
     return {
       headers: {
         ...headers,
@@ -34,9 +28,17 @@ const createDimensionAuthLink = (dimension) => {
   });
 };
 const createDimensionHttpLink = (dimension) => {
+  if (!dimension) {
+    // @TODO - make this configurable default dimension
+    return createHttpLink({
+      // uri: "https://protocol.beb.xyz/graphql",
+      uri: "http://localhost:8080/graphql",
+    });
+  }
   const myContract = new ethers.Contract(
     "0x2167A15c97fE3A28c0eebfA23a3368974A2b64E5",
     abi,
+    // @TODO - make this configurable with API key
     new ethers.InfuraProvider("goerli")
   );
   const tokenId = getTokenIdFromLabel(dimension);
@@ -50,8 +52,13 @@ const createDimensionHttpLink = (dimension) => {
 };
 
 export const makeApolloClient = (dimension) => {
-  const httpLink = createDimensionHttpLink(dimension);
-  const authLink = createDimensionAuthLink(dimension);
+  const split = dimension?.split(".");
+  const locale = split?.[0];
+  const cleanLocale = locale?.replace(/[^a-zA-Z0-9]/g, "").toLowerCase();
+  const tld = split?.[1] || "beb";
+
+  const httpLink = createDimensionHttpLink(cleanLocale, tld);
+  const authLink = createDimensionAuthLink(cleanLocale, tld);
 
   const client = new ApolloClient({
     cache: new InMemoryCache(),

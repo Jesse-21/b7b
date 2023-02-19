@@ -13,11 +13,9 @@ const MemoizedHostApolloProvider = React.memo(HostApolloProvider);
 
 export const HostApolloProviderWithParams = ({ children }) => {
   const { dimension } = useParams();
-  const cleanDimension = React.useMemo(() => {
-    return dimension?.split?.(".")?.[0];
-  }, [dimension]);
+
   return (
-    <MemoizedHostApolloProvider dimension={cleanDimension}>
+    <MemoizedHostApolloProvider dimension={dimension}>
       {children}
     </MemoizedHostApolloProvider>
   );
