@@ -6,6 +6,7 @@ import { ethers } from "ethers";
 
 import { abi } from "./abis/DimensionResolver";
 import { getTokenIdFromLabel } from "./get-token-id-from-label";
+import { config } from "../config";
 
 const retryLink = new RetryLink();
 
@@ -27,12 +28,11 @@ const createDimensionAuthLink = (dimension) => {
     };
   });
 };
-const createDimensionHttpLink = (dimension) => {
+const createDimensionHttpLink = async (dimension) => {
   if (!dimension) {
-    // @TODO - make this configurable default dimension
     return createHttpLink({
       // uri: "https://protocol.beb.xyz/graphql",
-      uri: "http://localhost:8080/graphql",
+      uri: config.DEFAULT_URI,
     });
   }
   const myContract = new ethers.Contract(
@@ -42,22 +42,35 @@ const createDimensionHttpLink = (dimension) => {
     new ethers.InfuraProvider("goerli")
   );
   const tokenId = getTokenIdFromLabel(dimension);
-  console.log(tokenId, "tokenId");
-  myContract.get(tokenId).then((res) => console.log(res));
+  let hostUri = await myContract.get(tokenId);
+  let uri;
+  if (!hostUri) {
+    uri = new URL(config.DEFAULT_URI);
+  } else {
+    if (hostUri.slice(0, 4) !== "http") {
+      hostUri = "http://" + hostUri;
+    }
+    try {
+      uri = new URL(hostUri);
+    } catch (e) {
+      // invalid uri
+      uri = new URL(config.DEFAULT_URI);
+    }
+  }
 
   return createHttpLink({
     // uri: "https://protocol.beb.xyz/graphql",
-    uri: "http://localhost:8080/graphql",
+    uri: uri.toString(),
   });
 };
 
-export const makeApolloClient = (dimension) => {
+export const makeApolloClient = async (dimension) => {
   const split = dimension?.split(".");
   const locale = split?.[0];
   const cleanLocale = locale?.replace(/[^a-zA-Z0-9]/g, "").toLowerCase();
   const tld = split?.[1] || "beb";
 
-  const httpLink = createDimensionHttpLink(cleanLocale, tld);
+  const httpLink = await createDimensionHttpLink(cleanLocale, tld);
   const authLink = createDimensionAuthLink(cleanLocale, tld);
 
   const client = new ApolloClient({
