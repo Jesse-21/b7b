@@ -8,13 +8,14 @@ import {
 import { useCommunityContext } from "../../context/CommunityContext";
 import { useChannelContext } from "../../context/ChannelContext";
 
-import { PostWithContext } from "./PostWithContext";
+import { PostWithActions } from "./PostWithContext";
 
 const PostFeedWrapper = ({ postFeed }) => {
+  console.log("PostFeedWrapper", postFeed);
   return (
     <Box>
       {postFeed?.map((post) => (
-        <PostWithContext key={post?._id} post={post} />
+        <PostWithActions key={post?._id} post={post} />
       ))}
     </Box>
   );

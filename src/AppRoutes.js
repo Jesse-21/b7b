@@ -6,6 +6,7 @@ import { HostApolloProviderWithParams } from "./containers/apollo/HostApolloProv
 import { Home } from "./pages/Home";
 import { Dimension } from "./pages/Dimension";
 import { DimensionChannel } from "./pages/DimensionChannel";
+import { Post } from "./pages/Post";
 
 export const AppRoutes = () => {
   return (
@@ -34,6 +35,14 @@ export const AppRoutes = () => {
           element={
             <HostApolloProviderWithParams>
               <DimensionChannel />
+            </HostApolloProviderWithParams>
+          }
+        />
+        <Route
+          path="d/:dimension/posts/:postId"
+          element={
+            <HostApolloProviderWithParams>
+              <Post />
             </HostApolloProviderWithParams>
           }
         />

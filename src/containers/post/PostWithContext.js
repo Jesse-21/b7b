@@ -1,4 +1,5 @@
 import React from "react";
+import { usePostContext } from "../../context/PostContext";
 
 const Post = ({ post }) => {
   return (
@@ -7,7 +8,7 @@ const Post = ({ post }) => {
     </div>
   );
 };
-const withPostContext = (Component) => {
+const withPostActions = (Component) => {
   const Memo = React.memo(Component);
 
   // eslint-disable-next-line react/display-name
@@ -15,4 +16,18 @@ const withPostContext = (Component) => {
     return <Memo post={post} />;
   };
 };
+
+const withPostContext = (Component) => {
+  const Memo = React.memo(Component);
+
+  // eslint-disable-next-line react/display-name
+  return () => {
+    const { post, loading, error } = usePostContext();
+    if (loading) return <>Loading...</>;
+    if (!post?._id) return <>No post</>;
+    return <Memo post={post} />;
+  };
+};
+
 export const PostWithContext = withPostContext(Post);
+export const PostWithActions = withPostActions(Post);
