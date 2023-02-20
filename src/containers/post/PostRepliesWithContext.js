@@ -1,5 +1,6 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
+import { Box } from "@chakra-ui/layout";
 
 import { usePostContext } from "../../context/PostContext";
 import { GET_POST_REPLIES } from "../../graphql/queries/GET_POST_REPLIES";
@@ -10,7 +11,9 @@ export const PostReplies = ({ parent, replies }) => {
   return (
     <div>
       {replies?.map((post) => (
-        <PostWithActions key={post?._id} post={post} showReplies={true} />
+        <Box key={post?._id} ml={4}>
+          <PostWithActions post={post} showReplies={true} />
+        </Box>
       ))}
     </div>
   );
