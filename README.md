@@ -13,3 +13,12 @@ $ cd app
 $ yarn install
 $ yarn start
 ```
+
+### Testing Production
+
+Production is static files with hash routing, you can serve these files with any tool, e.g.:
+
+```
+$ cd docs
+$ python3 -m http.server
+```
