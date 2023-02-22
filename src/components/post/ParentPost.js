@@ -14,7 +14,7 @@ import {
 } from "../../helpers/make-post-link";
 import { getDateFromNow } from "../../helpers/get-date-from-now";
 
-export const ParentPost = ({ post }) => {
+export const ParentPost = ({ post, isStandalone = false }) => {
   const postLink = React.useMemo(() => {
     return makePostLink(post, true);
   }, [post?._id]);
@@ -54,21 +54,30 @@ export const ParentPost = ({ post }) => {
         </Text>
       </HStack>
       <HStack mt={[2, null, null, 4]}>
-        <IconButton
-          icon={<Expand />}
-          size="sm"
-          variant={"ghost"}
-          onClick={(e) => {
-            e.preventDefault();
-            onToggle();
-          }}
-        />
+        {!isStandalone && (
+          <IconButton
+            icon={<Expand />}
+            size="sm"
+            variant={"ghost"}
+            onClick={(e) => {
+              e.preventDefault();
+              onToggle();
+            }}
+          />
+        )}
         <PostFooter
           index={0}
           commentCount={post?.rootCommentCount}
           size="sm"
           postLink={postLink}
-          onPostCommentClick={() => (window.location.href = postLink)}
+          onPostCommentClick={(e) => {
+            e.preventDefault();
+            if (isStandalone) {
+              // @TODO scroll to comment
+            } else {
+              window.location.href = postLink;
+            }
+          }}
         />
       </HStack>
       {isOpen && (

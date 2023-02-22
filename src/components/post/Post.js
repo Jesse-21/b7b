@@ -10,12 +10,17 @@ import { ParentPost } from "./ParentPost";
 
 const PostWithReplies = withPostReplies(PostReplies);
 
-export const Post = ({ post, showReplies = false, index = 0 }) => {
+export const Post = ({
+  post,
+  showReplies = false,
+  isStandalone = false,
+  index = 0,
+}) => {
   return (
     <Box border="1px solid" padding={[2, null, null, 4]}>
       {index === 0 ? (
         <>
-          <ParentPost post={post} />
+          <ParentPost post={post} isStandalone={isStandalone} />
         </>
       ) : (
         <>

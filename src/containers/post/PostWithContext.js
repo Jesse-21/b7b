@@ -16,11 +16,13 @@ const withPostContext = (Component) => {
   const Memo = React.memo(Component);
 
   // eslint-disable-next-line react/display-name
-  return ({ showReplies }) => {
+  return ({ showReplies, isStandalone }) => {
     const { post, loading, error } = usePostContext();
     if (loading) return <>Loading...</>;
     if (!post?._id) return <>No post</>;
-    return <Memo post={post} showReplies={showReplies} />;
+    return (
+      <Memo post={post} showReplies={showReplies} isStandalone={isStandalone} />
+    );
   };
 };
 

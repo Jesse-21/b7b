@@ -22,7 +22,7 @@ const withPostParams = (Component) => {
 const PostPageContent = () => {
   return (
     <>
-      <PostWithContext showReplies={true}></PostWithContext>
+      <PostWithContext showReplies={true} isStandalone={true}></PostWithContext>
     </>
   );
 };
