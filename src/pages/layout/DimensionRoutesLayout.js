@@ -4,10 +4,14 @@ import {
   lightTheme,
   darkTheme,
 } from "@rainbow-me/rainbowkit";
+import { AuthContextProvider } from "../../context/AuthContext";
+import { WalletContextProvider } from "../../context/WalletContext";
+
+import "@rainbow-me/rainbowkit/styles.css";
 
 import { wagmiClient, config } from "../../helpers/make-wagmi-client";
 
-import "@rainbow-me/rainbowkit/styles.css";
+import { DimensionHeader } from "../../containers/navigation/DimensionHeader";
 
 export const DimensionRoutesLayout = ({ children }) => {
   return (
@@ -19,8 +23,12 @@ export const DimensionRoutesLayout = ({ children }) => {
           darkMode: darkTheme(),
         }}
       >
-        Dimension Routes Layout!
-        {children}
+        <WalletContextProvider>
+          <AuthContextProvider>
+            <DimensionHeader />
+            {children}
+          </AuthContextProvider>
+        </WalletContextProvider>
       </RainbowKitProvider>
     </WagmiConfig>
   );

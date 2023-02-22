@@ -27,35 +27,19 @@ export const AppRoutes = () => {
       <Route
         path="d/"
         element={
-          <DimensionRoutesLayout>
-            <Outlet />
-          </DimensionRoutesLayout>
+          <HostApolloProviderWithParams>
+            <DimensionRoutesLayout>
+              <Outlet />
+            </DimensionRoutesLayout>
+          </HostApolloProviderWithParams>
         }
       >
-        <Route
-          path=":dimension"
-          element={
-            <HostApolloProviderWithParams>
-              <Dimension />
-            </HostApolloProviderWithParams>
-          }
-        />
+        <Route path=":dimension" element={<Dimension />} />
         <Route
           path=":dimension/channels/:channelId"
-          element={
-            <HostApolloProviderWithParams>
-              <DimensionChannel />
-            </HostApolloProviderWithParams>
-          }
+          element={<DimensionChannel />}
         />
-        <Route
-          path=":dimension/posts/:postId"
-          element={
-            <HostApolloProviderWithParams>
-              <Post />
-            </HostApolloProviderWithParams>
-          }
-        />
+        <Route path=":dimension/posts/:postId" element={<Post />} />
       </Route>
       {/* <Route path="dashboard" element={<Dashboard />} /> */}
       {/* <Route path="*" element={<NoMatch />} /> */}
