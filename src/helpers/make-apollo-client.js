@@ -6,17 +6,13 @@ import { ethers } from "ethers";
 
 import { abi } from "./abis/DimensionResolver";
 import { getTokenIdFromLabel } from "./get-token-id-from-label";
+import { createCookiesAuthKey } from "./create-cookies-auth-key";
 import { config } from "../config";
 
 const retryLink = new RetryLink();
 
-const createDimensionAuthKey = (hostUri) => {
-  if (!hostUri) return "default-auth-token";
-
-  return `auth-token-${hostUri}`;
-};
 const createDimensionAuthLink = (hostUri) => {
-  const authKey = createDimensionAuthKey(hostUri);
+  const authKey = createCookiesAuthKey(hostUri);
   return setContext((_, { headers }) => {
     const token = Cookies.get(authKey);
 
