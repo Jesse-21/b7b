@@ -6,7 +6,8 @@ import { PostContent } from "./PostContent";
 
 const PostWithReplies = withPostReplies(PostReplies);
 
-export const Post = ({ post, showReplies = false, index }) => {
+export const Post = ({ post, showReplies = false, index = 0 }) => {
+  console.log("Post", post?._id, showReplies, index);
   return (
     <div>
       <PostContent content={post?.richContent?.content} />

@@ -2,7 +2,6 @@ import React from "react";
 import { useParams } from "react-router-dom";
 
 import { PostWithContext } from "../containers/post/PostWithContext";
-import { PostRepliesWithContext } from "../containers/post/PostRepliesWithContext";
 
 import { PostContextProvider } from "../context/PostContext";
 
@@ -23,8 +22,7 @@ const withPostParams = (Component) => {
 const PostPageContent = () => {
   return (
     <>
-      <PostWithContext></PostWithContext>
-      <PostRepliesWithContext></PostRepliesWithContext>
+      <PostWithContext showReplies={true}></PostWithContext>
     </>
   );
 };
