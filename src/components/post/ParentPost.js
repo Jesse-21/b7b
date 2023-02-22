@@ -26,6 +26,9 @@ const PostParentInner = ({
   blocks,
 }) => {
   const { isOpen, onToggle } = useDisclosure();
+  const showContent = React.useMemo(() => {
+    return isStandalone || isOpen;
+  }, [isStandalone, isOpen]);
 
   return (
     <>
@@ -56,7 +59,7 @@ const PostParentInner = ({
           }}
         />
       </HStack>
-      {isOpen && <PostContent content={content} blocks={blocks} />}
+      {showContent && <PostContent content={content} blocks={blocks} />}
     </>
   );
 };
@@ -91,6 +94,7 @@ export const ParentPost = ({ post, isStandalone = false }) => {
         mr={2}
       />
       <PostPreview
+        flexShrink={0}
         mr={2}
         w={32}
         h={24}
@@ -104,7 +108,7 @@ export const ParentPost = ({ post, isStandalone = false }) => {
         as="a"
         href={postLink}
       />
-      <Box>
+      <Box flex="1" overflowX="hidden" overflowY="visible" py={1}>
         <PostTitle
           contentRaw={post?.richContent?.content?.raw}
           username={post?.account?.username}
@@ -113,8 +117,10 @@ export const ParentPost = ({ post, isStandalone = false }) => {
           fontWeight="semibold"
           as="a"
           href={postLink}
+          textOverflow="ellipsis"
         />
-        <HStack>
+
+        <Box display="flex" flexWrap="wrap">
           <Button
             // ml={1}
             color="text.secondary"
@@ -135,7 +141,7 @@ export const ParentPost = ({ post, isStandalone = false }) => {
               shortenAddress(post?.account?.address?.address)}
             , {getDateFromNow(post?.createdAt)}
           </Text>
-        </HStack>
+        </Box>
         <PostParentInnerMemo
           rootCommentCount={post?.rootCommentCount}
           content={post?.richContent?.content}
