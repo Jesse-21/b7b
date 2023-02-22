@@ -19,12 +19,13 @@ export const PostOrReplyRichBlockImage = ({
       justifyContent={"center"}
     >
       <Image
-        {...block}
+        src={block?.src}
         height={["100%", null, null, size]}
         width="auto"
         maxWidth="100%"
         className="post-rich-block"
         backgroundColor="transparent"
+        objectFit={"contain"}
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
@@ -38,14 +39,6 @@ export const PostOrReplyRichBlockImage = ({
         src={block?.src}
         name={block?.name}
       /> */}
-      <style jsx global>
-        {`
-          .post-rich-block > img {
-            border-radius: 0;
-            object-fit: contain !important;
-          }
-        `}
-      </style>
     </Flex>
   );
 };

@@ -22,8 +22,19 @@ export const AppRoutes = () => {
         }
       >
         <Route index element={<Home />} />
+      </Route>
+      <Route
+        path="d/"
+        element={
+          <>
+            d/ Layout!
+            {/* the child of the root layout */}
+            <Outlet />
+          </>
+        }
+      >
         <Route
-          path="d/:dimension"
+          path=":dimension"
           element={
             <HostApolloProviderWithParams>
               <Dimension />
@@ -31,7 +42,7 @@ export const AppRoutes = () => {
           }
         />
         <Route
-          path="d/:dimension/channels/:channelId"
+          path=":dimension/channels/:channelId"
           element={
             <HostApolloProviderWithParams>
               <DimensionChannel />
@@ -39,16 +50,16 @@ export const AppRoutes = () => {
           }
         />
         <Route
-          path="d/:dimension/posts/:postId"
+          path=":dimension/posts/:postId"
           element={
             <HostApolloProviderWithParams>
               <Post />
             </HostApolloProviderWithParams>
           }
         />
-        {/* <Route path="dashboard" element={<Dashboard />} /> */}
-        {/* <Route path="*" element={<NoMatch />} /> */}
       </Route>
+      {/* <Route path="dashboard" element={<Dashboard />} /> */}
+      {/* <Route path="*" element={<NoMatch />} /> */}
     </Routes>
   );
 };
