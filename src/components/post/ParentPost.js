@@ -8,6 +8,7 @@ import { PostTitle } from "./PostTitle";
 import { PostContent } from "./PostContent";
 import { PostFooter } from "./PostFooter";
 import { PostUpvote } from "./PostUpvote";
+import { PostPreview } from "./PostPreview";
 import { Expand } from "../icons/Expand";
 
 import {
@@ -83,7 +84,24 @@ export const ParentPost = ({ post, isStandalone = false }) => {
 
   return (
     <Box display="flex">
-      <PostUpvote reactionCount={post?.reactionCount} size="sm" />
+      <PostUpvote
+        reactionCount={post?.reactionCount}
+        size="sm"
+        flexDir="column"
+        mr={2}
+      />
+      <PostPreview
+        mr={2}
+        w={32}
+        h={24}
+        block={post?.richContent?.blocks?.[0]?.block}
+        overflow="hidden"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        backgroundColor="blackAlpha.100"
+        rounded="sm"
+      />
       <Box>
         <PostTitle
           contentRaw={post?.richContent?.content?.raw}

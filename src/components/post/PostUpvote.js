@@ -10,7 +10,7 @@ export const PostUpvote = ({
   onPostLike,
   reactionCount,
   size,
-  flexDir = "column",
+  ...props
 }) => {
   const _onPostLike = React.useCallback(
     (e, value) => {
@@ -22,7 +22,7 @@ export const PostUpvote = ({
   );
 
   return (
-    <Box display={"flex"} flexDir={flexDir}>
+    <Box display={"flex"} {...props}>
       <IconButton
         aria-label="Upvote"
         icon={<TriangleUpIcon />}
