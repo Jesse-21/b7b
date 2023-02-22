@@ -25,7 +25,10 @@ export const Post = ({
         </>
       ) : (
         <>
-          <PostRichContent content={post?.richContent?.content} />
+          <PostRichContent
+            content={post?.richContent?.content}
+            blocks={post?.richContent?.blocks}
+          />
           {/* upvote elem */}
           {/* <PostFooter
             index={index}

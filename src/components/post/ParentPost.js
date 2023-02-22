@@ -59,7 +59,11 @@ const PostParentInner = ({
           }}
         />
       </HStack>
-      {showContent && <PostRichContent content={content} blocks={blocks} />}
+      {showContent && (
+        <Box p={[2, null, null, 4]}>
+          <PostRichContent content={content} blocks={blocks} />
+        </Box>
+      )}
     </>
   );
 };
