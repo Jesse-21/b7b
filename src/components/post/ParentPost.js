@@ -22,8 +22,14 @@ const PostParentInner = ({
   isStandalone = false,
   postLink,
   rootCommentCount,
-  onExpand,
+  content,
+  blocks,
 }) => {
+  const { isOpen, onToggle } = useDisclosure();
+  const showContent = React.useMemo(() => {
+    return isStandalone || isOpen;
+  }, [isStandalone, isOpen]);
+
   return (
     <>
       <HStack mt={[2, null, null, 4]} spacing={1}>
@@ -34,7 +40,7 @@ const PostParentInner = ({
             variant={"ghost"}
             onClick={(e) => {
               e.preventDefault();
-              onExpand?.();
+              onToggle();
             }}
           />
         )}
@@ -53,6 +59,11 @@ const PostParentInner = ({
           }}
         />
       </HStack>
+      {showContent && (
+        <Box p={[1, null, null, 4]}>
+          <PostRichContent content={content} blocks={blocks} />
+        </Box>
+      )}
     </>
   );
 };
@@ -64,7 +75,8 @@ const PostParentInnerMemo = React.memo(
       prev.isStandalone === next.isStandalone &&
       prev.postLink === next.postLink &&
       prev.rootCommentCount === next.rootCommentCount &&
-      prev.onExpand === next.onExpand
+      isEqual(prev.content, next.content) &&
+      isEqual(prev.blocks, next.blocks)
     );
   }
 );
@@ -76,87 +88,72 @@ export const ParentPost = ({ post, isStandalone = false }) => {
   const postChannelLink = React.useMemo(() => {
     return makePostChannelLink(post, false);
   }, [post?._id]);
-  const { isOpen, onToggle } = useDisclosure();
-  const showContent = React.useMemo(() => {
-    return isStandalone || isOpen;
-  }, [isStandalone, isOpen]);
 
   return (
-    <Box>
-      <Box display="flex">
-        <PostUpvote
-          reactionCount={post?.reactionCount}
-          size="sm"
-          flexDir="column"
-          mr={2}
-        />
-        <PostPreview
-          flexShrink={0}
-          mr={2}
-          w={32}
-          h={24}
-          block={post?.richContent?.blocks?.[0]?.block}
-          overflow="hidden"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          backgroundColor="blackAlpha.100"
-          rounded="sm"
+    <Box display="flex">
+      <PostUpvote
+        reactionCount={post?.reactionCount}
+        size="sm"
+        flexDir="column"
+        mr={2}
+      />
+      <PostPreview
+        flexShrink={0}
+        mr={2}
+        w={32}
+        h={24}
+        block={post?.richContent?.blocks?.[0]?.block}
+        overflow="hidden"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        backgroundColor="blackAlpha.100"
+        rounded="sm"
+        as="a"
+        href={postLink}
+      />
+      <Box flex="1" overflowX="hidden" overflowY="visible" py={1}>
+        <PostTitle
+          contentRaw={post?.richContent?.content?.raw}
+          username={post?.account?.username}
+          address={post?.account?.address?.address}
+          _hover={{ textDecoration: "underline", cursor: "pointer" }}
+          fontWeight="semibold"
           as="a"
           href={postLink}
+          textOverflow="ellipsis"
         />
-        <Box flex="1" overflowX="hidden" overflowY="visible" py={1}>
-          <PostTitle
-            contentRaw={post?.richContent?.content?.raw}
-            username={post?.account?.username}
-            address={post?.account?.address?.address}
-            _hover={{ textDecoration: "underline", cursor: "pointer" }}
-            fontWeight="semibold"
-            as="a"
-            href={postLink}
-            textOverflow="ellipsis"
-          />
 
-          <Box display="flex" flexWrap="wrap">
-            <Button
-              // ml={1}
-              color="text.secondary"
-              fontWeight="semibold"
-              letterSpacing="wide"
-              fontSize="xs"
-              size="xs"
-              as="a"
-              variant="link"
-              href={postChannelLink}
-            >
-              to: {post?.channel?.slug || "all"}@{post?.community?.bebdomain}.
-              {post?.community?.tld || "beb"}
-            </Button>
-            <Text color="text.secondary" fontSize="xs">
-              &bull; posted by{" "}
-              {post?.account?.username ||
-                shortenAddress(post?.account?.address?.address)}
-              , {getDateFromNow(post?.createdAt)}
-            </Text>
-          </Box>
-          <PostParentInnerMemo
-            rootCommentCount={post?.rootCommentCount}
-            content={post?.richContent?.content}
-            blocks={post?.richContent?.blocks}
-            isStandalone={isStandalone}
-            postLink={postLink}
-            onExpand={onToggle}
-          />
+        <Box display="flex" flexWrap="wrap">
+          <Button
+            // ml={1}
+            color="text.secondary"
+            fontWeight="semibold"
+            letterSpacing="wide"
+            fontSize="xs"
+            size="xs"
+            as="a"
+            variant="link"
+            href={postChannelLink}
+          >
+            to: {post?.channel?.slug || "all"}@{post?.community?.bebdomain}.
+            {post?.community?.tld || "beb"}
+          </Button>
+          <Text color="text.secondary" fontSize="xs">
+            &bull; posted by{" "}
+            {post?.account?.username ||
+              shortenAddress(post?.account?.address?.address)}
+            , {getDateFromNow(post?.createdAt)}
+          </Text>
         </Box>
+        <PostParentInnerMemo
+          rootCommentCount={post?.rootCommentCount}
+          content={post?.richContent?.content}
+          blocks={post?.richContent?.blocks}
+          isStandalone={isStandalone}
+          postLink={postLink}
+        />
       </Box>
-      {showContent && (
-        <Box p={[2, null, null, 4]}>
-          <PostRichContent
-            content={post?.richContent?.content}
-            blocks={post?.richContent?.blocks}
-          />
-        </Box>
-      )}
     </Box>
   );
 };
