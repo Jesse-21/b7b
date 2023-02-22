@@ -4,7 +4,7 @@ export const Home = () => {
   return (
     <Box>
       <Text fontSize="3xl" fontWeight="bold">
-        The open-sourced BEB dimension browser!
+        Welcome to b7b, the BEB dimension browser!
       </Text>
     </Box>
   );
