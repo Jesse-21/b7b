@@ -10,13 +10,13 @@ import { config } from "../config";
 
 const retryLink = new RetryLink();
 
-const createDimensionAuthKey = (dimension, tld) => {
-  if (!dimension) return "default-auth-token";
+const createDimensionAuthKey = (hostUri) => {
+  if (!hostUri) return "default-auth-token";
 
-  return `auth-token-${dimension}-${tld}`;
+  return `auth-token-${hostUri}`;
 };
-const createDimensionAuthLink = (dimension) => {
-  const authKey = createDimensionAuthKey(dimension);
+const createDimensionAuthLink = (hostUri) => {
+  const authKey = createDimensionAuthKey(hostUri);
   return setContext((_, { headers }) => {
     const token = Cookies.get(authKey);
 
@@ -28,12 +28,9 @@ const createDimensionAuthLink = (dimension) => {
     };
   });
 };
-const createDimensionHttpLink = async (dimension) => {
+const getDimensionHostUri = async (dimension) => {
   if (!dimension) {
-    return createHttpLink({
-      // uri: "https://protocol.beb.xyz/graphql",
-      uri: config.DEFAULT_URI,
-    });
+    return config.DEFAULT_URI;
   }
   const myContract = new ethers.Contract(
     "0x2167A15c97fE3A28c0eebfA23a3368974A2b64E5",
@@ -58,10 +55,7 @@ const createDimensionHttpLink = async (dimension) => {
     }
   }
 
-  return createHttpLink({
-    // uri: "https://protocol.beb.xyz/graphql",
-    uri: uri.toString(),
-  });
+  return uri;
 };
 
 export const makeApolloClient = async (dimension) => {
@@ -70,8 +64,13 @@ export const makeApolloClient = async (dimension) => {
   const cleanLocale = locale?.replace(/[^a-zA-Z0-9]/g, "").toLowerCase();
   const tld = split?.[1] || "beb";
 
-  const httpLink = await createDimensionHttpLink(cleanLocale, tld);
-  const authLink = createDimensionAuthLink(cleanLocale, tld);
+  const hostUri = await getDimensionHostUri(cleanLocale, tld);
+  const authLink = createDimensionAuthLink(hostUri.toString());
+
+  const httpLink = createHttpLink({
+    // uri: "https://protocol.beb.xyz/graphql",
+    uri: hostUri.toString(),
+  });
 
   const client = new ApolloClient({
     cache: new InMemoryCache(),
