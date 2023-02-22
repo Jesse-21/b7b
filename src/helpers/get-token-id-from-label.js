@@ -1,8 +1,8 @@
-import { ethers } from "ethers";
+import { utils, BigNumber } from "ethers";
 
 export const getTokenIdFromLabel = (label) => {
   if (!label) return null;
-  const labelHash = ethers.keccak256(ethers.toUtf8Bytes(label));
-  const tokenId = ethers.toBigInt(labelHash).toString();
+  const labelHash = utils.keccak256(utils.toUtf8Bytes(label));
+  const tokenId = BigNumber.from(labelHash).toString();
   return tokenId;
 };

@@ -2,7 +2,7 @@ import { ApolloClient, InMemoryCache, createHttpLink } from "@apollo/client";
 import { RetryLink } from "@apollo/client/link/retry";
 import { setContext } from "@apollo/client/link/context";
 import Cookies from "js-cookie";
-import { ethers } from "ethers";
+import { Contract, providers } from "ethers";
 
 import { abi } from "./abis/DimensionResolver";
 import { getTokenIdFromLabel } from "./get-token-id-from-label";
@@ -28,11 +28,11 @@ const getDimensionHostUri = async (dimension) => {
   if (!dimension) {
     return config.DEFAULT_URI;
   }
-  const myContract = new ethers.Contract(
+  const myContract = new Contract(
     "0x2167A15c97fE3A28c0eebfA23a3368974A2b64E5",
     abi,
     // @TODO - make this configurable with API key
-    new ethers.InfuraProvider("goerli")
+    new providers.InfuraProvider("goerli")
   );
   const tokenId = getTokenIdFromLabel(dimension);
   let hostUri = await myContract.get(tokenId);
