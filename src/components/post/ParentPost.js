@@ -101,6 +101,8 @@ export const ParentPost = ({ post, isStandalone = false }) => {
         alignItems="center"
         backgroundColor="blackAlpha.100"
         rounded="sm"
+        as="a"
+        href={postLink}
       />
       <Box>
         <PostTitle
