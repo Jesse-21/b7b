@@ -1,24 +1,8 @@
 import React from "react";
 import { usePostContext } from "../../context/PostContext";
 
-import { PostReplies, withPostReplies } from "./PostRepliesWithContext";
+import { Post } from "../../components/post/Post";
 
-const PostWithReplies = withPostReplies(PostReplies);
-
-const Post = ({ post, showReplies = false }) => {
-  return (
-    <div>
-      <p>{post?.richContent?.content?.raw}</p>
-      {showReplies && (
-        <PostWithReplies
-          post={post}
-          // @TODO maybe stop looping at certain index?
-          showReplies={true}
-        />
-      )}
-    </div>
-  );
-};
 const withPostActions = (Component) => {
   const Memo = React.memo(Component);
 

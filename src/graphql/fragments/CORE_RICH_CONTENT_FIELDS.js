@@ -5,7 +5,6 @@ export const CORE_RICH_CONTENT_FIELDS = gql`
     _id
     content {
       raw
-      html
     }
     blocks {
       id
