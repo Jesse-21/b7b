@@ -1,9 +1,12 @@
 import React from "react";
 import { Box, HStack, Text } from "@chakra-ui/layout";
-import { Button } from "@chakra-ui/button";
+import { Button, IconButton } from "@chakra-ui/button";
+import { useDisclosure } from "@chakra-ui/hooks";
 
 import { PostTitle } from "./PostTitle";
+import { PostContent } from "./PostContent";
 import { PostFooter } from "./PostFooter";
+import { Expand } from "../icons/Expand";
 
 import {
   makePostLink,
@@ -18,6 +21,7 @@ export const ParentPost = ({ post }) => {
   const postChannelLink = React.useMemo(() => {
     return makePostChannelLink(post, false);
   }, [post?._id]);
+  const { isOpen, onToggle } = useDisclosure();
 
   return (
     <Box>
@@ -25,6 +29,9 @@ export const ParentPost = ({ post }) => {
         contentRaw={post?.richContent?.content?.raw}
         username={post?.account?.username}
         address={post?.account?.address?.address}
+        _hover={{ textDecoration: "underline", cursor: "pointer" }}
+        as="a"
+        href={postLink}
       />
       <HStack>
         <Button
@@ -46,13 +53,30 @@ export const ParentPost = ({ post }) => {
           {getDateFromNow(post?.createdAt)}
         </Text>
       </HStack>
-      {/* expand elem */}
-      <PostFooter
-        index={0}
-        commentCount={post?.rootCommentCount}
-        size="xs"
-        postLink={postLink}
-      />
+      <HStack mt={[2, null, null, 4]}>
+        <IconButton
+          icon={<Expand />}
+          size="sm"
+          variant={"ghost"}
+          onClick={(e) => {
+            e.preventDefault();
+            onToggle();
+          }}
+        />
+        <PostFooter
+          index={0}
+          commentCount={post?.rootCommentCount}
+          size="sm"
+          postLink={postLink}
+          onPostCommentClick={() => (window.location.href = postLink)}
+        />
+      </HStack>
+      {isOpen && (
+        <PostContent
+          content={post?.richContent?.content}
+          blocks={post?.richContent?.blocks}
+        />
+      )}
     </Box>
   );
 };

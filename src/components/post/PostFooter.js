@@ -16,7 +16,6 @@ export const PostFooter = ({
     <HStack>
       <Button
         variant={"ghost"}
-        backgroundColor={!index ? "blackAlpha.300" : "none"}
         leftIcon={<EditIcon />}
         onClick={onPostCommentClick}
         zIndex={2}
@@ -28,7 +27,6 @@ export const PostFooter = ({
       {index < 1 && (
         <CopyButton
           variant={"ghost"}
-          backgroundColor={!index ? "blackAlpha.300" : "none"}
           value={postLink}
           icon={<LinkIcon />}
           zIndex={2}
