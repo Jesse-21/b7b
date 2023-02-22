@@ -5,7 +5,7 @@ import { useDisclosure } from "@chakra-ui/hooks";
 import isEqual from "lodash/isEqual";
 
 import { PostTitle } from "./PostTitle";
-import { PostContent } from "./PostContent";
+import { PostRichContent } from "./PostContent";
 import { PostFooter } from "./PostFooter";
 import { PostUpvote } from "./PostUpvote";
 import { PostPreview } from "./PostPreview";
@@ -59,7 +59,7 @@ const PostParentInner = ({
           }}
         />
       </HStack>
-      {showContent && <PostContent content={content} blocks={blocks} />}
+      {showContent && <PostRichContent content={content} blocks={blocks} />}
     </>
   );
 };

@@ -5,7 +5,7 @@ import {
   withPostReplies,
 } from "../../containers/post/PostRepliesWithContext";
 
-import { PostContent } from "./PostContent";
+import { PostRichContent } from "./PostContent";
 import { ParentPost } from "./ParentPost";
 
 const PostWithReplies = withPostReplies(PostReplies);
@@ -25,7 +25,7 @@ export const Post = ({
         </>
       ) : (
         <>
-          <PostContent content={post?.richContent?.content} />
+          <PostRichContent content={post?.richContent?.content} />
           {/* upvote elem */}
           {/* <PostFooter
             index={index}

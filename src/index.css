@@ -11,3 +11,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.twitter-tweet::before {
+  content: "";
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  background-image: url("https://abs.twimg.com/icons/apple-touch-icon-192x192.png");
+  background-repeat: no-repeat;
+  background-size: 24px;
+}
