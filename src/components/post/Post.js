@@ -16,6 +16,7 @@ export const Post = ({
   isStandalone = false,
   index = 0,
 }) => {
+  console.log("Post", post?._id);
   return (
     <Box border="1px solid" padding={[2, null, null, 4]}>
       {index === 0 ? (

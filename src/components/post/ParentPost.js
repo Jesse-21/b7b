@@ -2,10 +2,12 @@ import React from "react";
 import { Box, HStack, Text } from "@chakra-ui/layout";
 import { Button, IconButton } from "@chakra-ui/button";
 import { useDisclosure } from "@chakra-ui/hooks";
+import isEqual from "lodash/isEqual";
 
 import { PostTitle } from "./PostTitle";
 import { PostContent } from "./PostContent";
 import { PostFooter } from "./PostFooter";
+import { PostUpvote } from "./PostUpvote";
 import { Expand } from "../icons/Expand";
 
 import {
@@ -13,47 +15,20 @@ import {
   makePostChannelLink,
 } from "../../helpers/make-post-link";
 import { getDateFromNow } from "../../helpers/get-date-from-now";
+import { shortenAddress } from "../../helpers/shorten-address";
 
-export const ParentPost = ({ post, isStandalone = false }) => {
-  const postLink = React.useMemo(() => {
-    return makePostLink(post, true);
-  }, [post?._id]);
-  const postChannelLink = React.useMemo(() => {
-    return makePostChannelLink(post, false);
-  }, [post?._id]);
+const PostParentInner = ({
+  isStandalone = false,
+  postLink,
+  rootCommentCount,
+  content,
+  blocks,
+}) => {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
-    <Box>
-      <PostTitle
-        contentRaw={post?.richContent?.content?.raw}
-        username={post?.account?.username}
-        address={post?.account?.address?.address}
-        _hover={{ textDecoration: "underline", cursor: "pointer" }}
-        as="a"
-        href={postLink}
-      />
-      <HStack>
-        <Button
-          // ml={1}
-          color="text.secondary"
-          fontWeight="semibold"
-          letterSpacing="wide"
-          fontSize="xs"
-          size="xs"
-          as="a"
-          variant="link"
-          href={postChannelLink}
-        >
-          to: {post?.channel?.slug || "all"}@{post?.community?.bebdomain}.
-          {post?.community?.tld || "beb"}
-        </Button>
-        <Text color="text.secondary" fontSize="xs">
-          &bull; posted by {post?.account?.username},{" "}
-          {getDateFromNow(post?.createdAt)}
-        </Text>
-      </HStack>
-      <HStack mt={[2, null, null, 4]}>
+    <>
+      <HStack mt={[2, null, null, 4]} spacing={1}>
         {!isStandalone && (
           <IconButton
             icon={<Expand />}
@@ -67,7 +42,7 @@ export const ParentPost = ({ post, isStandalone = false }) => {
         )}
         <PostFooter
           index={0}
-          commentCount={post?.rootCommentCount}
+          commentCount={rootCommentCount}
           size="sm"
           postLink={postLink}
           onPostCommentClick={(e) => {
@@ -80,12 +55,74 @@ export const ParentPost = ({ post, isStandalone = false }) => {
           }}
         />
       </HStack>
-      {isOpen && (
-        <PostContent
+      {isOpen && <PostContent content={content} blocks={blocks} />}
+    </>
+  );
+};
+
+const PostParentInnerMemo = React.memo(
+  PostParentInner,
+  (prev = {}, next = {}) => {
+    return (
+      prev.isStandalone === next.isStandalone &&
+      prev.postLink === next.postLink &&
+      prev.rootCommentCount === next.rootCommentCount &&
+      isEqual(prev.content, next.content) &&
+      isEqual(prev.blocks, next.blocks)
+    );
+  }
+);
+
+export const ParentPost = ({ post, isStandalone = false }) => {
+  const postLink = React.useMemo(() => {
+    return makePostLink(post, true);
+  }, [post?._id]);
+  const postChannelLink = React.useMemo(() => {
+    return makePostChannelLink(post, false);
+  }, [post?._id]);
+
+  return (
+    <Box display="flex">
+      <PostUpvote reactionCount={post?.reactionCount} size="sm" />
+      <Box>
+        <PostTitle
+          contentRaw={post?.richContent?.content?.raw}
+          username={post?.account?.username}
+          address={post?.account?.address?.address}
+          _hover={{ textDecoration: "underline", cursor: "pointer" }}
+          as="a"
+          href={postLink}
+        />
+        <HStack>
+          <Button
+            // ml={1}
+            color="text.secondary"
+            fontWeight="semibold"
+            letterSpacing="wide"
+            fontSize="xs"
+            size="xs"
+            as="a"
+            variant="link"
+            href={postChannelLink}
+          >
+            to: {post?.channel?.slug || "all"}@{post?.community?.bebdomain}.
+            {post?.community?.tld || "beb"}
+          </Button>
+          <Text color="text.secondary" fontSize="xs">
+            &bull; posted by{" "}
+            {post?.account?.username ||
+              shortenAddress(post?.account?.address?.address)}
+            , {getDateFromNow(post?.createdAt)}
+          </Text>
+        </HStack>
+        <PostParentInnerMemo
+          rootCommentCount={post?.rootCommentCount}
           content={post?.richContent?.content}
           blocks={post?.richContent?.blocks}
+          isStandalone={isStandalone}
+          postLink={postLink}
         />
-      )}
+      </Box>
     </Box>
   );
 };
