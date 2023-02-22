@@ -1,3 +1,4 @@
+import React from "react";
 import { Box } from "@chakra-ui/layout";
 
 import {
@@ -7,10 +8,17 @@ import {
 
 import { PostContent } from "./PostContent";
 import { PostTitle } from "./PostTitle";
+import { PostFooter } from "./PostFooter";
+
+import { makePostLink } from "../../helpers/make-post-link";
 
 const PostWithReplies = withPostReplies(PostReplies);
 
 const ParentPost = ({ post }) => {
+  const postLink = React.useMemo(() => {
+    return makePostLink(post, true);
+  }, [post?._id]);
+
   return (
     <Box>
       <PostTitle
@@ -18,17 +26,33 @@ const ParentPost = ({ post }) => {
         username={post?.account?.username}
         address={post?.account?.address?.address}
       />
+      {/* expand elem */}
+      <PostFooter
+        index={0}
+        commentCount={post?.commentCount}
+        size="xs"
+        postLink={postLink}
+      />
     </Box>
   );
 };
 export const Post = ({ post, showReplies = false, index = 0 }) => {
-  console.log("Post", post?._id, showReplies, index);
   return (
     <Box border="1px solid" padding={[2, null, null, 4]}>
       {index === 0 ? (
-        <ParentPost post={post} />
+        <>
+          <ParentPost post={post} />
+        </>
       ) : (
-        <PostContent content={post?.richContent?.content} />
+        <>
+          <PostContent content={post?.richContent?.content} />
+          {/* upvote elem */}
+          {/* <PostFooter
+            index={index}
+            commentCount={post?.commentCount}
+            size="xs"
+          /> */}
+        </>
       )}
       {showReplies && (
         <PostWithReplies
