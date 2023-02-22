@@ -1,7 +1,7 @@
-import { Text } from "@chakra-ui/layout";
+import { Text, Box } from "@chakra-ui/layout";
 
+/** @TODO while the post don't have title, use the sliced content as title */
 export const PostContent = ({ blocks, content }) => {
-  console.log("PostContent", content);
   return (
     <Text whiteSpace={"pre-wrap"} lineHeight="1">{`${content?.raw}`}</Text>
   );

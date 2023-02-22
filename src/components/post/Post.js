@@ -6,7 +6,7 @@ import { PostContent } from "./PostContent";
 
 const PostWithReplies = withPostReplies(PostReplies);
 
-export const Post = ({ post, showReplies = false }) => {
+export const Post = ({ post, showReplies = false, index }) => {
   return (
     <div>
       <PostContent content={post?.richContent?.content} />
@@ -15,6 +15,7 @@ export const Post = ({ post, showReplies = false }) => {
           post={post}
           // @TODO maybe stop looping at certain index?
           showReplies={true}
+          index={index + 1}
         />
       )}
     </div>
