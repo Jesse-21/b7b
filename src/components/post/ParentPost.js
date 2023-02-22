@@ -108,6 +108,7 @@ export const ParentPost = ({ post, isStandalone = false }) => {
           username={post?.account?.username}
           address={post?.account?.address?.address}
           _hover={{ textDecoration: "underline", cursor: "pointer" }}
+          fontWeight="semibold"
           as="a"
           href={postLink}
         />
