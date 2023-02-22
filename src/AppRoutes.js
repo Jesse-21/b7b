@@ -7,6 +7,7 @@ import { Home } from "./pages/Home";
 import { Dimension } from "./pages/Dimension";
 import { DimensionChannel } from "./pages/DimensionChannel";
 import { Post } from "./pages/Post";
+import { DimensionRoutesLayout } from "./pages/layout/DimensionRoutesLayout";
 
 export const AppRoutes = () => {
   return (
@@ -26,11 +27,9 @@ export const AppRoutes = () => {
       <Route
         path="d/"
         element={
-          <>
-            d/ Layout!
-            {/* the child of the root layout */}
+          <DimensionRoutesLayout>
             <Outlet />
-          </>
+          </DimensionRoutesLayout>
         }
       >
         <Route
