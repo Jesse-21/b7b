@@ -1,8 +1,8 @@
-# B7B - A BEB Protocol Client
+# b7b - a BEB protocol client
 
 <img src="./b7b_logo.png" width="200" />
 
-B&B is a static web client for the open BEB Protocol. It is not tied to or centralized to BEBverse, and uses an open source resolver contract to query dimensions.
+b7b is a static web client for the open BEB Protocol. It is not tied to or centralized to BEBverse, and uses an open source resolver contract to query dimensions.
 
 ## Contribution Guidelines
 
