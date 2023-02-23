@@ -5,10 +5,10 @@ import { useDisclosure } from "@chakra-ui/hooks";
 import isEqual from "lodash/isEqual";
 
 import { PostUpvoteWithActions } from "../../containers/post/PostUpvoteWithContext";
+import { PostFooterWithAction } from "../../containers/post/PostFooterWithContext";
 
 import { PostTitle } from "./PostTitle";
 import { PostRichContent } from "./PostContent";
-import { PostFooter } from "./PostFooter";
 import { PostPreview } from "./PostPreview";
 import { Expand } from "../icons/Expand";
 
@@ -22,7 +22,6 @@ import { shortenAddress } from "../../helpers/shorten-address";
 const PostParentInner = ({
   isStandalone = false,
   postLink,
-  rootCommentCount,
   content,
   blocks,
 }) => {
@@ -45,19 +44,10 @@ const PostParentInner = ({
             }}
           />
         )}
-        <PostFooter
+        <PostFooterWithAction
           index={0}
-          commentCount={rootCommentCount}
           size="sm"
-          postLink={postLink}
-          onPostCommentClick={(e) => {
-            e.preventDefault();
-            if (isStandalone) {
-              // @TODO scroll to comment
-            } else {
-              window.location.href = postLink;
-            }
-          }}
+          postLink={isStandalone ? null : postLink}
         />
       </HStack>
       {showContent && (
