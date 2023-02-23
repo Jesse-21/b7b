@@ -60,6 +60,7 @@ export const usePostReaction = () => {
               },
               data: {
                 getReactionByAccountAndObjectId: {
+                  _id: reactForPostData.accountReaction._id,
                   reactionObject:
                     reactForPostData.accountReaction.reactionObject,
                   reactions: reactForPostData.accountReaction.reactions,
