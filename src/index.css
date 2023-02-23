@@ -21,3 +21,66 @@ code {
   background-repeat: no-repeat;
   background-size: 24px;
 }
+
+/* Placeholder (at the top) */
+.basic-editor p.is-editor-empty:first-child::before {
+  color: var(--chakra-colors-text-secondary);
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+.rich-editor-lg p.is-editor-empty:first-child::after {
+  color: var(--chakra-colors-text-secondary);
+  content: "Type '/' for commands";
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+.basic-editor {
+  background-color: var(--chakra-colors-background-main);
+  border-radius: var(--chakra-radii-3xl);
+  padding: var(--chakra-space-2) var(--chakra-space-4);
+  max-height: var(--chakra-space-48);
+  overflow: scroll;
+  height: auto;
+  outline: 2px solid transparent;
+  border: 2px solid transparent;
+  outline-offset: 2px;
+  border-radius: var(--chakra-radii-md);
+}
+.basic-editor-paragraph {
+  word-break: break-word;
+}
+.basic-editor-paragraph:not(:first-child) {
+  margin-top: var(--chakra-space-4);
+}
+.basic-editor.lg {
+  min-height: var(--chakra-space-24);
+  max-height: var(--chakra-space-48);
+}
+.basic-editor-rich-link {
+  color: var(--chakra-colors-link);
+  text-decoration: underline;
+}
+.basic-editor:focus {
+  outline-color: transparent;
+  border: 2px solid #63b3ed;
+  transition-property: var(--chakra-transition-property-common);
+  transition-duration: var(--chakra-transition-duration-normal);
+}
+.basic-editor-mention {
+  color: var(--chakra-colors-link);
+}
+.basic-editor-mention:hover {
+  cursor: pointer;
+}
+.basic-editor {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+.basic-editor::-webkit-scrollbar {
+  /* WebKit */
+  width: 0;
+  height: 0;
+}
