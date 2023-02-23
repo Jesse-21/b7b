@@ -9,7 +9,7 @@ const withPostFooterAction = (Component) => {
   const Memo = React.memo(Component);
 
   // eslint-disable-next-line react/display-name
-  return ({ postId, index, postLink, ...props }) => {
+  return ({ postId, index, postLink, clickShowReplyEditor, ...props }) => {
     const { data } = useQuery(GET_POST_COMMENT_COUNT, {
       variables: {
         id: postId,
@@ -20,13 +20,13 @@ const withPostFooterAction = (Component) => {
     const onPostCommentClick = React.useCallback(
       (e) => {
         e.preventDefault();
-        if (!postLink) {
+        if (clickShowReplyEditor) {
           // @TODO scroll to comment
         } else {
           window.location.href = postLink;
         }
       },
-      [postLink]
+      [clickShowReplyEditor, postLink]
     );
 
     const commentCount = React.useMemo(() => {

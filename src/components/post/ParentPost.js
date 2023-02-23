@@ -49,7 +49,8 @@ const PostParentInner = ({
           postId={postId}
           index={0}
           size="sm"
-          postLink={isStandalone ? null : postLink}
+          postLink={postLink}
+          clickShowReplyEditor={false}
         />
       </HStack>
       {showContent && (

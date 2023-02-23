@@ -2,28 +2,25 @@ import React from "react";
 import { Box, HStack, Text } from "@chakra-ui/layout";
 
 import { PostUpvoteWithActions } from "../../containers/post/PostUpvoteWithContext";
+import { PostFooterWithAction } from "../../containers/post/PostFooterWithContext";
 
 import { PostRichContent } from "./PostContent";
-import { PostFooter } from "./PostFooter";
 
 import { makePostLink } from "../../helpers/make-post-link";
 import { getDateFromNow } from "../../helpers/get-date-from-now";
 import { shortenAddress } from "../../helpers/shorten-address";
 
-const ReplyPostFooter = ({ postLink, postId, commentCount }) => {
+const ReplyPostFooter = ({ postLink, postId, index }) => {
   return (
     <>
       <HStack spacing={1}>
         <PostUpvoteWithActions postId={postId} size="xs" flexDir="row" />
-        <PostFooter
-          index={0}
-          commentCount={commentCount}
+        <PostFooterWithAction
+          index={index}
           size="xs"
           postLink={postLink}
-          onPostCommentClick={(e) => {
-            e.preventDefault();
-            // @TODO scroll to comment
-          }}
+          clickShowReplyEditor={true}
+          postId={postId}
         />
       </HStack>
     </>
@@ -35,8 +32,8 @@ const ReplyPostFooterMemo = React.memo(
   (prev = {}, next = {}) => {
     return (
       prev.postLink === next.postLink &&
-      prev.commentCount === next.commentCount &&
-      prev.postId === next.postId
+      prev.postId === next.postId &&
+      prev.index === next.index
     );
   }
 );
@@ -62,8 +59,8 @@ export const ReplyPost = ({ post, index }) => {
         />
       </Box>
       <ReplyPostFooterMemo
+        index={index}
         postId={post?._id}
-        commentCount={post?.commentCount}
         postLink={postLink}
       />
     </Box>
