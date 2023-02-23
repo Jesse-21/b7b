@@ -21,6 +21,7 @@ const withPostReactionActions = (Component) => {
       },
       skip: !postId,
     });
+
     const { data: postReactionData } = useQuery(GET_POST_REACTION, {
       variables: {
         id: postId,
