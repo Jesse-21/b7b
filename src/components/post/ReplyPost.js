@@ -51,7 +51,7 @@ export const ReplyPost = ({ post, index }) => {
       <Box>
         <Text color="text.secondary" fontSize="xs">
           {post?.account?.username ||
-            shortenAddress(post?.account?.address?.address)}
+            shortenAddress(post?.account?.address?.address)}{" "}
           &bull; {getDateFromNow(post?.createdAt)}
         </Text>
       </Box>
