@@ -48,6 +48,8 @@ code {
   border: 2px solid transparent;
   outline-offset: 2px;
   border-radius: var(--chakra-radii-md);
+  min-width: var(--chakra-sizes-sm);
+  width: 100%;
 }
 .basic-editor-paragraph {
   word-break: break-word;
