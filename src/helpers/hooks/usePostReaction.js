@@ -62,21 +62,6 @@ export const usePostReaction = () => {
                 },
               },
             });
-            if (
-              reactForPostData.accountReaction.reactionObject?.__typename ===
-              "Post"
-            ) {
-              /** Modify existing Post reaction count */
-              cache.modify({
-                id: `Post:${reactForPostData.accountReaction.reactionObject._id}`,
-                fields: {
-                  reactionCount() {
-                    return reactForPostData.accountReaction.reactionObject
-                      .reactionCount;
-                  },
-                },
-              });
-            }
           }
         },
       });

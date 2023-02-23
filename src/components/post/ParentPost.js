@@ -94,7 +94,7 @@ export const ParentPost = ({ post, isStandalone = false }) => {
     <Box display="flex">
       <PostUpvoteWithActions
         postId={post?._id}
-        reactionCount={post?.reactionCount}
+        // reactionCount={post?.reactionCount}
         size="sm"
         flexDir="column"
         mr={2}

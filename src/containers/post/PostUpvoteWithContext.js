@@ -10,7 +10,7 @@ const withPostReactionActions = (Component) => {
   const Memo = React.memo(Component);
 
   // eslint-disable-next-line react/display-name
-  return ({ postId, reactionCount, ...props }) => {
+  return ({ postId, ...props }) => {
     const { reactForPost } = usePostReaction();
     const { data } = useQuery(GET_REACTION_BY_ACCOUNT_AND_OBJECT_ID, {
       variables: {
@@ -22,6 +22,13 @@ const withPostReactionActions = (Component) => {
 
     const currentLikes = React.useMemo(() => {
       return data?.getReactionByAccountAndObjectId?.reactions?.likes;
+    }, [data]);
+
+    const reactionCount = React.useMemo(() => {
+      return (
+        data?.getReactionByAccountAndObjectId?.reactionObject?.reactionCount ||
+        1
+      );
     }, [data]);
 
     const onPostLike = React.useCallback(
