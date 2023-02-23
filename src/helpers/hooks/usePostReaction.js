@@ -44,26 +44,7 @@ export const usePostReaction = () => {
             },
           },
         },
-        update: (cache, { data: { reactForPost: reactForPostData } }) => {
-          if (reactForPostData.success) {
-            /** Modify existing Account Reaction */
-            cache.modify({
-              id: `AccountReaction:${JSON.stringify({
-                reactionObject: {
-                  _id: reactForPostData.accountReaction.reactionObject._id,
-                },
-              })}`,
-              fields: {
-                reactions(existingReactions = {}) {
-                  return {
-                    ...existingReactions,
-                    ...reactForPostData.accountReaction.reactions,
-                  };
-                },
-              },
-            });
-          }
-        },
+        updateQueries: ["GET_REACTION_BY_ACCOUNT_AND_OBJECT_ID"],
       });
     },
     [_reactForPost]

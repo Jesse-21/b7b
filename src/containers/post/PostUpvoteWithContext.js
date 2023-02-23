@@ -4,6 +4,8 @@ import { useQuery } from "@apollo/client";
 import { PostUpvote } from "../../components/post/PostUpvote";
 
 import { GET_REACTION_BY_ACCOUNT_AND_OBJECT_ID } from "../../graphql/queries/GET_REACTION_BY_ACCOUNT_AND_OBJECT_ID";
+import { GET_POST_REACTION } from "../../graphql/queries/GET_POST_REACTION";
+
 import { usePostReaction } from "../../helpers/hooks/usePostReaction";
 
 const withPostReactionActions = (Component) => {
@@ -19,17 +21,20 @@ const withPostReactionActions = (Component) => {
       },
       skip: !postId,
     });
+    const { data: postReactionData } = useQuery(GET_POST_REACTION, {
+      variables: {
+        id: postId,
+      },
+      skip: !postId,
+    });
 
     const currentLikes = React.useMemo(() => {
       return data?.getReactionByAccountAndObjectId?.reactions?.likes;
     }, [data]);
 
     const reactionCount = React.useMemo(() => {
-      return (
-        data?.getReactionByAccountAndObjectId?.reactionObject?.reactionCount ||
-        1
-      );
-    }, [data]);
+      return postReactionData?.getPost?.reactionCount;
+    }, [postReactionData]);
 
     const onPostLike = React.useCallback(
       (e, amount) => {
