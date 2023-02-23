@@ -35,6 +35,7 @@ export const withPostFeedContextProvider = (Component) => {
 
   // eslint-disable-next-line react/display-name
   return ({ filters, sort = "lastActivity", limit = 10 }) => {
+    console.log("withPostFeedContextProvider");
     return (
       <PostFeedContextProvider limit={limit} sort={sort} filters={filters}>
         <Memo />
