@@ -1,21 +1,19 @@
 /* eslint-disable indent */
-import { useApolloClient } from "@apollo/client";
-
 import { getCurrentAccount } from "../cache/get-current-account";
 import { getCommunity } from "../cache/get-community";
 import { getPostWithParent } from "../cache/get-post-with-parent";
 import { getChannel } from "../cache/get-channel";
 import { ObjectId } from "../make-object-id";
 
-export const useOptimisticPost = ({
+export const makeOptimisticPost = ({
   _id,
   contentRaw,
   contentHtml,
   communityId,
   parentId,
   channelId,
+  client,
 } = {}) => {
-  const client = useApolloClient();
   return {
     __typename: "Post",
     _id: _id || ObjectId(),

@@ -30,6 +30,10 @@ export const theme = extendTheme({
   },
   semanticTokens: {
     colors: {
+      background: {
+        default: "gray.100",
+        _dark: "gray.800",
+      },
       border: {
         default: "gray.200",
         _dark: "gray.500",

@@ -72,21 +72,19 @@ export const CreatePostOrReply = ({
         {...richEditorProps}
         size={size}
         content={content}
-        footer={
-          size === "lg" && (
-            <Button
-              onClick={onSubmitPostOrReply}
-              isDisabled={loading || disabled}
-              colorScheme={colorScheme}
-              size={"md"}
-              rounded="full"
-              leftIcon={<ChatIcon />}
-            >
-              {parentId ? "Comment" : "Send"}
-            </Button>
-          )
-        }
       ></BasicEditor>
+      {size === "lg" && (
+        <Button
+          onClick={onSubmitPostOrReply}
+          isDisabled={loading || disabled}
+          colorScheme={colorScheme}
+          size={"md"}
+          rounded="full"
+          leftIcon={<ChatIcon />}
+        >
+          {parentId ? "Comment" : "Send"}
+        </Button>
+      )}
       {size === "sm" && (
         <IconButton
           ml={2}

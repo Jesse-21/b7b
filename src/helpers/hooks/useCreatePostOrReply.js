@@ -1,26 +1,28 @@
 /* eslint-disable no-inline-comments */
-import { useMutation } from "@apollo/client";
+import { useMutation, useApolloClient } from "@apollo/client";
 
 import { CREATE_POST_OR_REPLY_FOR_ACCOUNT } from "../../graphql/mutations/CREATE_POST_OR_REPLY_FOR_ACCOUNT";
 import { CORE_POST_FIELDS } from "../../graphql/fragments/CORE_POST_FIELDS";
 import { CORE_COMMENT_FIELDS } from "../../graphql/fragments/CORE_COMMENT_FIELDS";
 
-import { useOptimisticPost } from "../optimisticTemplates/post";
+import { makeOptimisticPost } from "../optimisticTemplates/post";
 
 export const useCreatePostOrReply = () => {
   const [
     _createPostOrReply,
     { data, loading: createPostLoading, error: createPostError },
   ] = useMutation(CREATE_POST_OR_REPLY_FOR_ACCOUNT);
+  const client = useApolloClient();
 
   const createPostOrReply = (variables = {}) => {
-    const post = useOptimisticPost({
+    const post = makeOptimisticPost({
       contentRaw: variables.contentRaw,
       contentHtml: variables.contentHtml,
       communityId: variables.communityId,
       parentId: variables.parentId,
       blocks: variables.blocks,
       channelId: variables.channelId,
+      client,
     });
 
     if (!variables.contentRaw && !variables.blocks?.length) return;

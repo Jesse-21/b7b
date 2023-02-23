@@ -47,6 +47,7 @@ const DimensionContent = ({ communityId }) => {
       <CreatePostOrReply
         placeholder={"Publish a public message!"}
         colorScheme="pink"
+        size="lg"
         communityId={communityId}
       ></CreatePostOrReply>
       <PostFeedWithContext></PostFeedWithContext>

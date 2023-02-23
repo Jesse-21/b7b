@@ -38,7 +38,7 @@ code {
   pointer-events: none;
 }
 .basic-editor {
-  background-color: var(--chakra-colors-background-main);
+  background-color: var(--chakra-colors-background);
   border-radius: var(--chakra-radii-3xl);
   padding: var(--chakra-space-2) var(--chakra-space-4);
   max-height: var(--chakra-space-48);
