@@ -12,21 +12,12 @@ export const PostUpvote = ({
   size,
   ...props
 }) => {
-  const _onPostLike = React.useCallback(
-    (e, value) => {
-      e.preventDefault();
-      e.stopPropagation();
-      onPostLike(value);
-    },
-    [onPostLike]
-  );
-
   return (
     <Box display={"flex"} {...props}>
       <IconButton
         aria-label="Upvote"
         icon={<TriangleUpIcon />}
-        onClick={(e) => _onPostLike(e, 1)}
+        onClick={(e) => onPostLike(e, 1)}
         colorScheme={currentLikes === 1 ? "green" : "gray"}
         isDisabled={currentLikes === 1}
         variant="ghost"
@@ -38,7 +29,7 @@ export const PostUpvote = ({
       <IconButton
         aria-label="Downvote"
         icon={<TriangleDownIcon />}
-        onClick={(e) => _onPostLike(e, -1)}
+        onClick={(e) => onPostLike(e, -1)}
         isDisabled={currentLikes === -1}
         colorScheme={currentLikes === -1 ? "pink" : "gray"}
         variant="ghost"

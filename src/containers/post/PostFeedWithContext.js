@@ -11,7 +11,6 @@ import { useChannelContext } from "../../context/ChannelContext";
 import { PostWithActions } from "./PostWithContext";
 
 const PostFeedWrapper = ({ postFeed }) => {
-  console.log("PostFeedWrapper", postFeed);
   return (
     <Box>
       {postFeed?.map((post) => (

@@ -4,10 +4,11 @@ import { Button, IconButton } from "@chakra-ui/button";
 import { useDisclosure } from "@chakra-ui/hooks";
 import isEqual from "lodash/isEqual";
 
+import { PostUpvoteWithActions } from "../../containers/post/PostUpvoteWithContext";
+
 import { PostTitle } from "./PostTitle";
 import { PostRichContent } from "./PostContent";
 import { PostFooter } from "./PostFooter";
-import { PostUpvote } from "./PostUpvote";
 import { PostPreview } from "./PostPreview";
 import { Expand } from "../icons/Expand";
 
@@ -91,7 +92,8 @@ export const ParentPost = ({ post, isStandalone = false }) => {
 
   return (
     <Box display="flex">
-      <PostUpvote
+      <PostUpvoteWithActions
+        postId={post?._id}
         reactionCount={post?.reactionCount}
         size="sm"
         flexDir="column"
