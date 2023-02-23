@@ -110,7 +110,7 @@ export const GuestLogin = () => {
             size="lg"
             w="100%"
             onClick={onClick}
-            colorScheme="primary"
+            colorScheme="pink"
             isDisabled={loading || !wallet}
           >
             Sign in

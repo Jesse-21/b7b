@@ -26,7 +26,7 @@ export const AddressWithCopy = ({
           variant="filled"
           type="text"
           placeholder="Address"
-          value={shortAddress}
+          value={shortAddress || ""}
           size={"lg"}
           {...props}
         />
