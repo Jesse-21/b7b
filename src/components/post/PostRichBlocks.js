@@ -60,13 +60,9 @@ export const PostOrReplyRichBlockRichEmbed = ({ block: _block = {} }) => {
         <Text fontSize="md" fontWeight="bold">
           {block?.title}
         </Text>
-        <Box
-          fontSize="sm"
-          color="text.secondary"
-          dangerouslySetInnerHTML={{
-            __html: block?.description?.html,
-          }}
-        ></Box>
+        <Box fontSize="sm" color="text.secondary">
+          {block?.description?.raw}
+        </Box>
       </Box>
       <Image
         {...block?.thumbnail}
