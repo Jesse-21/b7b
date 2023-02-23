@@ -9,7 +9,7 @@ const withPostFooterAction = (Component) => {
   const Memo = React.memo(Component);
 
   // eslint-disable-next-line react/display-name
-  return ({ postId, isReply, postLink, ...props }) => {
+  return ({ postId, index, postLink, ...props }) => {
     const { data } = useQuery(GET_POST_COMMENT_COUNT, {
       variables: {
         id: postId,
@@ -30,10 +30,10 @@ const withPostFooterAction = (Component) => {
     );
 
     const commentCount = React.useMemo(() => {
-      return isReply
-        ? data?.getPost?.commentCount
-        : data?.getPost?.rootCommentCount;
-    }, [data, isReply]);
+      return index === 0
+        ? data?.getPost?.rootCommentCount
+        : data?.getPost?.commentCount;
+    }, [data, index]);
 
     return (
       <Memo
@@ -41,6 +41,7 @@ const withPostFooterAction = (Component) => {
         size="sm"
         postLink={postLink}
         onPostCommentClick={onPostCommentClick}
+        index={index}
         {...props}
       />
     );

@@ -24,6 +24,7 @@ const PostParentInner = ({
   postLink,
   content,
   blocks,
+  postId,
 }) => {
   const { isOpen, onToggle } = useDisclosure();
   const showContent = React.useMemo(() => {
@@ -45,6 +46,7 @@ const PostParentInner = ({
           />
         )}
         <PostFooterWithAction
+          postId={postId}
           index={0}
           size="sm"
           postLink={isStandalone ? null : postLink}
@@ -65,7 +67,7 @@ const PostParentInnerMemo = React.memo(
     return (
       prev.isStandalone === next.isStandalone &&
       prev.postLink === next.postLink &&
-      prev.rootCommentCount === next.rootCommentCount &&
+      prev.postId === next.postId &&
       isEqual(prev.content, next.content) &&
       isEqual(prev.blocks, next.blocks)
     );
@@ -139,11 +141,11 @@ export const ParentPost = ({ post, isStandalone = false }) => {
           </Text>
         </Box>
         <PostParentInnerMemo
-          rootCommentCount={post?.rootCommentCount}
           content={post?.richContent?.content}
           blocks={post?.richContent?.blocks}
           isStandalone={isStandalone}
           postLink={postLink}
+          postId={post?._id}
         />
       </Box>
     </Box>
