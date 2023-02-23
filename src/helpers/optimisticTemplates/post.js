@@ -1,10 +1,13 @@
+/* eslint-disable indent */
+import { useApolloClient } from "@apollo/client";
+
 import { getCurrentAccount } from "../cache/get-current-account";
 import { getCommunity } from "../cache/get-community";
 import { getPostWithParent } from "../cache/get-post-with-parent";
 import { getChannel } from "../cache/get-channel";
 import { ObjectId } from "../make-object-id";
 
-export const makeOptimisticPost = ({
+export const useOptimisticPost = ({
   _id,
   contentRaw,
   contentHtml,
@@ -12,6 +15,7 @@ export const makeOptimisticPost = ({
   parentId,
   channelId,
 } = {}) => {
+  const client = useApolloClient();
   return {
     __typename: "Post",
     _id: _id || ObjectId(),
@@ -29,19 +33,19 @@ export const makeOptimisticPost = ({
       },
       blocks: [],
     },
-    account: getCurrentAccount()?.getCurrentAccount || {
+    account: getCurrentAccount({ client })?.getCurrentAccount || {
       _id: ObjectId(),
       __typename: "Account",
     },
-    channel: channelId ? getChannel(channelId) : null,
-    community: communityId ? getCommunity(communityId) : null,
+    channel: channelId ? getChannel({ client, channelId }) : null,
+    community: communityId ? getCommunity({ client, communityId }) : null,
     currentAccountPermissions: {
       _id: ObjectId(),
       __typename: "PostCurrentAccountPermissions",
       canRead: true,
     },
     parent: parentId
-      ? getPostWithParent(parentId) || {
+      ? getPostWithParent({ client, postId: parentId }) || {
           _id: parentId,
           __typename: "Post",
           account: {
