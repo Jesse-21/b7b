@@ -17,7 +17,7 @@ export const Post = ({
   isStandalone = false,
   index = 0,
 }) => {
-  console.log("Post", post?._id);
+  console.log("Post", post?._id, post?.richContent?.content?.raw);
   return (
     <Box
       border="1px solid var(--chakra-colors-border)"
