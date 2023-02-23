@@ -12,14 +12,7 @@ const withPostFooterAction = (Component) => {
   const Memo = React.memo(Component);
 
   // eslint-disable-next-line react/display-name
-  return ({
-    postId,
-    parentId,
-    index,
-    postLink,
-    replyEditorStyle,
-    ...props
-  }) => {
+  return ({ postId, index, postLink, replyEditorStyle, ...props }) => {
     const [showReplyEditor, setShowReplyEditor] = React.useState(false);
 
     const { data } = useQuery(GET_POST_COMMENT_COUNT, {
@@ -69,7 +62,7 @@ const withPostFooterAction = (Component) => {
               size="sm"
               id={`CreatePostOrReply-${postId}`}
               // parentId={level >= 3 ? parent._id : post._id} this is in place to avoid infinite nesting. disabked for now
-              parentId={parentId}
+              parentId={postId}
               placeholder={"What do you think?"}
               colorScheme="gray"
               callback={() => setShowReplyEditor(false)}
