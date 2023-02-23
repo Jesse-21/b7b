@@ -19,7 +19,13 @@ export const Post = ({
 }) => {
   console.log("Post", post?._id);
   return (
-    <Box border="1px solid" padding={[2, null, null, 4]}>
+    <Box
+      border="1px solid var(--chakra-colors-border)"
+      borderBottom={
+        index === 0 ? "none" : "1px solid var(--chakra-colors-border)"
+      }
+      padding={[2, null, null, 4]}
+    >
       {index === 0 ? (
         <ParentPost post={post} isStandalone={isStandalone} />
       ) : (
