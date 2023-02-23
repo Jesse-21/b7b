@@ -2,7 +2,12 @@ import React from "react";
 import { useParams } from "react-router-dom";
 
 import { PostFeedWithContext } from "../containers/post/PostFeedWithContext";
-import { CommunityContextProvider } from "../context/CommunityContext";
+import { CreatePostOrReply } from "../containers/post/CreatePostOrReply";
+
+import {
+  CommunityContextProvider,
+  useCommunityContext,
+} from "../context/CommunityContext";
 
 const withDimensionContext = (Component) => {
   const Memo = React.memo(Component);
@@ -23,8 +28,32 @@ const withDimensionContext = (Component) => {
     );
   };
 };
-const DimensionContent = () => {
-  return <PostFeedWithContext></PostFeedWithContext>;
+
+const withCommunityContext = (Component) => {
+  const Memo = React.memo(Component, (prev, next) => {
+    return prev.communityId === next.communityId;
+  });
+
+  // eslint-disable-next-line react/display-name
+  return () => {
+    const { community } = useCommunityContext();
+    return <Memo communityId={community?._id} />;
+  };
 };
 
-export const Dimension = withDimensionContext(DimensionContent);
+const DimensionContent = ({ communityId }) => {
+  return (
+    <>
+      <CreatePostOrReply
+        placeholder={"Publish a public message!"}
+        colorScheme="pink"
+        communityId={communityId}
+      ></CreatePostOrReply>
+      <PostFeedWithContext></PostFeedWithContext>
+    </>
+  );
+};
+
+export const Dimension = withDimensionContext(
+  withCommunityContext(DimensionContent)
+);
