@@ -7,6 +7,7 @@ import {
 
 import { PostRichContent } from "./PostContent";
 import { ParentPost } from "./ParentPost";
+import { ReplyPost } from "./ReplyPost";
 
 const PostWithReplies = withPostReplies(PostReplies);
 
@@ -20,22 +21,9 @@ export const Post = ({
   return (
     <Box border="1px solid" padding={[2, null, null, 4]}>
       {index === 0 ? (
-        <>
-          <ParentPost post={post} isStandalone={isStandalone} />
-        </>
+        <ParentPost post={post} isStandalone={isStandalone} />
       ) : (
-        <>
-          <PostRichContent
-            content={post?.richContent?.content}
-            blocks={post?.richContent?.blocks}
-          />
-          {/* upvote elem */}
-          {/* <PostFooter
-            index={index}
-            commentCount={post?.commentCount}
-            size="xs"
-          /> */}
-        </>
+        <ReplyPost index={index} post={post} />
       )}
       {showReplies && (
         <PostWithReplies
