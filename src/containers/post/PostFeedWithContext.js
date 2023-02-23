@@ -30,6 +30,19 @@ export const withPostFeedContext = (Component) => {
   };
 };
 
+export const withPostFeedContextProvider = (Component) => {
+  const Memo = React.memo(Component);
+
+  // eslint-disable-next-line react/display-name
+  return ({ filters, sort = "lastActivity", limit = 10 }) => {
+    return (
+      <PostFeedContextProvider limit={limit} sort={sort} filters={filters}>
+        <Memo />
+      </PostFeedContextProvider>
+    );
+  };
+};
+
 export const withCommunityContext = (Component) => {
   const Memo = React.memo(Component);
 
@@ -81,10 +94,14 @@ export const withChannelContext = (Component) => {
     );
   };
 };
-export const PostFeedWithContext = withCommunityContext(
+export const PostFeedWithCommunityContext = withCommunityContext(
   withPostFeedContext(PostFeedWrapper)
 );
 
 export const PostFeedWithChannelContext = withChannelContext(
+  withPostFeedContext(PostFeedWrapper)
+);
+
+export const PostFeedWithContext = withPostFeedContextProvider(
   withPostFeedContext(PostFeedWrapper)
 );

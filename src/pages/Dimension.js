@@ -36,7 +36,11 @@ const withCommunityContext = (Component) => {
 
   // eslint-disable-next-line react/display-name
   return () => {
-    const { community } = useCommunityContext();
+    const { community, loading } = useCommunityContext();
+    if (loading) return <>Loading...</>;
+    if (!community?._id) return <>No community</>;
+    if (!community.currentAccountPermissions.canRead) return <>No access</>;
+
     return <Memo communityId={community?._id} />;
   };
 };
@@ -50,7 +54,13 @@ const DimensionContent = ({ communityId }) => {
         size="lg"
         communityId={communityId}
       ></CreatePostOrReply>
-      <PostFeedWithContext></PostFeedWithContext>
+      <PostFeedWithContext
+        filters={{
+          community: communityId,
+          excludeChannels: true,
+          excludeComments: true,
+        }}
+      ></PostFeedWithContext>
     </>
   );
 };
