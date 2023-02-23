@@ -11,8 +11,6 @@ export const CORE_POST_FIELDS = gql`
   fragment CorePostFields on Post {
     _id
     createdAt
-    commentCount
-    rootCommentCount
     isHidden
     richContent {
       ...CoreRichContentFields
