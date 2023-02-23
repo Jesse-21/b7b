@@ -3,6 +3,8 @@ import { HStack } from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/button";
 import { EditIcon, LinkIcon } from "@chakra-ui/icons";
 
+import { PostUpvoteWithActions } from "../../containers/post/PostUpvoteWithContext";
+
 import { CopyButton } from "../buttons/CopyButton";
 
 export const PostFooter = ({
@@ -10,10 +12,15 @@ export const PostFooter = ({
   index,
   commentCount,
   postLink,
+  postId,
   size,
+  showUpvote,
 }) => {
   return (
     <HStack>
+      {showUpvote && (
+        <PostUpvoteWithActions postId={postId} size="xs" flexDir="row" />
+      )}
       <Button
         variant={"ghost"}
         leftIcon={<EditIcon />}

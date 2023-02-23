@@ -16,6 +16,7 @@ export const useBasicEditor = ({
   limit = 1000,
   extensions = [],
   keyboardShortcuts = [],
+  props = {},
 } = {}) => {
   // const { extension: mentionExtension } = useMention();
   let ParagraphExtended = Paragraph.configure({
@@ -36,6 +37,7 @@ export const useBasicEditor = ({
       },
     });
   }
+
   const editor = useEditor({
     extensions: [
       Document,
@@ -62,6 +64,7 @@ export const useBasicEditor = ({
       ...extensions,
     ],
     content: null,
+    ...props,
     editorProps: {
       attributes: {
         class: size === "lg" ? "basic-editor lg" : "basic-editor",

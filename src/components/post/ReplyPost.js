@@ -14,13 +14,13 @@ const ReplyPostFooter = ({ postLink, postId, index }) => {
   return (
     <>
       <HStack spacing={1}>
-        <PostUpvoteWithActions postId={postId} size="xs" flexDir="row" />
         <PostFooterWithAction
           index={index}
           size="xs"
           postLink={postLink}
-          clickShowReplyEditor={true}
           postId={postId}
+          replyEditorStyle={"inline"}
+          showUpvote={true}
         />
       </HStack>
     </>

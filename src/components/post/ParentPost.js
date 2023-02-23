@@ -50,7 +50,7 @@ const PostParentInner = ({
           index={0}
           size="sm"
           postLink={postLink}
-          clickShowReplyEditor={false}
+          replyEditorStyle={"link"}
         />
       </HStack>
       {showContent && (
