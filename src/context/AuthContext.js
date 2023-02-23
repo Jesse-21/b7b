@@ -61,8 +61,8 @@ export const AuthContextProvider = ({ children }) => {
     return currentAccount?.address?.address || currentAddress;
   }, [currentAddress, currentAccount?.address?.address]);
   const authKey = React.useMemo(() => {
-    return createCookiesAuthKey(client?.uri);
-  }, [client?.uri]);
+    return createCookiesAuthKey(window.hostUri?.toString());
+  }, []);
 
   React.useEffect(() => {
     if (Cookies.get(authKey)) {

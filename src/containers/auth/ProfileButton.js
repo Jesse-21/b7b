@@ -39,7 +39,7 @@ export const ProfileButton = ({ size = "large" }) => {
   const connectButtonPtops = {
     onClick: onAuthModalOpen,
     isLoading: loading,
-    size: "md",
+    size: size === "large" ? "lg" : "md",
     rounded: "3xl",
     colorScheme: null,
   };

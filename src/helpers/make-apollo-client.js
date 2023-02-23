@@ -61,6 +61,7 @@ export const makeApolloClient = async (dimension) => {
   const tld = split?.[1] || "beb";
 
   const hostUri = await getDimensionHostUri(cleanLocale, tld);
+  window.hostUri = hostUri;
   const authLink = createDimensionAuthLink(hostUri.toString());
 
   const httpLink = createHttpLink({
@@ -72,5 +73,6 @@ export const makeApolloClient = async (dimension) => {
     cache: new InMemoryCache(),
     link: retryLink.concat(authLink.concat(httpLink)),
   });
+
   return client;
 };
