@@ -11,6 +11,12 @@ import { config } from "../config";
 
 const retryLink = new RetryLink();
 
+export const typePolicies = {
+  Community: {
+    keyFields: ["tokenId"],
+  },
+};
+
 const createDimensionAuthLink = (hostUri) => {
   const authKey = createCookiesAuthKey(hostUri);
   return setContext((_, { headers }) => {
@@ -70,7 +76,9 @@ export const makeApolloClient = async (dimension) => {
   });
 
   const client = new ApolloClient({
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache({
+      typePolicies,
+    }),
     link: retryLink.concat(authLink.concat(httpLink)),
   });
 

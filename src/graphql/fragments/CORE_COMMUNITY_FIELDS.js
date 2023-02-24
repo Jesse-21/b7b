@@ -25,5 +25,6 @@ export const CORE_COMMUNITY_FIELDS = gql`
     }
     membersCount
     tld
+    tokenId
   }
 `;

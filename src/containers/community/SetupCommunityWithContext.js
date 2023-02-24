@@ -30,8 +30,17 @@ export const SetupCommunity = ({
                 You can initialize your dimension as long as your registration
                 is active.
                 <br />
-                <b>Optional:</b> If you wish to change the server URI to host
-                your dimension, click here and follow this guide.
+                Optional: If you wish to change the server URI to host your
+                dimension,{" "}
+                <Button
+                  as="a"
+                  target="_blank"
+                  variant={"link"}
+                  href="https://etherscan.io/address/0xf71a58ddc57214e431168c4a3f2ff62a069ab8a6#writeContract"
+                >
+                  click here to navigate to Etherscan{" "}
+                </Button>{" "}
+                and follow this guide.
               </AlertDescription>
             </Box>
           </Alert>
