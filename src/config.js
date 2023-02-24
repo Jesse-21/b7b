@@ -23,4 +23,4 @@ export const prod = {
     ?.join?.("."),
 };
 
-export const config = isProd ? prod : dev;
+export const config = prod;
