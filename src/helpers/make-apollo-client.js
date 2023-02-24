@@ -29,7 +29,7 @@ const getDimensionHostUri = async (dimension) => {
     return config.DEFAULT_URI;
   }
   const myContract = new Contract(
-    "0x2167A15c97fE3A28c0eebfA23a3368974A2b64E5",
+    config.RESOLVER_ADDRESS,
     abi,
     // @TODO - make this configurable with API key
     new providers.InfuraProvider("goerli")
