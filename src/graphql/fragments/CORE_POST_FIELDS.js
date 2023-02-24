@@ -23,6 +23,7 @@ export const CORE_POST_FIELDS = gql`
       name
       bebdomain
       tld
+      tokenId
     }
     channel {
       ...CoreChannelFields
