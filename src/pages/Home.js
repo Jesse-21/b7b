@@ -1,4 +1,4 @@
-import { Text, Box } from "@chakra-ui/react";
+import { Text, Box } from "@chakra-ui/layout";
 
 export const Home = () => {
   return (

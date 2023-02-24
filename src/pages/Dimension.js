@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 
 import { PostFeedWithContext } from "../containers/post/PostFeedWithContext";
 import { CreatePostOrReply } from "../containers/post/CreatePostOrReply";
+import { SetupCommunityWithContext } from "../containers/community/SetupCommunityWithContext";
 
 import {
   CommunityContextProvider,
@@ -38,7 +39,7 @@ const withCommunityContext = (Component) => {
   return () => {
     const { community, loading } = useCommunityContext();
     if (loading) return <>Loading...</>;
-    if (!community?._id) return <>No community</>;
+    if (!community?._id) return <SetupCommunityWithContext />;
     if (!community.currentAccountPermissions.canRead) return <>No access</>;
 
     return <Memo communityId={community?._id} />;
