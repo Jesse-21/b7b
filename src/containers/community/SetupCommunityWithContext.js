@@ -74,6 +74,7 @@ const withCommunityAndAuthContext = (Component) => {
       useRegisterCommunity();
 
     const isOwner = React.useMemo(() => {
+      if (!community?.tokenOwnerAddress) return false;
       return (
         activeAddress?.toLowerCase() ===
         community?.tokenOwnerAddress?.toLowerCase()

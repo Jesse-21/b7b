@@ -15,6 +15,7 @@ const withDimensionContext = (Component) => {
 
   // eslint-disable-next-line react/display-name
   return () => {
+    console.log("withDimensionContext");
     const { dimension } = useParams();
     const domain = React.useMemo(() => {
       return dimension?.split(".")?.[0];

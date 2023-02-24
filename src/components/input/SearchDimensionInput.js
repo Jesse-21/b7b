@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Input, InputGroup, InputRightElement } from "@chakra-ui/input";
 import { IconButton } from "@chakra-ui/button";
 import { SearchIcon } from "@chakra-ui/icons";
@@ -12,6 +13,16 @@ export const SearchDimensionInput = ({ size, ...props }) => {
       setValue(e.target.value);
     },
     [setValue]
+  );
+  const navigate = useNavigate();
+
+  const handleClick = React.useCallback(
+    (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      navigate(`/d/${value}`);
+    },
+    [navigate, value]
   );
 
   return (
@@ -29,7 +40,7 @@ export const SearchDimensionInput = ({ size, ...props }) => {
             size="md"
             icon={<SearchIcon />}
             as="a"
-            href={`/#/d/${value}`}
+            onClick={handleClick}
           ></IconButton>
         </InputRightElement>
       </InputGroup>
