@@ -32,7 +32,7 @@ const getDimensionHostUri = async (dimension) => {
     config.RESOLVER_ADDRESS,
     abi,
     // @TODO - make this configurable with API key
-    new providers.InfuraProvider("goerli")
+    new providers.InfuraProvider(config.NODE_NETWORK)
   );
   const tokenId = getTokenIdFromLabel(dimension);
   let hostUri = await myContract.get(tokenId);

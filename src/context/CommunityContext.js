@@ -13,9 +13,6 @@ CommunityContext.displayName = "CommunityContext";
 export const useCommunityContext = () => React.useContext(CommunityContext);
 
 export const CommunityContextProvider = ({ children, domain, tld = "beb" }) => {
-  const child = React.useMemo(() => {
-    return children;
-  }, [children]);
   const { data, loading, error } = useQuery(
     GET_COMMUNITY_BY_DOMAIN_OR_TOKEN_ID,
     {
@@ -31,8 +28,6 @@ export const CommunityContextProvider = ({ children, domain, tld = "beb" }) => {
     return data?.CommunityQuery?.getCommunityByDomainOrTokenId;
   }, [data?.CommunityQuery?.getCommunityByDomainOrTokenId]);
 
-  console.log("CommunityContextProvider", domain, tld, community, loading);
-
   return (
     <CommunityContext.Provider
       value={{
@@ -41,7 +36,7 @@ export const CommunityContextProvider = ({ children, domain, tld = "beb" }) => {
         error,
       }}
     >
-      {child}
+      {children}
     </CommunityContext.Provider>
   );
 };

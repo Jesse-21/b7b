@@ -1,4 +1,5 @@
 import React from "react";
+import { useQuery } from "@apollo/client";
 import { Box } from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/button";
 import { Alert, AlertIcon, AlertDescription } from "@chakra-ui/alert";
@@ -8,6 +9,8 @@ import { useAuthContext } from "../../context/AuthContext";
 
 import { shortenAddress } from "../../helpers/shorten-address";
 import { useRegisterCommunity } from "../../helpers/hooks/useRegisterCommunity";
+
+import { GET_COMMUNITY_TOKEN_OWNER_ADDRESS } from "../../graphql/queries/GET_COMMUNITY_TOKEN_OWNER_ADDRESS";
 
 /** Component to Initialize a community */
 export const SetupCommunity = ({
@@ -26,7 +29,8 @@ export const SetupCommunity = ({
               <AlertDescription>
                 You can initialize your dimension as long as your registration
                 is active.
-                <b>Optional:</b>If you wish to change the server URI to host
+                <br />
+                <b>Optional:</b> If you wish to change the server URI to host
                 your dimension, click here and follow this guide.
               </AlertDescription>
             </Box>
@@ -69,17 +73,23 @@ const withCommunityAndAuthContext = (Component) => {
   // eslint-disable-next-line react/display-name
   return () => {
     const { activeAddress } = useAuthContext();
-    const { community, loading } = useCommunityContext();
+    const { community } = useCommunityContext();
     const { onRegisterCommunity, loading: registerCommunityLoading } =
       useRegisterCommunity();
+    const { data, loading } = useQuery(GET_COMMUNITY_TOKEN_OWNER_ADDRESS, {
+      variables: {
+        bebdomain: community?.bebdomain,
+        tld: community?.tld || "beb",
+      },
+      skip: !community?.bebdomain,
+    });
 
     const isOwner = React.useMemo(() => {
-      if (!community?.tokenOwnerAddress) return false;
-      return (
-        activeAddress?.toLowerCase() ===
-        community?.tokenOwnerAddress?.toLowerCase()
-      );
-    }, [activeAddress, community?.tokenOwnerAddress]);
+      const tokenOwnerAddress =
+        data?.CommunityQuery?.getCommunityByDomainOrTokenId?.tokenOwnerAddress;
+      if (!tokenOwnerAddress) return false;
+      return activeAddress?.toLowerCase() === tokenOwnerAddress?.toLowerCase();
+    }, [activeAddress, data]);
     const isLoading = React.useMemo(() => {
       return loading || registerCommunityLoading;
     }, [loading, registerCommunityLoading]);

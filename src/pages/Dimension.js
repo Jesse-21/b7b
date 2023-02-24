@@ -15,7 +15,6 @@ const withDimensionContext = (Component) => {
 
   // eslint-disable-next-line react/display-name
   return () => {
-    console.log("withDimensionContext");
     const { dimension } = useParams();
     const domain = React.useMemo(() => {
       return dimension?.split(".")?.[0];
@@ -40,7 +39,11 @@ const withCommunityContext = (Component) => {
   return () => {
     const { community, loading } = useCommunityContext();
     if (loading) return <>Loading...</>;
-    if (!community?._id) return <SetupCommunityWithContext />;
+    if (!community?._id) {
+      return (
+        <SetupCommunityWithContext community={community} loading={loading} />
+      );
+    }
     if (!community.currentAccountPermissions.canRead) return <>No access</>;
 
     return <Memo communityId={community?._id} />;
