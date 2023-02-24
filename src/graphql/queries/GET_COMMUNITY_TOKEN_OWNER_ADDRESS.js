@@ -13,6 +13,7 @@ export const GET_COMMUNITY_TOKEN_OWNER_ADDRESS = gql`
         tokenId: $tokenId
         tld: $tld
       ) {
+        _id
         tokenId
         tokenOwnerAddress
       }

@@ -41,6 +41,9 @@ export const SetupCommunity = ({
                   click here to navigate to Etherscan{" "}
                 </Button>{" "}
                 and follow this guide.
+                <br />
+                <br />
+                Current host: <b>{window?.hostUri?.toString()}</b>
               </AlertDescription>
             </Box>
           </Alert>

@@ -63,7 +63,7 @@ const getDimensionHostUri = async (dimension) => {
 export const makeApolloClient = async (dimension) => {
   const split = dimension?.split(".");
   const locale = split?.[0];
-  const cleanLocale = locale?.replace(/[^a-zA-Z0-9]/g, "").toLowerCase();
+  const cleanLocale = locale?.replace(/[^a-zA-Z0-9-]/g, "").toLowerCase();
   const tld = split?.[1] || "beb";
 
   const hostUri = await getDimensionHostUri(cleanLocale, tld);
