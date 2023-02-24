@@ -21,6 +21,7 @@ export const CORE_COMMENT_FIELDS = gql`
       _id
       name
       bebdomain
+      tokenId
     }
     parent {
       _id
