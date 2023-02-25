@@ -2,12 +2,12 @@ import { Text, Box } from "@chakra-ui/layout";
 
 export const Home = () => {
   return (
-    <Box marginLeft={10} maxWidth={750}>
+    <Box marginTop={10} marginLeft={10} maxWidth={750}>
       <Text fontSize="3xl" fontWeight="bold">
         Welcome to b7b, the BEB dimension browser!
       </Text>
 
-      <Text>
+      <Text marginTop={5}>
         The BEB (Blockchain-Enabled Broadcast) protocol is an open messaging
         network, similar to SMTP, but designed for wallet communication. It is
         simple enough for anyone to deploy their own self-hosted server, known
