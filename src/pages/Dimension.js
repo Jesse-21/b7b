@@ -12,10 +12,12 @@ import {
 
 export const withDimensionContext = (Component) => {
   const Memo = React.memo(Component);
+  const CommunityContextProviderMemo = React.memo(CommunityContextProvider);
 
   // eslint-disable-next-line react/display-name
   return () => {
     const { dimension } = useParams();
+    console.log("dimension", dimension);
     const domain = React.useMemo(() => {
       return dimension?.split(".")?.[0];
     }, [dimension]);
@@ -23,9 +25,9 @@ export const withDimensionContext = (Component) => {
       return dimension?.split(".")?.[1];
     }, [dimension]);
     return (
-      <CommunityContextProvider domain={domain} tld={tld}>
+      <CommunityContextProviderMemo domain={domain} tld={tld}>
         <Memo />
-      </CommunityContextProvider>
+      </CommunityContextProviderMemo>
     );
   };
 };
@@ -34,15 +36,15 @@ const withCommunityContext = (Component) => {
   const Memo = React.memo(Component, (prev, next) => {
     return prev.communityId === next.communityId;
   });
+  const SetupCommunityWithContextMemo = React.memo(SetupCommunityWithContext);
 
   // eslint-disable-next-line react/display-name
   return () => {
+    console.log("withCommunityContext");
     const { community, loading } = useCommunityContext();
     if (loading) return <>Loading...</>;
     if (!community?._id) {
-      return (
-        <SetupCommunityWithContext community={community} loading={loading} />
-      );
+      return <SetupCommunityWithContextMemo />;
     }
     if (!community.currentAccountPermissions.canRead) return <>No access</>;
 
@@ -70,6 +72,4 @@ export const DimensionContent = ({ communityId }) => {
   );
 };
 
-export const Dimension = withDimensionContext(
-  withCommunityContext(DimensionContent)
-);
+export const Dimension = React.memo(withCommunityContext(DimensionContent));

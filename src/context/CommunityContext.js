@@ -20,7 +20,6 @@ export const CommunityContextProvider = ({ children, domain, tld = "beb" }) => {
         bebdomain: domain,
         tld,
       },
-      skip: !domain,
     }
   );
 
