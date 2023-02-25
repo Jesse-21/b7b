@@ -7,9 +7,13 @@ import { Home } from "./pages/Home";
 import { Dimension, withDimensionContext } from "./pages/Dimension";
 import { DimensionChannel } from "./pages/DimensionChannel";
 import { Post } from "./pages/Post";
+import { DimensionAdmin } from "./pages/DimensionAdmin";
 import { DimensionRoutesLayout } from "./pages/layout/DimensionRoutesLayout";
+import { withCommunityAdminContext } from "./pages/layout/DimensionAdminRoutesLayout";
 
 const DimensionOutlet = withDimensionContext(Outlet);
+const DimensionAdminOutlet = withCommunityAdminContext(Outlet);
+
 export const AppRoutes = () => {
   return (
     <Routes>
@@ -34,6 +38,16 @@ export const AppRoutes = () => {
         }
       >
         <Route index element={<Dimension />} />
+        <Route
+          path="admin/"
+          element={
+            <>
+              <DimensionAdminOutlet />
+            </>
+          }
+        >
+          <Route index element={<DimensionAdmin />} />
+        </Route>
         <Route path="channels/:channelId" element={<DimensionChannel />} />
         <Route path="posts/:postId" element={<Post />} />
       </Route>
