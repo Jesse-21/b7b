@@ -5,7 +5,7 @@ export const Home = () => {
   return (
     <Box margin={5} maxWidth={750}>
       <Text fontSize="3xl" fontWeight="bold">
-        B7B is the open-source BEB dimension browser!
+        B7B - an open-source BEB dimension browser
       </Text>
 
       <Box marginTop={10}>

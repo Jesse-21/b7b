@@ -1,8 +1,8 @@
-# b7b - a [BEB protocol](https://github.com/bebverse/protocol) client
+# B7B, an open-source [BEB](https://github.com/bebverse/protocol) dimension browser
 
 <img src="./b7b_logo.png" width="200" />
 
-b7b is a static web client for the open BEB Protocol. It is not tied to or centralized to BEBverse servers, and uses an open-source [resolver contract](https://github.com/bebverse/contracts) to browse and query dimensions.
+B7B is a static web client for the open BEB Protocol. It is not tied to or centralized to BEBverse servers, and uses an open-source [resolver contract](https://github.com/bebverse/contracts) to browse and query dimensions.
 
 ## Contribution Guidelines
 
