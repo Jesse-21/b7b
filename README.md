@@ -1,4 +1,4 @@
-# B7B, an open-source [BEB](https://github.com/bebverse/protocol) dimension browser
+# B7B - an open-source [BEB](https://github.com/bebverse/protocol) dimension browser
 
 <img src="./b7b_logo.png" width="200" />
 
