@@ -17,8 +17,6 @@ export const AppRoutes = () => {
         path="/"
         element={
           <>
-            Layout!
-            {/* the child of the root layout */}
             <Outlet />
           </>
         }
