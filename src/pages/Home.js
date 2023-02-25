@@ -14,9 +14,9 @@ export const Home = () => {
 
       <Text marginTop={10}>
         The BEB (Blockchain-Enabled Broadcast) protocol is an open messaging
-        network, similar to SMTP, but designed for wallet communication. It is
-        simple enough for anyone to deploy their own self-hosted server, known
-        as a {"dimension"} host. A server can host multiple dimensions!
+        protocol for communities. It is simple enough for anyone to deploy their
+        own self-hosted server, known as a {"dimension"} host. A server can host
+        multiple dimensions!
       </Text>
 
       <Box marginTop={10}>
