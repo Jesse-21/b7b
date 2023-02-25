@@ -3,7 +3,7 @@ import { SearchDimensionInput } from "../components/input/SearchDimensionInput";
 
 export const Home = () => {
   return (
-    <Box marginTop={10} marginLeft={10} maxWidth={750}>
+    <Box margin={5} maxWidth={750}>
       <Text fontSize="3xl" fontWeight="bold">
         Welcome to b7b, the BEB dimension browser!
       </Text>
