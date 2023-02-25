@@ -10,7 +10,7 @@ import {
   useCommunityContext,
 } from "../context/CommunityContext";
 
-const withDimensionContext = (Component) => {
+export const withDimensionContext = (Component) => {
   const Memo = React.memo(Component);
 
   // eslint-disable-next-line react/display-name
@@ -50,7 +50,7 @@ const withCommunityContext = (Component) => {
   };
 };
 
-const DimensionContent = ({ communityId }) => {
+export const DimensionContent = ({ communityId }) => {
   return (
     <>
       <CreatePostOrReply

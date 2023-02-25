@@ -4,11 +4,12 @@ import { Routes, Route, Outlet } from "react-router-dom";
 import { HostApolloProviderWithParams } from "./containers/apollo/HostApolloProvider";
 
 import { Home } from "./pages/Home";
-import { Dimension } from "./pages/Dimension";
+import { DimensionContent, withDimensionContext } from "./pages/Dimension";
 import { DimensionChannel } from "./pages/DimensionChannel";
 import { Post } from "./pages/Post";
 import { DimensionRoutesLayout } from "./pages/layout/DimensionRoutesLayout";
 
+const DimensionOutlet = withDimensionContext(Outlet);
 export const AppRoutes = () => {
   return (
     <Routes>
@@ -29,12 +30,12 @@ export const AppRoutes = () => {
         element={
           <HostApolloProviderWithParams>
             <DimensionRoutesLayout>
-              <Outlet />
+              <DimensionOutlet />
             </DimensionRoutesLayout>
           </HostApolloProviderWithParams>
         }
       >
-        <Route path=":dimension" element={<Dimension />} />
+        <Route path=":dimension" element={<DimensionContent />} />
         <Route
           path=":dimension/channels/:channelId"
           element={<DimensionChannel />}

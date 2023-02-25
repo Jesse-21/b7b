@@ -2,31 +2,23 @@ import React from "react";
 import { useParams } from "react-router-dom";
 
 import { PostFeedWithChannelContext } from "../containers/post/PostFeedWithContext";
-import { CommunityContextProvider } from "../context/CommunityContext";
 import { ChannelContextProvider } from "../context/ChannelContext";
 
-const withDimensionChannelContext = (Component) => {
+export const withDimensionChannelContext = (Component) => {
   const Memo = React.memo(Component);
 
   // eslint-disable-next-line react/display-name
   return () => {
-    const { dimension, channelId } = useParams();
-    const domain = React.useMemo(() => {
-      return dimension?.split(".")?.[0];
-    }, [dimension]);
-    const tld = React.useMemo(() => {
-      return dimension?.split(".")?.[1];
-    }, [dimension]);
+    const { channelId } = useParams();
+
     return (
-      <CommunityContextProvider domain={domain} tld={tld}>
-        <ChannelContextProvider channelId={channelId}>
-          <Memo />
-        </ChannelContextProvider>
-      </CommunityContextProvider>
+      <ChannelContextProvider channelId={channelId}>
+        <Memo />
+      </ChannelContextProvider>
     );
   };
 };
-const DimensionChannelContent = () => {
+export const DimensionChannelContent = () => {
   return <PostFeedWithChannelContext></PostFeedWithChannelContext>;
 };
 
