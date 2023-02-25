@@ -35,7 +35,7 @@ export const Home = () => {
         </Text>
       </Box>
 
-      <Box>
+      <Box marginTop={5}>
         <Text fontSize="xl" fontWeight="bold">
           Here are some useful links to learn about the BEB protocol:
           <Text fontSize="xl" fontWeight="bold" color={"blue.600"}>
