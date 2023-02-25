@@ -15,7 +15,7 @@ When opening a Pull Request and you are not already a core contributor to [@bebv
 ```
 $ cd app
 $ yarn install
-$ yarn start
+$ yarn dev
 ```
 
 ### Testing Production

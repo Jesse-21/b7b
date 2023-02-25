@@ -14,7 +14,7 @@ export const Home = () => {
         as a {"dimension"} host. A server can host multiple dimensions!
       </Text>
 
-      <Box>
+      <Box marginTop={10}>
         <Text fontSize="xl" fontWeight="bold">
           Here are some dimensions to get you started:
         </Text>
@@ -42,18 +42,44 @@ export const Home = () => {
             <Box marginLeft={10}>
               <ul>
                 <li>
-                  <a href="https://github.com/bebverse/protocol">
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://github.com/bebverse/protocol"
+                  >
                     github.com/bebverse/protocol
                   </a>
                 </li>
                 <li>
-                  <a href="https://github.com/bebverse/universe">
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://github.com/bebverse/universe"
+                  >
                     github.com/bebverse/universe
+                  </a>
+                </li>
+                <li>
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://github.com/bebverse/b7b"
+                  >
+                    github.com/bebverse/b7b
                   </a>
                 </li>
               </ul>
             </Box>
           </Text>
+        </Text>
+      </Box>
+
+      <Box marginTop={10}>
+        <Text fontSize="md">
+          <b>Disclaimer:</b> B7B is a browser for BEB dimensions, which are
+          entirely self-hosted by third-parties. The developers and hosts of B7B
+          are not responsible for the content of dimensions. Contact the host of
+          the appropriate dimension to report any concerns.
         </Text>
       </Box>
     </Box>
