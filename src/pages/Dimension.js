@@ -1,9 +1,8 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 
 import { PostFeedWithContext } from "../containers/post/PostFeedWithContext";
 import { CreatePostOrReply } from "../containers/post/CreatePostOrReply";
-import { SetupCommunityWithContext } from "../containers/community/SetupCommunityWithContext";
 
 import {
   CommunityContextProvider,
@@ -36,15 +35,14 @@ const withCommunityContext = (Component) => {
   const Memo = React.memo(Component, (prev, next) => {
     return prev.communityId === next.communityId;
   });
-  const SetupCommunityWithContextMemo = React.memo(SetupCommunityWithContext);
 
   // eslint-disable-next-line react/display-name
   return () => {
-    console.log("withCommunityContext");
     const { community, loading } = useCommunityContext();
+    console.log("withCommunityContext");
     if (loading) return <>Loading...</>;
     if (!community?._id) {
-      return <SetupCommunityWithContextMemo />;
+      return <Navigate to={`/d/${community?.bebdomain}/admin`} />;
     }
     if (!community.currentAccountPermissions.canRead) return <>No access</>;
 
