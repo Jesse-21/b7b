@@ -17,7 +17,7 @@ export const DimensionHeader = () => {
         px={[2, null, null, 4]}
       >
         <Text fontWeight={"bold"} fontSize="2xl">
-          B7B
+          <a href="/">B7B</a>
         </Text>
         <Box display={"flex"}>
           <SearchDimensionInput size="lg" />
