@@ -1,4 +1,5 @@
 import { Text, Box } from "@chakra-ui/layout";
+import { SearchDimensionInput } from "../components/input/SearchDimensionInput";
 
 export const Home = () => {
   return (
@@ -7,7 +8,11 @@ export const Home = () => {
         Welcome to b7b, the BEB dimension browser!
       </Text>
 
-      <Text marginTop={5}>
+      <Box marginTop={10}>
+        <SearchDimensionInput size="lg" />
+      </Box>
+
+      <Text marginTop={10}>
         The BEB (Blockchain-Enabled Broadcast) protocol is an open messaging
         network, similar to SMTP, but designed for wallet communication. It is
         simple enough for anyone to deploy their own self-hosted server, known
