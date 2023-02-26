@@ -1,10 +1,12 @@
 import React from "react";
 import { Text, Box, Badge } from "@chakra-ui/layout";
 import { Input } from "@chakra-ui/input";
-import { Field, Form, useFormikContext, Formik } from "formik";
-import debounce from "lodash/debounce";
+
+import { Field, Form, Formik } from "formik";
 
 import { BasicEditor } from "../richText/BasicEditor";
+import { AutoSave } from "../input/FormikAutoSave";
+
 import { useBasicEditor } from "../../helpers/hooks/richText/useBasicEditor";
 
 const fields = [
@@ -16,20 +18,6 @@ const fields = [
     required: true,
   },
 ];
-
-const AutoSave = ({ debounceMs = 1000 }) => {
-  const formik = useFormikContext();
-  const debouncedSubmit = React.useCallback(
-    debounce(() => {
-      return formik.submitForm();
-    }, debounceMs),
-    [formik.submitForm, debounceMs]
-  );
-
-  React.useEffect(() => debouncedSubmit, [debouncedSubmit, formik.values]);
-
-  return <></>;
-};
 
 const RoleEditTabInputField = ({
   id,
@@ -112,8 +100,7 @@ export const RoleEdit = ({ roleName, onSubmit, roleDescription, editable }) => {
             Role description
           </Text>
           <Text color={"text.secondary"} mb={4}>
-            Describe the role in details. <br />
-            For example: &rdquo;Hold a BEBverse Dimension NFT.&rdquo;
+            Describe the role in details.
           </Text>
           <BasicEditor editor={editor} />
         </Box>
