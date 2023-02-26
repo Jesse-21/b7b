@@ -1,5 +1,7 @@
 import React from "react";
 
+import { AdminCommunityBasicWithContext } from "../containers/community/AdminCommunityBasicWithContext";
+
 export const withDimensionAdminContext = (Component) => {
   const Memo = React.memo(Component);
 
@@ -11,7 +13,11 @@ export const withDimensionAdminContext = (Component) => {
   };
 };
 export const DimensionAdminContent = () => {
-  return <>admin</>;
+  return (
+    <>
+      <AdminCommunityBasicWithContext />
+    </>
+  );
 };
 
 export const DimensionAdmin = withDimensionAdminContext(DimensionAdminContent);
