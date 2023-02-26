@@ -11,7 +11,7 @@ const RoleEditPermissionField = ({ permission }) => {
     <>
       <Text as="label" fontWeight={"semibold"} mb={2}>
         Grant role members permission to{" "}
-        <Badge as="span" rounded="md" colorScheme={"gray"}>
+        <Badge as="span" rounded="md" colorScheme={"gray"} variant="outline">
           {permission?.name}
         </Badge>{" "}
         ?

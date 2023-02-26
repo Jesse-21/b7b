@@ -84,29 +84,31 @@ export const ParentPost = ({ post, isStandalone = false }) => {
   }, [post?._id]);
 
   return (
-    <Box display="flex">
-      <PostUpvoteWithActions
-        postId={post?._id}
-        // reactionCount={post?.reactionCount}
-        size="sm"
-        flexDir="column"
-        mr={2}
-      />
-      <PostPreview
-        flexShrink={0}
-        mr={2}
-        w={32}
-        h={24}
-        block={post?.richContent?.blocks?.[0]?.block}
-        overflow="hidden"
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        backgroundColor="blackAlpha.100"
-        rounded="sm"
-        as="a"
-        href={postLink}
-      />
+    <Box display="flex" flexDir={["column", null, null, "row"]}>
+      <Box display="flex">
+        <PostUpvoteWithActions
+          postId={post?._id}
+          // reactionCount={post?.reactionCount}
+          size="sm"
+          flexDir="column"
+          mr={2}
+        />
+        <PostPreview
+          flexShrink={0}
+          mr={2}
+          w={32}
+          h={24}
+          block={post?.richContent?.blocks?.[0]?.block}
+          overflow="hidden"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          backgroundColor="blackAlpha.100"
+          rounded="sm"
+          as="a"
+          href={postLink}
+        />
+      </Box>
       <Box flex="1" overflowX="hidden" overflowY="visible" py={1}>
         <PostTitle
           contentRaw={post?.richContent?.content?.raw}

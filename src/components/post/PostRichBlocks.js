@@ -86,6 +86,25 @@ export const PostOrReplyRichBlockLink = ({
   size = "xs",
 }) => {
   const block = _block?.link;
+  const isYoutube = React.useMemo(() => {
+    // check if url is youtube
+    return block?.url?.includes("youtube.com");
+  }, [block?.url]);
+  if (isYoutube)
+    return (
+      <Box height={["xs", null, null, size]} w="100%" display={"flex"}>
+        <iframe
+          type="text/html"
+          style={{
+            display: "flex",
+          }}
+          width="640px"
+          height="100%"
+          src={`https://www.youtube.com/embed/${block?.url.split("v=")[1]}`}
+          allowFullScreen
+        ></iframe>
+      </Box>
+    );
   return (
     <Flex
       flexDir={"column"}

@@ -31,7 +31,7 @@ const RoleEditTabInputField = ({
       <Text as="label" htmlFor={id} fontWeight={"semibold"} mb={2}>
         {title}
         {required && (
-          <Badge colorScheme={"purple"} ml={2}>
+          <Badge colorScheme={"gray"} ml={2}>
             required
           </Badge>
         )}
