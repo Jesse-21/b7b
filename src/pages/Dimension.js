@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams, Navigate } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 import { PostFeedWithContext } from "../containers/post/PostFeedWithContext";
 import { CreatePostOrReply } from "../containers/post/CreatePostOrReply";
@@ -11,7 +11,6 @@ import {
 
 export const withDimensionContext = (Component) => {
   const Memo = React.memo(Component);
-  const CommunityContextProviderMemo = React.memo(CommunityContextProvider);
 
   // eslint-disable-next-line react/display-name
   return () => {
@@ -24,9 +23,9 @@ export const withDimensionContext = (Component) => {
       return dimension?.split(".")?.[1];
     }, [dimension]);
     return (
-      <CommunityContextProviderMemo domain={domain} tld={tld}>
+      <CommunityContextProvider domain={domain} tld={tld}>
         <Memo />
-      </CommunityContextProviderMemo>
+      </CommunityContextProvider>
     );
   };
 };
@@ -39,10 +38,20 @@ const withCommunityContext = (Component) => {
   // eslint-disable-next-line react/display-name
   return () => {
     const { community, loading } = useCommunityContext();
-    console.log("withCommunityContext");
     if (loading) return <>Loading...</>;
     if (!community?._id) {
-      return <Navigate to={`/d/${community?.bebdomain}/admin`} />;
+      return (
+        <>
+          No community found. If you are the owner, go to{" "}
+          <Link
+            to="admin"
+            relative="path"
+            style={{ textDecoration: "underscore" }}
+          >
+            /admin to initiate your community
+          </Link>
+        </>
+      );
     }
     if (!community.currentAccountPermissions.canRead) return <>No access</>;
 

@@ -11,7 +11,9 @@ export const HostApolloProvider = ({ children, dimension }) => {
     let isMounted = true;
     if (dimension) {
       makeApolloClient(dimension).then((hostClient) => {
-        if (isMounted) setClient(hostClient);
+        if (isMounted) {
+          setClient(hostClient);
+        }
       });
     }
     return () => {
@@ -29,6 +31,7 @@ const withParams = (Component) => {
   // eslint-disable-next-line react/display-name
   return ({ children }) => {
     const { dimension } = useParams();
+
     return <Memo dimension={dimension}>{children}</Memo>;
   };
 };

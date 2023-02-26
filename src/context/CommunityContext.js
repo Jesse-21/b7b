@@ -21,6 +21,7 @@ export const CommunityContextProvider = ({ children, domain, tld = "beb" }) => {
         tld,
       },
       skip: !domain,
+      fetchPolicy: "cache-and-network",
     }
   );
 
