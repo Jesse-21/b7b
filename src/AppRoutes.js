@@ -47,6 +47,7 @@ export const AppRoutes = () => {
           }
         >
           <Route index element={<DimensionAdmin />} />
+          <Route path="roles/:roleId" element={<DimensionAdmin />} />
         </Route>
         <Route path="channels/:channelId" element={<DimensionChannel />} />
         <Route path="posts/:postId" element={<Post />} />
