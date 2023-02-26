@@ -40,6 +40,7 @@ export const RolesTable = ({
           <Tr>
             <Th color="text.secondary">Roles - {roles.length}</Th>
             <Th color="text.secondary">Address</Th>
+            <Th color="text.secondary">Description</Th>
             <Th color="text.secondary">Members</Th>
             {/* <Th color="text.secondary">Actions</Th> */}
           </Tr>
@@ -58,6 +59,7 @@ export const RolesTable = ({
               <Td>
                 {role.slug}@{communityDomain}.{communityTld}
               </Td>
+              <Td>{role.description?.raw}</Td>
 
               <Td>{!role.editable ? "" : role.membersCount || 0}</Td>
               {/* <Td>
