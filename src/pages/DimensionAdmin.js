@@ -2,6 +2,7 @@ import React from "react";
 
 import { AdminCommunityBasicWithContext } from "../containers/community/AdminCommunityBasicWithContext";
 import { RolesTableWithContext } from "../containers/roles/RolesTableWithContext";
+import { RoleEditModalWithContext } from "../containers/roles/RoleEditModalWithContext";
 
 export const withDimensionAdminContext = (Component) => {
   const Memo = React.memo(Component);
@@ -18,6 +19,7 @@ export const DimensionAdminContent = () => {
     <>
       <AdminCommunityBasicWithContext />
       <RolesTableWithContext />
+      <RoleEditModalWithContext />
     </>
   );
 };
