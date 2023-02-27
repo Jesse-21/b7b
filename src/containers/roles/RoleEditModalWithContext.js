@@ -39,6 +39,7 @@ const withRoleParams = (Component) => {
 
     return (
       <Memo
+        roleId={roleId}
         roleName={role?.name}
         roleDescription={role?.description?.raw}
         rolePermissionString={role?.permissionString}
@@ -57,6 +58,7 @@ const RoleEditModal = ({
   roleDescription,
   editable,
   rolePermissionString,
+  roleId,
 }) => {
   const onSubmit = React.useCallback((values) => {
     console.log(values);
@@ -80,6 +82,7 @@ const RoleEditModal = ({
           onSubmit={onSubmit}
         />
         <RoleEditPermissionsWithContext
+          roleId={roleId}
           rolePermissionString={rolePermissionString}
         />
       </ModalBody>

@@ -21,13 +21,7 @@ const SettingsSectionInputField = ({
 }) => {
   return (
     <>
-      <Text
-        as="label"
-        htmlFor={id}
-        fontSize={"3xl"}
-        fontWeight={"semibold"}
-        mb={2}
-      >
+      <Text as="label" htmlFor={id} fontWeight={"semibold"} mb={2}>
         {title}
       </Text>
       {description && (
@@ -107,13 +101,13 @@ export const DomainCommunitySettingsForm = ({
         <Form style={{ display: "flex", flexDirection: "column" }}>
           {fields.map((field) => {
             return (
-              <Box key={field.id} mb={8}>
+              <Box key={field.id} mb={4}>
                 <SettingsSectionInputField {...field} />
               </Box>
             );
           })}
           <Box>
-            <Text as="label" fontSize={"3xl"} fontWeight={"semibold"} mb={2}>
+            <Text as="label" fontWeight={"semibold"} mb={2}>
               Description
             </Text>
             <Text color={"text.secondary"} mb={4}>
@@ -129,6 +123,7 @@ export const DomainCommunitySettingsForm = ({
               width="100%"
               size="lg"
               margin={"auto"}
+              colorScheme="pink"
             >
               Save community
             </Button>

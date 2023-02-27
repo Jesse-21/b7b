@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Box } from "@chakra-ui/layout";
 import { AdminCommunityBasicWithContext } from "../containers/community/AdminCommunityBasicWithContext";
 import { RolesTableWithContext } from "../containers/roles/RolesTableWithContext";
 import { RoleEditModalWithContext } from "../containers/roles/RoleEditModalWithContext";
@@ -16,11 +16,13 @@ export const withDimensionAdminContext = (Component) => {
 };
 export const DimensionAdminContent = () => {
   return (
-    <>
+    <Box p={[2, null, null, 4]}>
       <AdminCommunityBasicWithContext />
-      <RolesTableWithContext />
+      <Box mt={8}>
+        <RolesTableWithContext />
+      </Box>
       <RoleEditModalWithContext />
-    </>
+    </Box>
   );
 };
 
