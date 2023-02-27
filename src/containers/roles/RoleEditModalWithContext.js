@@ -6,9 +6,9 @@ import { ModalBody } from "@chakra-ui/modal";
 import { GET_ROLE } from "../../graphql/queries/GET_ROLE";
 
 import { RoleEditPermissionsWithContext } from "./RoleEditPermissionsWithContext";
+import { RoleEditWithContext } from "./RoleEditWithContext";
 
 import { ModalPrimary } from "../../components/modal/ModalPrimary";
-import { RoleEdit } from "../../components/roles/RoleEdit";
 
 const withRoleParams = (Component) => {
   const Memo = React.memo(Component);
@@ -60,10 +60,6 @@ const RoleEditModal = ({
   rolePermissionString,
   roleId,
 }) => {
-  const onSubmit = React.useCallback((values) => {
-    console.log(values);
-  }, []);
-
   return (
     <ModalPrimary
       isOpen={isOpen}
@@ -75,11 +71,11 @@ const RoleEditModal = ({
       }
     >
       <ModalBody>
-        <RoleEdit
+        <RoleEditWithContext
           roleName={roleName}
           roleDescription={roleDescription}
           editable={editable}
-          onSubmit={onSubmit}
+          roleId={roleId}
         />
         <RoleEditPermissionsWithContext
           roleId={roleId}

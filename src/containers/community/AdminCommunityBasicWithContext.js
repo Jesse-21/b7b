@@ -121,11 +121,10 @@ export const DomainCommunitySettingsForm = ({
               isDisabled={loading}
               type="submit"
               width="100%"
-              size="lg"
               margin={"auto"}
               colorScheme="pink"
             >
-              Save community
+              Save
             </Button>
           </Box>
         </Form>

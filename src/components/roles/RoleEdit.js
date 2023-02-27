@@ -1,8 +1,7 @@
 import React from "react";
 import { Text, Box, Badge } from "@chakra-ui/layout";
 import { Input } from "@chakra-ui/input";
-
-import { Field, Form, Formik } from "formik";
+import { Field, Form, Formik, useFormikContext } from "formik";
 
 import { BasicEditor } from "../richText/BasicEditor";
 import { AutoSave } from "../input/FormikAutoSave";
@@ -38,7 +37,11 @@ const RoleEditTabInputField = ({
       </Text>
       {description && (
         <Text color={"text.secondary"} mb={4}>
-          {description}
+          {inputProps.isDisabled ? (
+            <>The field {id} is not editable for this role.</>
+          ) : (
+            description
+          )}
         </Text>
       )}
       <Field id={id} name={id}>
@@ -55,28 +58,51 @@ const RoleEditTabInputField = ({
   );
 };
 
-export const RoleEdit = ({ roleName, onSubmit, roleDescription, editable }) => {
-  const { getContent, editor, setContent } = useBasicEditor({
+const EditorWithAutoSave = ({ content, isDisabled }) => {
+  const { editor } = useBasicEditor({
     size: "lg",
     placeholder: "Role for the cool beans",
     limit: 240,
   });
+  const formik = useFormikContext();
 
   React.useEffect(() => {
-    if (roleDescription && editor) {
-      setContent(roleDescription);
+    if (content && editor) {
+      editor.commands.setContent(content);
     }
-  }, [roleDescription, editor]);
+    if (editor) {
+      editor.on("update", ({ editor: _editor }) => {
+        formik.setFieldValue("content", {
+          html: _editor.getHTML(),
+          raw: _editor.getText(),
+        });
+      });
+    }
+  }, [content, editor]);
+  return isDisabled ? (
+    <Box
+      px={4}
+      py={2}
+      backgroundColor="background"
+      rounded="md"
+      opacity={"0.5"}
+      cursor="no-drop"
+    >
+      {content}
+    </Box>
+  ) : (
+    <BasicEditor editor={editor} />
+  );
+};
 
+export const RoleEdit = ({ roleName, onSubmit, roleDescription, editable }) => {
   const onSave = React.useCallback(
     async (values) => {
-      const content = getContent();
       onSubmit({
-        content,
         ...values,
       });
     },
-    [getContent, onSubmit]
+    [onSubmit]
   );
 
   return (
@@ -100,9 +126,16 @@ export const RoleEdit = ({ roleName, onSubmit, roleDescription, editable }) => {
             Role description
           </Text>
           <Text color={"text.secondary"} mb={4}>
-            Describe the role in details.
+            {!editable ? (
+              <>The field description is not editable for this role.</>
+            ) : (
+              "Describe the role in details."
+            )}
           </Text>
-          <BasicEditor editor={editor} />
+          <EditorWithAutoSave
+            content={roleDescription}
+            isDisabled={!editable}
+          />
         </Box>
         <AutoSave />
       </Form>
