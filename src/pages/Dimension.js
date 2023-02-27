@@ -9,6 +9,8 @@ import {
   useCommunityContext,
 } from "../context/CommunityContext";
 
+import { DimensionHead } from "../pages/head/Dimension";
+
 export const withDimensionContext = (Component) => {
   const Memo = React.memo(Component);
 
@@ -54,7 +56,12 @@ const withCommunityContext = (Component) => {
     }
     if (!community.currentAccountPermissions.canRead) return <>No access</>;
 
-    return <Memo communityId={community?._id} />;
+    return (
+      <>
+        <DimensionHead community={community} />
+        <Memo communityId={community?._id} />
+      </>
+    );
   };
 };
 
