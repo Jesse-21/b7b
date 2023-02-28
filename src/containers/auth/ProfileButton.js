@@ -77,9 +77,7 @@ export const ProfileButton = ({ size = "large" }) => {
             </Flex>
           </MenuButton>
           <MenuList>
-            <MenuItem onClick={onBebdomainClick}>
-              Create your Community
-            </MenuItem>
+            <MenuItem onClick={onBebdomainClick}>BEB.domains</MenuItem>
 
             <MenuItem onClick={onDeveloperClick}>Developers</MenuItem>
             <MenuItem onClick={onSignOut}>Log out</MenuItem>
