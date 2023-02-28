@@ -61,13 +61,7 @@ const AdminCommunityImages = ({ bannerImageSrc, imageSrc, onEdit }) => {
   }, [image?._id, bannerImage?._id]);
   return (
     <Box>
-      <Box
-        w="100%"
-        h={48}
-        display="flex"
-        borderBottomLeftRadius={"2xl"}
-        borderBottomRightRadius={"2xl"}
-      >
+      <Box w="100%" h={48} display="flex">
         <ImageWithUpload
           onImageUpload={onBannerImageUpload}
           w="100%"
