@@ -85,16 +85,25 @@ export const DimensionContent = ({
         bannerImageSrc={bannerImageSrc}
         imageSrc={imageSrc}
       >
-        <Box>
-          <Text ml={2} fontSize="xl" fontWeight={"bold"}>
-            {communityName}
-          </Text>
-          <Text ml={2} color="text.secondary">
-            {communityDescription}
-          </Text>
+        <Box display="flex" justifyContent={"space-between"} w="100%">
+          <Box ml={2}>
+            <Text fontSize="xl" fontWeight={"bold"}>
+              {communityName}
+            </Text>
+            <Text color="text.secondary">{communityDescription}</Text>
+          </Box>
+          <Link
+            to="admin"
+            relative="path"
+            style={{
+              color: "var(--chakra-colors-gray-500)",
+            }}
+          >
+            Admin
+          </Link>
         </Box>
       </BannerAndProfileImage>
-      <Box mb={4}>
+      <Box my={4}>
         <CreatePostOrReply
           placeholder={"Publish a public message!"}
           colorScheme="pink"

@@ -9,7 +9,7 @@ export const BannerAndProfileImage = ({
 }) => {
   return (
     <Box {...props}>
-      <Box w="100%" h={48} display="flex">
+      <Box w="100%" h={[24, null, null, 48]} display="flex">
         <Image
           w="100%"
           h="auto"
