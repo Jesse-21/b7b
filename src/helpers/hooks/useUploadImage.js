@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import React from "react";
 
-export const useUploadImageOrNft = () => {
+export const useUploadImage = () => {
   const [file, setFile] = React.useState(null);
   const [image, setImage] = React.useState(null);
   const [loading, toggleLoading] = React.useState(false);
@@ -28,7 +28,9 @@ export const useUploadImageOrNft = () => {
     try {
       const formData = new FormData();
       formData.append("files", f);
-      const res = await fetch(`${window.hostUri}/image/upload`, {
+      let uri = window.hostUri?.toString?.();
+      uri = uri.replace(/\/graphql$/, "");
+      const res = await fetch(`${uri}/image/upload`, {
         method: "POST",
         body: formData,
       });
@@ -36,21 +38,12 @@ export const useUploadImageOrNft = () => {
       toggleLoading(false);
       if (resjson.image) {
         setImage(resjson.image);
-        setLastUploaded(UPLOAD_TYPES.IMAGE);
       } else {
         setError(resjson.message);
         setFile(null);
-        logError(new Error(resjson.message), {
-          functionName: "onImageUpload",
-          errorDisplayed: resjson.message,
-        });
       }
       return resjson;
     } catch (e) {
-      logError(e, {
-        functionName: "onImageUpload",
-        errorDisplayed: e.message,
-      });
       setFile(null);
       toggleLoading(false);
       setError(e.message);
@@ -66,8 +59,8 @@ export const useUploadImageOrNft = () => {
   return {
     file,
     onImageUpload,
-    error: error || NFTError,
-    loading: loading || NFTLoading,
+    error: error,
+    loading: loading,
     image,
     reset,
   };

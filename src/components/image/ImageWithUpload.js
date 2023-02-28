@@ -41,6 +41,7 @@ export const ImageWithUpload = ({
   return (
     <>
       <Image
+        _hover={{ cursor: "pointer" }}
         onClick={onUploadClick}
         src={_src}
         opacity={loading ? 0.5 : 1}

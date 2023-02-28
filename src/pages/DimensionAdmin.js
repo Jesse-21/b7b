@@ -3,6 +3,7 @@ import { Box } from "@chakra-ui/layout";
 import { AdminCommunityBasicWithContext } from "../containers/community/AdminCommunityBasicWithContext";
 import { RolesTableWithContext } from "../containers/roles/RolesTableWithContext";
 import { RoleEditModalWithContext } from "../containers/roles/RoleEditModalWithContext";
+import { AdminCommunityImagesWithContext } from "../containers/community/AdminCommunityImagesWithContext";
 
 export const withDimensionAdminContext = (Component) => {
   const Memo = React.memo(Component);
@@ -17,6 +18,7 @@ export const withDimensionAdminContext = (Component) => {
 export const DimensionAdminContent = () => {
   return (
     <Box p={[2, null, null, 4]}>
+      <AdminCommunityImagesWithContext />
       <AdminCommunityBasicWithContext />
       <Box mt={8}>
         <RolesTableWithContext />
