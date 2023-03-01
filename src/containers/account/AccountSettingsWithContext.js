@@ -1,5 +1,5 @@
 import React from "react";
-import { Formik, Field, Form } from "formik";
+import { Formik, Field, Form, useFormikContext } from "formik";
 import * as Yup from "yup";
 import { Box, Flex, Badge, Text } from "@chakra-ui/layout";
 import { Input } from "@chakra-ui/input";
@@ -7,9 +7,35 @@ import { Button } from "@chakra-ui/button";
 
 import { useAuthContext } from "../../context/AuthContext";
 
+import { ImageWithUpload } from "../../components/image/ImageWithUpload";
+
 import { useUpdateCurrentAccount } from "../../helpers/hooks/useUpdateAccount";
 import { useErrorToast } from "../../helpers/hooks/useErrorToast";
+import { useUploadImage } from "../../helpers/hooks/useUploadImage";
 
+const SettingsPictureInput = ({ src }) => {
+  const { onImageUpload, loading, error, image } = useUploadImage();
+  useErrorToast(error);
+  const formik = useFormikContext();
+
+  React.useEffect(() => {
+    if (image) {
+      formik.setFieldValue("profileImageId", image._id);
+    }
+  }, [image]);
+  return (
+    <ImageWithUpload
+      src={image?.src || src}
+      objectFit={"contain"}
+      defaultSrc="https://via.placeholder.com/150"
+      h={32}
+      w={32}
+      onImageUpload={onImageUpload}
+      loading={loading}
+      rounded="full"
+    ></ImageWithUpload>
+  );
+};
 const SettingsSectionInputField = ({
   id,
   title,
@@ -117,6 +143,8 @@ const withAccountContext = (Component) => {
         username={currentAccount?.username}
         email={currentAccount?.email}
         bio={currentAccount?.bio?.raw}
+        profileImageSrc={currentAccount?.profileImage?.src}
+        profileImageId={currentAccount?.profileImage?._id}
         onSubmit={onSubmit}
       />
     );
@@ -132,6 +160,8 @@ export const AccountSettings = ({
   email,
   bio,
   onSubmit,
+  profileImageSrc,
+  profileImageId,
   loading,
 }) => {
   return (
@@ -143,10 +173,12 @@ export const AccountSettings = ({
           username: username || "",
           bio: bio || "",
           email: email || "",
+          profileImageId: profileImageId,
         }}
         onSubmit={onSubmit}
       >
         <Form>
+          <SettingsPictureInput src={profileImageSrc} />
           {fields.map((field, index) => {
             return (
               <Box
