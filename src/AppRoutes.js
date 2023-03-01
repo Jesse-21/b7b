@@ -28,6 +28,16 @@ export const AppRoutes = () => {
         <Route index element={<Home />} />
       </Route>
       <Route
+        path="/settings"
+        element={
+          <>
+            <Outlet />
+          </>
+        }
+      >
+        <Route index element={<Home />} />
+      </Route>
+      <Route
         path="d/:dimension/"
         element={
           <HostApolloProviderWithParams>
