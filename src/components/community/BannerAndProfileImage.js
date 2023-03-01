@@ -23,7 +23,6 @@ export const BannerAndProfileImage = ({
         <Image
           src={imageSrc}
           objectFit={"contain"}
-          defaultSrc="/cover.jpg"
           mt={-16}
           h={32}
           w={32}
