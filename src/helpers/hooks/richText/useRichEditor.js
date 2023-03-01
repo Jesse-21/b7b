@@ -23,13 +23,7 @@ export const useRichEditor = ({
       if (!f) {
         return;
       }
-      uploadImageProps?.onImageUpload?.(f).then(({ image } = {}) => {
-        if (!image) {
-          return;
-        }
-        setRichBlocks([image]);
-        uploadImageProps?.reset();
-      });
+      uploadImageProps?.onImageUpload?.([f]);
     },
     [uploadImageProps?.onImageUpload]
   );

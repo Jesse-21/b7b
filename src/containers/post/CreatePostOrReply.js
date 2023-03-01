@@ -71,7 +71,12 @@ export const CreatePostOrReply = ({
   };
 
   return (
-    <Flex flexDir={size === "lg" ? "column" : "row"} alignItems="center">
+    <Flex
+      flexDir={size === "lg" ? "column" : "row"}
+      alignItems="center"
+      maxW="lg"
+      m="auto"
+    >
       <RichEditor
         editor={editor}
         id={id}
@@ -81,19 +86,23 @@ export const CreatePostOrReply = ({
         onImageUpload={uploadImageProps?.onImageUpload}
         setContent={setContent}
         richBlocks={richBlocks}
+        footer={
+          <>
+            {size === "lg" && (
+              <Button
+                onClick={onSubmitPostOrReply}
+                isDisabled={loading || disabled}
+                colorScheme={colorScheme}
+                size={"md"}
+                rounded="full"
+                leftIcon={<ChatIcon />}
+              >
+                {parentId ? "Comment" : "Send"}
+              </Button>
+            )}
+          </>
+        }
       ></RichEditor>
-      {size === "lg" && (
-        <Button
-          onClick={onSubmitPostOrReply}
-          isDisabled={loading || disabled}
-          colorScheme={colorScheme}
-          size={"md"}
-          rounded="full"
-          leftIcon={<ChatIcon />}
-        >
-          {parentId ? "Comment" : "Send"}
-        </Button>
-      )}
       {size === "sm" && (
         <IconButton
           ml={2}

@@ -1,10 +1,8 @@
-import React from "react";
 import { Box, Flex, HStack, Text } from "@chakra-ui/layout";
 import { Image } from "@chakra-ui/image";
 
 import { ImageWithUpload } from "../image/ImageWithUpload";
 import { BasicEditor } from "./BasicEditor";
-import { Image as ImageIcon } from "../icons/Image";
 
 export const RichEditor = ({
   content = "",
@@ -55,7 +53,7 @@ export const RichEditor = ({
               backgroundColor="background"
               h={size === "lg" ? "48px" : "36px"}
               w={size === "lg" ? "48px" : "36px"}
-              defaultSrc={"https://via.placeholder.com/36"}
+              defaultSrc={"/upload.png"}
               onImageUpload={onImageUpload}
               loading={loading}
               allowMultiple={true}
@@ -65,6 +63,7 @@ export const RichEditor = ({
                 <Image
                   key={i}
                   src={block?.src}
+                  objectFit={"cover"}
                   h={size === "lg" ? "48px" : "36px"}
                   w={size === "lg" ? "48px" : "36px"}
                 ></Image>
