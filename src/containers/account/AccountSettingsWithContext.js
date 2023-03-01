@@ -2,6 +2,7 @@ import React from "react";
 import { Formik, Field, Form, useFormikContext } from "formik";
 import * as Yup from "yup";
 import { Box, Flex, Badge, Text } from "@chakra-ui/layout";
+import { useToast } from "@chakra-ui/toast";
 import { Input } from "@chakra-ui/input";
 import { Button } from "@chakra-ui/button";
 
@@ -129,9 +130,29 @@ const withAccountContext = (Component) => {
     const { currentAccount, loading } = useAuthContext();
     const { onUpdateCurrentAccount, error } = useUpdateCurrentAccount();
     useErrorToast(error);
+    const toast = useToast();
     const onSubmit = React.useCallback(
       (values) => {
-        onUpdateCurrentAccount(values);
+        return onUpdateCurrentAccount(values)
+          .then((res) => {
+            if (res && res?.data?.updateCurrentAccount?.success) {
+              toast({
+                title: "Account updated.",
+                status: "success",
+                duration: 5000,
+                isClosable: true,
+              });
+            }
+          })
+          .catch((err) => {
+            toast({
+              title: "Something went wrong!",
+              description: err.message,
+              status: "error",
+              duration: 5000,
+              isClosable: true,
+            });
+          });
       },
       [onUpdateCurrentAccount]
     );
