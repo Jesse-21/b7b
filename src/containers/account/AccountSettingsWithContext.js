@@ -26,7 +26,7 @@ const SettingsPictureInput = ({ src }) => {
   return (
     <ImageWithUpload
       src={image?.src || src}
-      objectFit={"contain"}
+      objectFit={"cover"}
       defaultSrc="https://via.placeholder.com/150"
       h={32}
       w={32}
