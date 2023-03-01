@@ -16,15 +16,13 @@ export const useUpdateCurrentAccount = () => {
   ] = useMutation(UPDATE_CURRENT_ACCOUNT);
 
   const onUpdateCurrentAccount = React.useCallback(
-    (bebdomain, tld) => {
+    (values) => {
       try {
         return lazyQueryWithTimeout(
           _updateCurrentAccount({
             variables: {
-              bebdomain,
-              tld,
+              ...values,
             },
-            skip: !bebdomain,
           })
         );
       } catch (e) {
