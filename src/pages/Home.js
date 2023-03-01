@@ -35,7 +35,7 @@ export const Home = () => {
           href="https://github.com/bebverse/contracts/blob/main/src/Resolver.sol"
           color="blue.600"
         >
-          deployed Resolver contract
+          deployed resolver contract
         </Link>
         , which allows domain holders to map their domain to their{" "}
         <Link
