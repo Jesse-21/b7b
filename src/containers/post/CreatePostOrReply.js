@@ -2,10 +2,10 @@ import { IconButton, Button } from "@chakra-ui/button";
 import { Flex } from "@chakra-ui/layout";
 import { ChevronRightIcon, ChatIcon } from "@chakra-ui/icons";
 
-import { BasicEditor } from "../../components/richText/BasicEditor";
+import { RichEditor } from "../../components/richText/RichEditor";
 
 import { useErrorToast } from "../../helpers/hooks/useErrorToast";
-import { useBasicEditor } from "../../helpers/hooks/richText/useBasicEditor";
+import { useRichEditor } from "../../helpers/hooks/richText/useRichEditor";
 import { useCreatePostOrReply } from "../../helpers/hooks/useCreatePostOrReply";
 
 export const CreatePostOrReply = ({
@@ -22,28 +22,35 @@ export const CreatePostOrReply = ({
   callback = () => {},
   editorProps = {},
 }) => {
-  const { getContent, editor, ...richEditorProps } = useBasicEditor({
+  const { loading, error, createPostOrReply } = useCreatePostOrReply();
+  useErrorToast(error);
+
+  const {
+    getContent,
+    editor,
+    uploadImageProps,
+    onClearRichBlocks,
+    setContent,
+    richBlocks,
+  } = useRichEditor({
     size,
     placeholder,
     limit: 2000,
     props: editorProps,
   });
 
-  const { loading, error, createPostOrReply } = useCreatePostOrReply();
-  useErrorToast(error);
-
   const onSubmitPostOrReply = async () => {
     if (loading) return;
-    // const blocks = (richEditorProps.richBlocks || []).map((rb) => ({
-    //   blockId: rb._id,
-    //   blockType: "IMAGE",
-    // }));
+    const blocks = (richBlocks || []).map((rb) => ({
+      blockId: rb._id,
+      blockType: "IMAGE",
+    }));
 
     const { html, json, raw } = getContent();
 
     try {
       editor?.commands?.clearContent();
-      richEditorProps.onDeleteImageAttachment?.();
+      onClearRichBlocks?.();
     } catch (e) {
       // this happens when the editor is destroyed on dev? see https://github.com/ueberdosis/tiptap/issues/1451
     }
@@ -53,7 +60,7 @@ export const CreatePostOrReply = ({
       contentJson: json,
       contentHtml: html,
       channelId,
-      // blocks,
+      blocks,
       parentId,
       communityId,
     });
@@ -65,14 +72,16 @@ export const CreatePostOrReply = ({
 
   return (
     <Flex flexDir={size === "lg" ? "column" : "row"} alignItems="center">
-      <BasicEditor
-        disabled={loading}
+      <RichEditor
         editor={editor}
         id={id}
-        {...richEditorProps}
+        loading={uploadImageProps.loading}
         size={size}
         content={content}
-      ></BasicEditor>
+        onImageUpload={uploadImageProps?.onImageUpload}
+        setContent={setContent}
+        richBlocks={richBlocks}
+      ></RichEditor>
       {size === "lg" && (
         <Button
           onClick={onSubmitPostOrReply}

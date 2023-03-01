@@ -3,25 +3,29 @@ import { VisuallyHidden } from "@chakra-ui/visually-hidden";
 import { Image } from "@chakra-ui/image";
 
 // eslint-disable-next-line react/display-name
-const Upload = React.forwardRef(({ accept, name, ...inputProps }, ref) => {
-  return (
-    <VisuallyHidden>
-      <input
-        ref={ref}
-        type="file"
-        accept={accept}
-        name={name}
-        {...inputProps}
-      ></input>
-    </VisuallyHidden>
-  );
-});
+const Upload = React.forwardRef(
+  ({ accept, name, allowMultiple, ...inputProps }, ref) => {
+    return (
+      <VisuallyHidden>
+        <input
+          ref={ref}
+          type="file"
+          accept={accept}
+          name={name}
+          {...inputProps}
+          multiple={allowMultiple}
+        ></input>
+      </VisuallyHidden>
+    );
+  }
+);
 
 export const ImageWithUpload = ({
   defaultSrc,
   onImageUpload,
   src,
   loading,
+  allowMultiple = false,
   ...props
 }) => {
   const _src = React.useMemo(() => {
@@ -34,9 +38,16 @@ export const ImageWithUpload = ({
     uploadRef?.current?.click();
   };
 
-  const onChange = (event) => {
-    onImageUpload(event.currentTarget.files[0]);
-  };
+  const onChange = React.useCallback(
+    (event) => {
+      if (!onImageUpload) return;
+      const target = allowMultiple
+        ? [...event.target.files]
+        : event.target.files[0];
+      onImageUpload(target);
+    },
+    [onImageUpload, allowMultiple]
+  );
 
   return (
     <>
@@ -53,6 +64,7 @@ export const ImageWithUpload = ({
         ref={uploadRef}
         onClick={(event) => (event.target.value = null)}
         onChange={onChange}
+        allowMultiple={allowMultiple}
       ></Upload>
     </>
   );

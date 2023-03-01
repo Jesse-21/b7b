@@ -30,13 +30,13 @@ code {
   height: 0;
   pointer-events: none;
 }
-.rich-editor-lg p.is-editor-empty:first-child::after {
+/* .rich-editor-lg p.is-editor-empty:first-child::after {
   color: var(--chakra-colors-text-secondary);
   content: "Type '/' for commands";
   float: left;
   height: 0;
   pointer-events: none;
-}
+} */
 .basic-editor {
   background-color: var(--chakra-colors-background);
   border-radius: var(--chakra-radii-3xl);
