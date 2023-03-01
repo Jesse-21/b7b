@@ -67,7 +67,7 @@ const AdminCommunityImages = ({ bannerImageSrc, imageSrc, onEdit }) => {
           w="100%"
           h="auto"
           objectFit={"cover"}
-          // src={bannerImage?.src || bannerImageSrc}
+          src={bannerImage?.src || bannerImageSrc}
           backgroundColor="gray.400"
           borderColor="gray.400"
           rounded="md"

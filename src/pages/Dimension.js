@@ -63,7 +63,7 @@ const withCommunityContext = (Component) => {
         <Memo
           communityId={community?._id}
           imageSrc={community?.image?.src}
-          bannerImageSrc={community?.bannerImageSrc?.src}
+          bannerImageSrc={community?.bannerImage?.src}
           communityName={community?.name}
           communityDescription={community?.bio?.raw}
         />

@@ -53,7 +53,7 @@ export const useUploadImage = () => {
         })
       );
       if (reset) {
-        setImages(promises);
+        setImages([...promises]);
       } else {
         setImages((_images) => [..._images, ...promises]);
       }
