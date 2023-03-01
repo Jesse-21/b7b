@@ -1,4 +1,4 @@
-import { Text, Box } from "@chakra-ui/layout";
+import { Text, Box, Link } from "@chakra-ui/layout";
 import { SearchDimensionInput } from "../components/input/SearchDimensionInput";
 
 export const Home = () => {
@@ -18,22 +18,49 @@ export const Home = () => {
         own self-hosted server, known as a {"dimension"} host. A server can host
         multiple dimensions!
       </Text>
+      <Text marginTop={2}>
+        Dimensions are queried against the{" "}
+        <Link
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://github.com/bebverse/contracts/blob/main/src/Resolver.sol"
+          color="blue.600"
+        >
+          deployed Resolver contract
+        </Link>
+        , which allows domain holders to map their domain to their{" "}
+        <Link
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://github.com/bebverse/universe"
+          color="blue.600"
+        >
+          self-hosted server
+        </Link>
+        .
+      </Text>
 
       <Box marginTop={10}>
         <Text fontSize="xl" fontWeight="bold">
           Here are some dimensions to get you started:
         </Text>
-        <Text fontSize="xl" fontWeight="bold" color={"blue.600"}>
+        <Text fontSize="xl" fontWeight="bold">
           <Box marginLeft={10}>
             <ul>
               <li>
-                <a href="#/d/playground.beb">playground.beb</a>
+                <Link color="blue.600" href="#/d/playground.beb">
+                  playground.beb
+                </Link>
               </li>
               <li>
-                <a href="#/d/music.beb">music.beb</a>
+                <Link color="blue.600" href="#/d/music.beb">
+                  music.beb
+                </Link>
               </li>
               <li>
-                <a href="#/d/wholesome-memes.beb">wholesome-memes.beb</a>
+                <Link color="blue.600" href="#/d/wholesome-memes.beb">
+                  wholesome-memes.beb
+                </Link>
               </li>
             </ul>
           </Box>
@@ -43,35 +70,38 @@ export const Home = () => {
       <Box marginTop={5}>
         <Text fontSize="xl" fontWeight="bold">
           Here are some useful links to learn about the BEB protocol:
-          <Text fontSize="xl" fontWeight="bold" color={"blue.600"}>
+          <Text fontSize="xl" fontWeight="bold">
             <Box marginLeft={10}>
               <ul>
                 <li>
-                  <a
+                  <Link
+                    color="blue.600"
                     target="_blank"
                     rel="noopener noreferrer"
                     href="https://github.com/bebverse/protocol"
                   >
                     github.com/bebverse/protocol
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
+                    color="blue.600"
                     target="_blank"
                     rel="noopener noreferrer"
                     href="https://github.com/bebverse/universe"
                   >
                     github.com/bebverse/universe
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
+                    color="blue.600"
                     target="_blank"
                     rel="noopener noreferrer"
                     href="https://github.com/bebverse/b7b"
                   >
                     github.com/bebverse/b7b
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </Box>
