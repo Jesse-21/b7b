@@ -4,6 +4,7 @@ import { Routes, Route, Outlet } from "react-router-dom";
 import { HostApolloProviderWithParams } from "./containers/apollo/HostApolloProvider";
 
 import { Home } from "./pages/Home";
+import { Settings } from "./pages/Settings";
 import { Dimension, withDimensionContext } from "./pages/Dimension";
 import { DimensionChannel } from "./pages/DimensionChannel";
 import { Post } from "./pages/Post";
@@ -28,16 +29,6 @@ export const AppRoutes = () => {
         <Route index element={<Home />} />
       </Route>
       <Route
-        path="/settings"
-        element={
-          <>
-            <Outlet />
-          </>
-        }
-      >
-        <Route index element={<Home />} />
-      </Route>
-      <Route
         path="d/:dimension/"
         element={
           <HostApolloProviderWithParams>
@@ -48,6 +39,7 @@ export const AppRoutes = () => {
         }
       >
         <Route index element={<Dimension />} />
+        <Route path="settings/" element={<Settings />} />
         <Route
           path="admin/"
           element={

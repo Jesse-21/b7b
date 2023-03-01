@@ -1,9 +1,9 @@
 import React from "react";
-
 import { Flex } from "@chakra-ui/layout";
 import { Avatar } from "@chakra-ui/avatar";
 import { Button } from "@chakra-ui/button";
 import { useBreakpointValue } from "@chakra-ui/media-query";
+import { useNavigate, useParams } from "react-router-dom";
 import { MenuButton, MenuList, MenuItem, Menu } from "@chakra-ui/menu";
 
 import { useAuthModalContext, AuthModalSteps } from "../../context/AuthModal";
@@ -17,6 +17,8 @@ import { shortenAddress } from "../../helpers/shorten-address";
 export const ProfileButton = ({ size = "large" }) => {
   const { loading, currentAccount, onSignOut, activeAddress } =
     useAuthContext();
+  const { dimension } = useParams();
+  const navigate = useNavigate();
 
   const { onOpen: onAuthModalOpen, step } = useAuthModalContext();
 
@@ -34,6 +36,9 @@ export const ProfileButton = ({ size = "large" }) => {
 
   const onDeveloperClick = () => {
     window.open("https://docs.beb.xyz", "_blank");
+  };
+  const onSettingsClick = () => {
+    navigate(`/d/${dimension}/settings`);
   };
 
   const connectButtonPtops = {
@@ -77,8 +82,8 @@ export const ProfileButton = ({ size = "large" }) => {
             </Flex>
           </MenuButton>
           <MenuList>
-            <MenuItem onClick={onBebdomainClick}>BEB.domains</MenuItem>
-
+            <MenuItem onClick={onSettingsClick}>Settings</MenuItem>
+            <MenuItem onClick={onBebdomainClick}>Register BEB.domains</MenuItem>
             <MenuItem onClick={onDeveloperClick}>Developers</MenuItem>
             <MenuItem onClick={onSignOut}>Log out</MenuItem>
           </MenuList>
