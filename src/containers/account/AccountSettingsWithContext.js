@@ -186,7 +186,7 @@ export const AccountSettings = ({
   loading,
 }) => {
   return (
-    <Flex width="100%" flexDir={"column"} mt={4}>
+    <Flex width="100%" flexDir={"column"} p={4}>
       <Formik
         enableReinitialize
         validationSchema={formSchema}
