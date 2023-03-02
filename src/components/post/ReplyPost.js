@@ -1,8 +1,9 @@
 import React from "react";
 import { Box, HStack, Text } from "@chakra-ui/layout";
 
-import { PostUpvoteWithActions } from "../../containers/post/PostUpvoteWithContext";
 import { PostFooterWithAction } from "../../containers/post/PostFooterWithContext";
+
+import { AccountAvatar } from "../account/AccountAvatar";
 
 import { PostRichContent } from "./PostContent";
 
@@ -45,11 +46,14 @@ export const ReplyPost = ({ post, index }) => {
 
   return (
     <Box>
-      <Box>
-        <Text color="text.secondary" fontSize="xs">
+      <Box display={"flex"} mb={2}>
+        <AccountAvatar account={post?.account} size={8} mr={2} />
+        <Text color="text.secondary" fontSize="xs" lineHeight={1.15}>
           {post?.account?.username ||
             shortenAddress(post?.account?.address?.address)}{" "}
           &bull; {getDateFromNow(post?.createdAt)}
+          <br />
+          {post?.account?.bio?.raw}
         </Text>
       </Box>
       <Box mb={2}>
