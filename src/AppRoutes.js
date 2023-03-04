@@ -12,10 +12,13 @@ import { DimensionAdmin } from "./pages/DimensionAdmin";
 import { DimensionRoutesLayout } from "./pages/layout/DimensionRoutesLayout";
 import { withCommunityAdminContext } from "./pages/layout/DimensionAdminRoutesLayout";
 
+import amplitude from "amplitude-js";
+
 const DimensionOutlet = withDimensionContext(Outlet);
 const DimensionAdminOutlet = withCommunityAdminContext(Outlet);
 
 export const AppRoutes = () => {
+  amplitude.getInstance().init("5b9f4ecc4ac8201a3287587d65df2091");
   return (
     <Routes>
       <Route
