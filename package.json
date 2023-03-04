@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "license": "AGPL-3.0",
   "private": true,
-  "homepage": ".",
+  "homepage": "/",
   "dependencies": {
     "@apollo/client": "^3.7.7",
     "@chakra-ui/icons": "^2.0.17",
@@ -45,7 +45,7 @@
     "yup": "^1.0.1"
   },
   "scripts": {
-    "dev": "PORT=4000 react-scripts start",
+    "dev": "GENERATE_SOURCEMAP=false PORT=4000 react-scripts start",
     "deploy": "react-scripts build && rm -rf docs/static/* && cp -R build/* docs",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
