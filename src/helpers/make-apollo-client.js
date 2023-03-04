@@ -3,6 +3,7 @@ import { RetryLink } from "@apollo/client/link/retry";
 import { setContext } from "@apollo/client/link/context";
 import Cookies from "js-cookie";
 import { Contract, providers } from "ethers";
+import { offsetLimitPagination } from "@apollo/client/utilities";
 
 import { abi } from "./abis/DimensionResolver";
 import { getTokenIdFromLabel } from "./get-token-id-from-label";
@@ -14,6 +15,26 @@ const retryLink = new RetryLink();
 export const typePolicies = {
   Community: {
     keyFields: ["tokenId"],
+  },
+  Query: {
+    fields: {
+      getPostFeed: {
+        ...offsetLimitPagination([
+          "sort",
+          "filters",
+          [
+            "post",
+            "account",
+            "excludeComments",
+            "excludeChannels",
+            "community",
+            "communities",
+            "channel",
+            "explore",
+          ],
+        ]),
+      },
+    },
   },
 };
 

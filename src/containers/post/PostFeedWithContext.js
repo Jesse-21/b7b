@@ -1,5 +1,6 @@
 import React from "react";
 import { Box } from "@chakra-ui/layout";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 import {
   PostFeedContextProvider,
@@ -10,13 +11,19 @@ import { useChannelContext } from "../../context/ChannelContext";
 
 import { PostWithActions } from "./PostWithContext";
 
-const PostFeedWrapper = ({ postFeed }) => {
+const PostFeedWrapper = ({ postFeed, next, isEnd, loading, limit }) => {
   return (
-    <Box>
+    <InfiniteScroll
+      dataLength={postFeed?.length || limit}
+      next={next}
+      hasMore={!isEnd || loading}
+      loader={"Loading posts..."}
+      endMessage={<Box mt={2}>No more posts to load</Box>}
+    >
       {postFeed?.map((post) => (
         <PostWithActions key={post?._id} post={post} />
       ))}
-    </Box>
+    </InfiniteScroll>
   );
 };
 
@@ -25,8 +32,16 @@ export const withPostFeedContext = (Component) => {
 
   // eslint-disable-next-line react/display-name
   return () => {
-    const { postFeed, loading, error } = usePostFeedContext();
-    return <Memo postFeed={postFeed} />;
+    const { postFeed, loading, next, isEnd, limit } = usePostFeedContext();
+    return (
+      <Memo
+        postFeed={postFeed}
+        loading={loading}
+        next={next}
+        isEnd={isEnd}
+        limit={limit}
+      />
+    );
   };
 };
 

@@ -14,14 +14,20 @@ PostFeedContext.displayName = "PostFeedContext";
 export const usePostFeedContext = () => React.useContext(PostFeedContext);
 
 export const PostFeedContextProvider = ({ children, limit, sort, filters }) => {
-  // const [isEnd, setIsEnd] = React.useState(false);
-  //   const [refreshLoading, setRefreshLoading] = React.useState(false);
+  const [isEnd, setIsEnd] = React.useState(false);
 
-  const { data, loading, error } = useQuery(GET_POST_FEED, {
+  const { data, loading, error, fetchMore } = useQuery(GET_POST_FEED, {
     variables: {
       filters,
       sort,
       limit,
+    },
+    onCompleted: (res) => {
+      if (!res || res.getPostFeed.length < limit) {
+        setIsEnd(true);
+      } else if (isEnd) {
+        setIsEnd(false);
+      }
     },
   });
 
@@ -29,13 +35,28 @@ export const PostFeedContextProvider = ({ children, limit, sort, filters }) => {
     return data?.getPostFeed;
   }, [data]);
 
+  const next = React.useCallback(() => {
+    return fetchMore({
+      variables: {
+        limit,
+        offset: postFeed.length,
+      },
+    }).then((res) => {
+      if (!res?.data || res.data.getPostFeed.length < limit) {
+        setIsEnd(true);
+      }
+    });
+  }, [fetchMore, limit, setIsEnd, postFeed]);
+
   return (
     <PostFeedContext.Provider
       value={{
         postFeed,
-        // isEnd,
         loading,
         error,
+        next,
+        isEnd,
+        limit,
       }}
     >
       {children}
