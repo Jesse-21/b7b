@@ -1,5 +1,3 @@
-const isProd = window.location.hostname !== "localhost";
-
 export const dev = {
   DEFAULT_URI: "http://localhost:8080/graphql",
   USE_GITHUB_HOST: true,
@@ -17,10 +15,7 @@ export const prod = {
   NODE_NETWORK: "mainnet",
   // get the current window cookie domain
   RESOLVER_ADDRESS: "0xf71a58ddc57214e431168c4a3f2ff62a069ab8a6",
-  COOKIE_DOMAIN: window.location.hostname
-    ?.split?.(".")
-    ?.slice?.(-2)
-    ?.join?.("."),
+  COOKIE_DOMAIN: ".b7b.xyz",
 };
 
-export const config = prod;
+export const config = process.env.NODE_ENV === "production" ? prod : dev;
