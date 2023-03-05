@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route, Outlet } from "react-router-dom";
 
 import { HostApolloProviderWithParams } from "./containers/apollo/HostApolloProvider";
+import { DefaultApolloProvider } from "./containers/apollo/DefaultApolloProvider";
 
 import { Home } from "./pages/Home";
 import { Settings } from "./pages/Settings";
@@ -24,9 +25,9 @@ export const AppRoutes = () => {
       <Route
         path="/"
         element={
-          <>
+          <DefaultApolloProvider>
             <Outlet />
-          </>
+          </DefaultApolloProvider>
         }
       >
         <Route index element={<Home />} />

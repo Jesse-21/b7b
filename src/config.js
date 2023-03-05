@@ -11,7 +11,7 @@ export const dev = {
 };
 
 export const prod = {
-  DEFAULT_URI: "http://localhost:8080/graphql",
+  DEFAULT_URI: "https://protocol.beb.xyz/graphql",
   USE_GITHUB_HOST: true,
   ENV: "PROD",
   NODE_NETWORK: "mainnet",
