@@ -106,3 +106,22 @@ export const makeApolloClient = async (dimension) => {
 
   return client;
 };
+
+export const makeDefaultApolloClient = async () => {
+  const hostUri = config.DEFAULT_URI;
+  const authLink = createDimensionAuthLink(hostUri.toString());
+
+  const httpLink = createHttpLink({
+    // uri: "https://protocol.beb.xyz/graphql",
+    uri: hostUri.toString(),
+  });
+
+  const client = new ApolloClient({
+    cache: new InMemoryCache({
+      typePolicies,
+    }),
+    link: retryLink.concat(authLink.concat(httpLink)),
+  });
+
+  return client;
+};
