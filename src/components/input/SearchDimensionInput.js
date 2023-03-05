@@ -20,7 +20,7 @@ export const SearchDimensionInput = ({ size, ...props }) => {
     (e) => {
       e.preventDefault();
       e.stopPropagation();
-      navigate(`/d/${value}`, { replace: true });
+      navigate(`/${value}`, { replace: true });
     },
     [navigate, value]
   );

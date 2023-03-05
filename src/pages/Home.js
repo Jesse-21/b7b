@@ -57,17 +57,17 @@ export const Home = () => {
           <Box marginLeft={10}>
             <ul>
               <li>
-                <Link color="blue.600" href="/d/playground.beb">
+                <Link color="blue.600" href="/playground">
                   playground.beb
                 </Link>
               </li>
               <li>
-                <Link color="blue.600" href="/d/music.beb">
+                <Link color="blue.600" href="/music">
                   music.beb
                 </Link>
               </li>
               <li>
-                <Link color="blue.600" href="/d/wholesome-memes.beb">
+                <Link color="blue.600" href="/wholesome-memes">
                   wholesome-memes.beb
                 </Link>
               </li>

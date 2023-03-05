@@ -33,7 +33,7 @@ const withCommunityRolesContext = (Component) => {
     }, [data]);
     const onClick = React.useCallback(
       (id) => {
-        navigate(`/d/${communityDomain}/admin/roles/${id}`);
+        navigate(`/${communityDomain}/admin/roles/${id}`);
       },
       [navigate, communityDomain]
     );

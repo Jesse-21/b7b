@@ -38,7 +38,7 @@ export const ProfileButton = ({ size = "large" }) => {
     window.open("https://docs.beb.xyz", "_blank");
   };
   const onSettingsClick = () => {
-    navigate(`/d/${dimension}/settings`);
+    navigate(`/${dimension}/settings`);
   };
 
   const connectButtonPtops = {

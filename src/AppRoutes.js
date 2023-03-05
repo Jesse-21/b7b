@@ -32,7 +32,7 @@ export const AppRoutes = () => {
         <Route index element={<Home />} />
       </Route>
       <Route
-        path="d/:dimension/"
+        path=":dimension/"
         element={
           <HostApolloProviderWithParams>
             <DimensionRoutesLayout>

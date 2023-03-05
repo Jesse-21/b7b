@@ -11,7 +11,7 @@ export const DimensionHead = ({ community }) => {
       <meta property="og:image" content={community?.image?.src} />
       <meta
         property="og:url"
-        content={`https://b7b.xyz/d/${community?.bebdomain}`}
+        content={`https://b7b.xyz/${community?.bebdomain}`}
       />
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="B7B" />
