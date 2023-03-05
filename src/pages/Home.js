@@ -1,6 +1,8 @@
 import { Text, Box, Link } from "@chakra-ui/layout";
 import { SearchDimensionInput } from "../components/input/SearchDimensionInput";
 
+import { HomeFeedWithUniverseSelect } from "./etc/HomeFeedWithUniverseSelect";
+
 export const Home = () => {
   return (
     <Box margin={5} maxWidth={750}>
@@ -17,11 +19,11 @@ export const Home = () => {
         BEB dimension browser
       </Text>
 
-      <Box marginTop={10}>
+      <Box marginTop={6}>
         <SearchDimensionInput size="lg" />
       </Box>
 
-      <Text marginTop={10}>
+      <Text marginTop={6}>
         The BEB (Blockchain-Enabled Broadcast) protocol is an open messaging
         protocol for communities. It is simple enough for anyone to deploy their
         own self-hosted server, known as a {"dimension"} host. A server can host
@@ -49,34 +51,7 @@ export const Home = () => {
         .
       </Text>
 
-      <Box marginTop={10}>
-        <Text fontSize="xl" fontWeight="bold">
-          Here are some dimensions to get you started:
-        </Text>
-        <Text fontSize="xl" fontWeight="bold">
-          <Box marginLeft={10}>
-            <ul>
-              <li>
-                <Link color="blue.600" href="/playground.beb">
-                  playground.beb
-                </Link>
-              </li>
-              <li>
-                <Link color="blue.600" href="/music.beb">
-                  music.beb
-                </Link>
-              </li>
-              <li>
-                <Link color="blue.600" href="/wholesome-memes.beb">
-                  wholesome-memes.beb
-                </Link>
-              </li>
-            </ul>
-          </Box>
-        </Text>
-      </Box>
-
-      <Box marginTop={5}>
+      <Box marginTop={4}>
         <Text fontSize="xl" fontWeight="bold">
           Here are some useful links to learn about the BEB protocol:
           <Text fontSize="xl" fontWeight="bold">
@@ -118,7 +93,7 @@ export const Home = () => {
         </Text>
       </Box>
 
-      <Box marginTop={10}>
+      <Box marginTop={4}>
         <Text fontSize="md">
           <b>Disclaimer:</b> B7B is a browser for BEB dimensions, which are
           entirely self-hosted by third-parties. The developers and hosts of B7B
@@ -126,6 +101,7 @@ export const Home = () => {
           the appropriate dimension to report any concerns.
         </Text>
       </Box>
+      <HomeFeedWithUniverseSelect />
     </Box>
   );
 };

@@ -13,10 +13,15 @@ PostFeedContext.displayName = "PostFeedContext";
 
 export const usePostFeedContext = () => React.useContext(PostFeedContext);
 
-export const PostFeedContextProvider = ({ children, limit, sort, filters }) => {
+export const PostFeedContextProvider = ({
+  children,
+  limit,
+  sort,
+  filters,
+  context = null,
+}) => {
   const [isEnd, setIsEnd] = React.useState(false);
-
-  const { data, loading, error, fetchMore } = useQuery(GET_POST_FEED, {
+  const queryOptions = {
     variables: {
       filters,
       sort,
@@ -29,7 +34,15 @@ export const PostFeedContextProvider = ({ children, limit, sort, filters }) => {
         setIsEnd(false);
       }
     },
-  });
+  };
+  if (context) {
+    queryOptions.context = context;
+  }
+
+  const { data, loading, error, fetchMore } = useQuery(
+    GET_POST_FEED,
+    queryOptions
+  );
 
   const postFeed = React.useMemo(() => {
     return data?.getPostFeed;
