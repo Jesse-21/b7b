@@ -1,5 +1,6 @@
 import React from "react";
-import { Box } from "@chakra-ui/layout";
+import { Text } from "@chakra-ui/layout";
+import { Select } from "@chakra-ui/select";
 
 import {
   withPostFeedContext,
@@ -14,7 +15,26 @@ export const HomeFeedWithUniverseSelect = () => {
   const [uri, setUri] = React.useState(config.DEFAULT_URI);
 
   return (
-    <Box>
+    <>
+      <Text fontSize="sm" color="text.secondary">
+        {" "}
+        Select a host Universe home feed:
+      </Text>
+      <Select
+        maxW={["100%", null, null, "xs"]}
+        mb={2}
+        defaultValue={config.DEFAULT_URI}
+        onChange={(e) => {
+          setUri(e.target.value);
+        }}
+      >
+        <option value={config.DEFAULT_URI}>
+          Default - {config.DEFAULT_URI}
+        </option>
+        <option value="https://universe.up.railway.app/graphql">
+          NSFW - https://universe.up.railway.app/graphql
+        </option>
+      </Select>
       <PostFeedContextProvider
         filters={{
           excludeChannels: true,
@@ -23,12 +43,12 @@ export const HomeFeedWithUniverseSelect = () => {
         }}
         limit={10}
         sort="lastActivity"
-        // context={{
-        //   uri: uri,
-        // }}
+        context={{
+          uri: uri,
+        }}
       >
         <PostFeed />
       </PostFeedContextProvider>
-    </Box>
+    </>
   );
 };
