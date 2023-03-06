@@ -20,8 +20,11 @@ export const HomeContent = ({ uri }) => {
         flexDir={["column-reverse", null, null, "row"]}
       >
         <Box flex="1" pr={[0, null, null, 8]}>
-          <Text fontSize="3xl" fontWeight="bold">
-            B7B - an{" "}
+          <HomeFeedWithUniverseSelect uri={uri} />
+        </Box>
+        <Box w={["100%", null, null, "sm"]} mb={[8, null, null, 0]}>
+          <Text fontSize="3xl" fontWeight="bold" lineHeight={1.15} mb={4}>
+            An{" "}
             <Link
               target="_blank"
               rel="noopener noreferrer"
@@ -32,14 +35,7 @@ export const HomeContent = ({ uri }) => {
             </Link>{" "}
             BEB dimension browser
           </Text>
-
-          <Box marginTop={4} mb={8}>
-            <SearchDimensionInput size="lg" />
-          </Box>
-          <HomeFeedWithUniverseSelect uri={uri} />
-        </Box>
-        <Box w={["100%", null, null, "sm"]} mb={[4, null, null, 0]}>
-          <Text marginTop={6}>
+          <Text>
             The BEB (Blockchain-Enabled Broadcast) protocol is an open messaging
             protocol for communities. It is simple enough for anyone to deploy
             their own self-hosted server, known as a {"dimension"} host. A
