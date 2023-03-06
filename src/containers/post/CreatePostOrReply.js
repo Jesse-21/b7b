@@ -1,6 +1,9 @@
+import React from "react";
+
 import { IconButton, Button } from "@chakra-ui/button";
-import { Flex } from "@chakra-ui/layout";
+import { Flex, Box } from "@chakra-ui/layout";
 import { ChevronRightIcon, ChatIcon } from "@chakra-ui/icons";
+import { Input, InputGroup, InputRightAddon } from "@chakra-ui/input";
 
 import { RichEditor } from "../../components/richText/RichEditor";
 
@@ -21,6 +24,7 @@ export const CreatePostOrReply = ({
   // eslint-disable-next-line no-empty-function
   callback = () => {},
   editorProps = {},
+  context = {},
 }) => {
   const { loading, error, createPostOrReply } = useCreatePostOrReply();
   useErrorToast(error);
@@ -55,15 +59,20 @@ export const CreatePostOrReply = ({
       // this happens when the editor is destroyed on dev? see https://github.com/ueberdosis/tiptap/issues/1451
     }
 
-    const res = await createPostOrReply({
-      contentRaw: raw,
-      contentJson: json,
-      contentHtml: html,
-      channelId,
-      blocks,
-      parentId,
-      communityId,
-    });
+    const res = await createPostOrReply(
+      {
+        contentRaw: raw,
+        contentJson: json,
+        contentHtml: html,
+        channelId,
+        blocks,
+        parentId,
+        communityId,
+      },
+      {
+        context,
+      }
+    );
 
     if (res?.data.createPostOrReplyForAccount?.success && !editor.isDestroyed) {
       callback?.();
@@ -115,5 +124,28 @@ export const CreatePostOrReply = ({
         ></IconButton>
       )}
     </Flex>
+  );
+};
+
+export const CreatePostOrReplyWithSelectCommunity = ({
+  size,
+  bebdomain,
+  ...props
+}) => {
+  const [selectedBebDomain, setSelectedBebDomain] = React.useState(
+    bebdomain || "playground"
+  );
+  return (
+    <Box>
+      <InputGroup size={size}>
+        <Input
+          placeholder="Input a community"
+          value={selectedBebDomain}
+          onChange={(e) => setSelectedBebDomain(e.target.value)}
+        ></Input>
+        <InputRightAddon>.beb</InputRightAddon>
+      </InputGroup>
+      <CreatePostOrReply {...props} size={size} />
+    </Box>
   );
 };

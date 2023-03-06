@@ -14,7 +14,7 @@ export const useCreatePostOrReply = () => {
   ] = useMutation(CREATE_POST_OR_REPLY_FOR_ACCOUNT);
   const client = useApolloClient();
 
-  const createPostOrReply = (variables = {}) => {
+  const createPostOrReply = (variables = {}, { context } = {}) => {
     const post = makeOptimisticPost({
       contentRaw: variables.contentRaw,
       contentHtml: variables.contentHtml,
@@ -31,6 +31,7 @@ export const useCreatePostOrReply = () => {
         ...variables,
         isReply: !!variables.parentId,
       },
+      context,
       optimisticResponse: {
         createPostOrReplyForAccount: {
           __typename: "PostMutationResponse",

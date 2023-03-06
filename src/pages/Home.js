@@ -7,6 +7,7 @@ import { DimensionRoutesLayout } from "./layout/DimensionRoutesLayout";
 import { withUriQueryParams } from "../helpers/hoc/withUriQueryParams";
 import { withUriApolloProvider } from "../helpers/hoc/withUriApolloProvider";
 
+import { CreatePostModalButton } from "../containers/post/CreatePostModal";
 export const HomeContent = ({ uri }) => {
   return (
     <DimensionRoutesLayout>
@@ -110,9 +111,9 @@ export const HomeContent = ({ uri }) => {
             </Text>
           </Box>
           <Box mt={4}>
-            {/* <Button w="100%" rounded="full" colorScheme={"pink"}>
+            <CreatePostModalButton w="100%" rounded="full" colorScheme={"pink"}>
               Create Post
-            </Button> */}
+            </CreatePostModalButton>
             <Button
               w="100%"
               rounded="full"
