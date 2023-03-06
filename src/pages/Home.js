@@ -1,10 +1,6 @@
 import { Text, Box, Link } from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/button";
 
-import { DimensionHeader } from "../containers/navigation/DimensionHeader";
-
-import { SearchDimensionInput } from "../components/input/SearchDimensionInput";
-
 import { HomeFeedWithUniverseSelect } from "./etc/HomeFeedWithUniverseSelect";
 import { DimensionRoutesLayout } from "./layout/DimensionRoutesLayout";
 
@@ -114,9 +110,9 @@ export const HomeContent = ({ uri }) => {
             </Text>
           </Box>
           <Box mt={4}>
-            <Button w="100%" rounded="full" colorScheme={"pink"}>
+            {/* <Button w="100%" rounded="full" colorScheme={"pink"}>
               Create Post
-            </Button>
+            </Button> */}
             <Button
               w="100%"
               rounded="full"
