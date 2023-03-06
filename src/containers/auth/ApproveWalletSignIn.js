@@ -50,7 +50,7 @@ export const ApproveWalletSignIn = () => {
       <ModalFooter mt={4}>
         <Box>
           <Text color="text.tertiary">
-            By signing the transaction, you allow beb.xyz to store your session
+            By signing the transaction, you allow b7b.xyz to store your session
             securely in your browser&apos;s local storage.
           </Text>
           {error && (

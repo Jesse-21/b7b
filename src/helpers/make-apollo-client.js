@@ -93,7 +93,6 @@ export const makeApolloClient = async (dimension) => {
   const authLink = createDimensionAuthLink(hostUri.toString());
 
   const httpLink = createHttpLink({
-    // uri: "https://protocol.beb.xyz/graphql",
     uri: hostUri.toString(),
   });
 
@@ -111,7 +110,6 @@ export const makeDefaultApolloClient = (hostUri = config.DEFAULT_URI) => {
   const authLink = createDimensionAuthLink(hostUri.toString());
 
   const httpLink = createHttpLink({
-    // uri: "https://protocol.beb.xyz/graphql",
     uri: hostUri.toString(),
   });
 

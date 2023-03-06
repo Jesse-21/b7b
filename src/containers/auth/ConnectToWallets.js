@@ -57,10 +57,13 @@ export const ConnectToWallets = () => {
                 Disconnect wallet
               </Button>
             )}
-            <Text pt={4} color="text.secondary">
-              <a href="https://beb.xyz/tos" target="_window">
-                <i>By using our client, you agree to our Terms of Use.</i>
-              </a>
+            <Text pt={2} fontSize="sm" color="text.secondary">
+              <i>
+                B7B is a browser for BEB dimensions, which are entirely
+                self-hosted by third-parties. The developers and hosts of B7B
+                are not responsible for the content of dimensions. Contact the
+                host of the appropriate dimension to report any concerns.
+              </i>
             </Text>
           </VStack>
           {error && (

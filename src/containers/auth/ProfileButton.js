@@ -35,7 +35,7 @@ export const ProfileButton = ({ size = "large" }) => {
   };
 
   const onDeveloperClick = () => {
-    window.open("https://docs.beb.xyz", "_blank");
+    window.open("https://github.com/bebverse/protocol", "_blank");
   };
   const onSettingsClick = () => {
     navigate(`/${dimension}/settings`);
