@@ -27,7 +27,7 @@ export const withUriApolloProvider = (Component) => {
 
     return (
       <ApolloProvider client={client}>
-        <Memo />
+        <Memo uri={uri} />
       </ApolloProvider>
     );
   };
