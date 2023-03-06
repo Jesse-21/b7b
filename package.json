@@ -48,7 +48,8 @@
     "dev": "GENERATE_SOURCEMAP=false PORT=4000 react-scripts start",
     "deploy": "PUBLIC_URL=https://b7b.xyz react-scripts build && rm -rf docs/static/* && cp -R build/* docs",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start": "node server.js"
   },
   "eslintConfig": {
     "extends": [
