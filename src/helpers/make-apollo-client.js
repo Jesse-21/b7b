@@ -107,6 +107,8 @@ export const makeApolloClient = async (dimension) => {
 };
 
 export const makeDefaultApolloClient = (hostUri = config.DEFAULT_URI) => {
+  window.hostUri = hostUri;
+
   const authLink = createDimensionAuthLink(hostUri.toString());
 
   const httpLink = createHttpLink({

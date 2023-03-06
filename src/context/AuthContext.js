@@ -133,6 +133,7 @@ export const AuthContextProvider = ({ children }) => {
       const signature = await _onSignMessage(message);
       // 3. signin
       await _onSignInAndSetCookie(signature, currentAddress);
+
       // 3. refetch all queries
       await _onSigninCallback();
 

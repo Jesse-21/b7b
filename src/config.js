@@ -1,7 +1,7 @@
 const isProd = window.location.hostname !== "localhost";
 
 export const dev = {
-  DEFAULT_URI: "http://localhost:8080/graphql",
+  DEFAULT_URI: "https://protocol.beb.xyz/graphql",
   USE_GITHUB_HOST: true,
   ENV: "DEV",
   NODE_NETWORK: "goerli",
@@ -23,4 +23,4 @@ export const prod = {
     ?.join?.("."),
 };
 
-export const config = prod;
+export const config = isProd ? prod : dev;

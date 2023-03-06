@@ -38,7 +38,7 @@ export const ProfileButton = ({ size = "large" }) => {
     window.open("https://github.com/bebverse/protocol", "_blank");
   };
   const onSettingsClick = () => {
-    navigate(`/${dimension}/settings`);
+    navigate(`/${dimension || "playground"}/settings`);
   };
 
   const connectButtonPtops = {
