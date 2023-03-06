@@ -112,7 +112,7 @@ export const HomeFeedWithUniverse = ({ uri }) => {
     <>
       <Text fontSize="sm" color="text.secondary">
         {" "}
-        Select a host Universe home feed:
+        Select a Universe:
       </Text>
       <Select
         maxW={["100%", null, null, "xs"]}
