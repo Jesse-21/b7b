@@ -1,4 +1,5 @@
 import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Text } from "@chakra-ui/layout";
 import { Select } from "@chakra-ui/select";
 import { ApolloProvider } from "@apollo/client";
@@ -28,7 +29,7 @@ const withApolloProvider = (Component) => {
   const Memo = React.memo(Component);
 
   // eslint-disable-next-line react/display-name
-  return ({ uri }) => {
+  return ({ uri = config.DEFAULT_URI }) => {
     const [client, setClient] = React.useState(null);
 
     React.useEffect(() => {
@@ -54,6 +55,24 @@ const withApolloProvider = (Component) => {
   };
 };
 
+function useQuery() {
+  const { search } = useLocation();
+
+  return React.useMemo(() => new URLSearchParams(search), [search]);
+}
+
+const withQueryParams = (Component) => {
+  const Memo = React.memo(Component);
+
+  // eslint-disable-next-line react/display-name
+  return ({ children }) => {
+    const query = useQuery();
+    const uri = query.get("uri");
+
+    return <Memo uri={uri || config.DEFAULT_URI}>{children}</Memo>;
+  };
+};
+
 const HomeFeed = () => {
   return (
     <PostFeedContextProvider
@@ -71,10 +90,21 @@ const HomeFeed = () => {
   );
 };
 
-const HomeFeedWithApolloProvider = withApolloProvider(HomeFeed);
+const HomeFeedWithApolloProvider = withQueryParams(
+  withApolloProvider(HomeFeed)
+);
 
 export const HomeFeedWithUniverseSelect = () => {
-  const [uri, setUri] = React.useState(config.DEFAULT_URI);
+  const navigate = useNavigate();
+  const onClick = React.useCallback(
+    (e) => {
+      e.preventDefault();
+      navigate(`?uri=${e.target.value}`, {
+        relative: "path",
+      });
+    },
+    [navigate]
+  );
 
   return (
     <>
@@ -86,9 +116,7 @@ export const HomeFeedWithUniverseSelect = () => {
         maxW={["100%", null, null, "xs"]}
         mb={2}
         defaultValue={config.DEFAULT_URI}
-        onChange={(e) => {
-          setUri(e.target.value);
-        }}
+        onChange={onClick}
       >
         <option value={config.DEFAULT_URI}>
           BEBverse - {config.DEFAULT_URI}
@@ -97,7 +125,7 @@ export const HomeFeedWithUniverseSelect = () => {
           B5B (Railway.app) - https://universe.b5b.xyz/graphql
         </option>
       </Select>
-      <HomeFeedWithApolloProvider uri={uri} />
+      <HomeFeedWithApolloProvider />
     </>
   );
 };

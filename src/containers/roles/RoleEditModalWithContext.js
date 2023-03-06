@@ -20,7 +20,7 @@ const withRoleParams = (Component) => {
 
     const onClose = React.useCallback(() => {
       navigate("..", {
-        reltive: "path",
+        relative: "path",
       });
     }, [navigate]);
 
