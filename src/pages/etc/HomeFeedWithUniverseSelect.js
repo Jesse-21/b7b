@@ -67,9 +67,12 @@ const withQueryParams = (Component) => {
   // eslint-disable-next-line react/display-name
   return ({ children }) => {
     const query = useQuery();
-    const uri = query.get("uri");
+    const uri =
+      query.get("uri") ||
+      window.localStorage.getItem("uri") ||
+      config.DEFAULT_URI;
 
-    return <Memo uri={uri || config.DEFAULT_URI}>{children}</Memo>;
+    return <Memo uri={uri}>{children}</Memo>;
   };
 };
 
@@ -90,15 +93,14 @@ const HomeFeed = () => {
   );
 };
 
-const HomeFeedWithApolloProvider = withQueryParams(
-  withApolloProvider(HomeFeed)
-);
+const HomeFeedWithApolloProvider = withApolloProvider(HomeFeed);
 
-export const HomeFeedWithUniverseSelect = () => {
+export const HomeFeedWithUniverse = ({ uri }) => {
   const navigate = useNavigate();
   const onClick = React.useCallback(
     (e) => {
       e.preventDefault();
+      window.localStorage.setItem("uri", e.target.value);
       navigate(`?uri=${e.target.value}`, {
         relative: "path",
       });
@@ -115,7 +117,7 @@ export const HomeFeedWithUniverseSelect = () => {
       <Select
         maxW={["100%", null, null, "xs"]}
         mb={2}
-        defaultValue={config.DEFAULT_URI}
+        defaultValue={uri}
         onChange={onClick}
       >
         <option value={config.DEFAULT_URI}>
@@ -125,7 +127,9 @@ export const HomeFeedWithUniverseSelect = () => {
           B5B (Railway.app) - https://universe.b5b.xyz/graphql
         </option>
       </Select>
-      <HomeFeedWithApolloProvider />
+      <HomeFeedWithApolloProvider uri={uri} />
     </>
   );
 };
+
+export const HomeFeedWithUniverseSelect = withQueryParams(HomeFeedWithUniverse);
