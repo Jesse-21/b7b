@@ -91,10 +91,10 @@ export const HomeFeedWithUniverseSelect = () => {
         }}
       >
         <option value={config.DEFAULT_URI}>
-          Default - {config.DEFAULT_URI}
+          BEBverse - {config.DEFAULT_URI}
         </option>
         <option value="https://universe.b5b.xyz/graphql">
-          Self-hosted - https://universe.b5b.xyz/graphql
+          B5B (Railway.app) - https://universe.b5b.xyz/graphql
         </option>
       </Select>
       <HomeFeedWithApolloProvider uri={uri} />
