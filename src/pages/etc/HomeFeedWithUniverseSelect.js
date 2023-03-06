@@ -6,11 +6,21 @@ import {
   withPostFeedContext,
   PostFeedWrapper,
 } from "../../containers/post/PostFeedWithContext";
-import { PostFeedContextProvider } from "../../context/PostFeedContext";
+import {
+  PostFeedContextProvider,
+  usePostFeedContext,
+} from "../../context/PostFeedContext";
 import { config } from "../../config";
 
 const PostFeed = withPostFeedContext(PostFeedWrapper);
 
+const ResetOnUniverseChange = (universe) => {
+  const { resetPostFeed } = usePostFeedContext();
+  React.useEffect(() => {
+    resetPostFeed();
+  }, [universe]);
+  return <></>;
+};
 export const HomeFeedWithUniverseSelect = () => {
   const [uri, setUri] = React.useState(config.DEFAULT_URI);
 
@@ -31,8 +41,8 @@ export const HomeFeedWithUniverseSelect = () => {
         <option value={config.DEFAULT_URI}>
           Default - {config.DEFAULT_URI}
         </option>
-        <option value="https://universe.up.railway.app/graphql">
-          NSFW - https://universe.up.railway.app/graphql
+        <option value="https://universe.b5b.xyz/graphql">
+          Self-hosted - https://universe.b5b.xyz/graphql
         </option>
       </Select>
       <PostFeedContextProvider
@@ -48,6 +58,7 @@ export const HomeFeedWithUniverseSelect = () => {
         }}
       >
         <PostFeed />
+        <ResetOnUniverseChange />
       </PostFeedContextProvider>
     </>
   );

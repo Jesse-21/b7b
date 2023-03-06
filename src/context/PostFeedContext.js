@@ -8,6 +8,8 @@ export const PostFeedContext = React.createContext({
   isEnd: false,
   loading: false,
   error: null,
+  // eslint-disable-next-line no-empty-function
+  resetPostFeed: () => {},
 });
 PostFeedContext.displayName = "PostFeedContext";
 
@@ -44,6 +46,13 @@ export const PostFeedContextProvider = ({
     queryOptions
   );
 
+  const resetPostFeed = React.useCallback(async () => {
+    await fetchMore({
+      offset: 0,
+      limit,
+    });
+  }, [fetchMore, limit]);
+
   const postFeed = React.useMemo(() => {
     return data?.getPostFeed;
   }, [data]);
@@ -70,6 +79,7 @@ export const PostFeedContextProvider = ({
         next,
         isEnd,
         limit,
+        resetPostFeed,
       }}
     >
       {children}
