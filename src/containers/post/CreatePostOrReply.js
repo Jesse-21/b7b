@@ -1,7 +1,7 @@
 import React from "react";
 
 import { IconButton, Button } from "@chakra-ui/button";
-import { Flex, Box } from "@chakra-ui/layout";
+import { Flex, Box, Text } from "@chakra-ui/layout";
 import { ChevronRightIcon, ChatIcon } from "@chakra-ui/icons";
 import { Input, InputGroup, InputRightAddon } from "@chakra-ui/input";
 
@@ -137,7 +137,36 @@ export const CreatePostOrReplyWithSelectCommunity = ({
   );
   return (
     <Box>
-      <InputGroup size={size}>
+      <Text color="text.secondary" lineHeight={1.2} mb={1}>
+        Choose a community. Examples:{" "}
+        <Text
+          as="span"
+          onClick={() => setSelectedBebDomain("playground")}
+          _hover={{ cursor: "pointer" }}
+          color="blue.500"
+        >
+          playground
+        </Text>
+        ,{" "}
+        <Text
+          as="span"
+          onClick={() => setSelectedBebDomain("wholesome-memes")}
+          _hover={{ cursor: "pointer" }}
+          color="blue.500"
+        >
+          wholesome-memes
+        </Text>
+        ,{" "}
+        <Text
+          as="span"
+          onClick={() => setSelectedBebDomain("music")}
+          _hover={{ cursor: "pointer" }}
+          color="blue.500"
+        >
+          music
+        </Text>
+      </Text>
+      <InputGroup size={size} mb={2}>
         <Input
           placeholder="Input a community"
           value={selectedBebDomain}

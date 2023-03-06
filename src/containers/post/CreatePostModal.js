@@ -22,7 +22,11 @@ export const CreatePostModal = ({ isOpen, onClose }) => {
       onClose={onClose}
       isCentered
       header={<>Create Post</>}
-      footer={<Button variant={"ghost"}>Cancel</Button>}
+      footer={
+        <Button variant={"ghost"} onClick={onClose}>
+          Cancel
+        </Button>
+      }
     >
       <ModalBody>
         <CreatePostOrReplyWithSelectCommunity />
