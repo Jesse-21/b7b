@@ -1,8 +1,7 @@
 import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Text } from "@chakra-ui/layout";
 import { Select } from "@chakra-ui/select";
-import { ApolloProvider } from "@apollo/client";
 
 import {
   withPostFeedContext,
@@ -13,7 +12,6 @@ import {
   usePostFeedContext,
 } from "../../context/PostFeedContext";
 import { config } from "../../config";
-import { makeDefaultApolloClient } from "../../helpers/make-apollo-client";
 
 const PostFeed = withPostFeedContext(PostFeedWrapper);
 
@@ -23,57 +21,6 @@ const ResetOnUniverseChange = (universe) => {
     resetPostFeed();
   }, [universe]);
   return <></>;
-};
-
-const withApolloProvider = (Component) => {
-  const Memo = React.memo(Component);
-
-  // eslint-disable-next-line react/display-name
-  return ({ uri = config.DEFAULT_URI }) => {
-    const [client, setClient] = React.useState(null);
-
-    React.useEffect(() => {
-      let isMounted = true;
-      if (uri) {
-        const _client = makeDefaultApolloClient(uri);
-        if (isMounted) {
-          setClient(_client);
-        }
-      }
-      return () => {
-        isMounted = false;
-      };
-    }, [uri]);
-
-    if (!client) return <>Resolving host for {uri}...</>;
-
-    return (
-      <ApolloProvider client={client}>
-        <Memo />
-      </ApolloProvider>
-    );
-  };
-};
-
-function useQuery() {
-  const { search } = useLocation();
-
-  return React.useMemo(() => new URLSearchParams(search), [search]);
-}
-
-const withQueryParams = (Component) => {
-  const Memo = React.memo(Component);
-
-  // eslint-disable-next-line react/display-name
-  return ({ children }) => {
-    const query = useQuery();
-    const uri =
-      query.get("uri") ||
-      window.localStorage.getItem("uri") ||
-      config.DEFAULT_URI;
-
-    return <Memo uri={uri}>{children}</Memo>;
-  };
 };
 
 const HomeFeed = () => {
@@ -92,8 +39,6 @@ const HomeFeed = () => {
     </PostFeedContextProvider>
   );
 };
-
-const HomeFeedWithApolloProvider = withApolloProvider(HomeFeed);
 
 export const HomeFeedWithUniverse = ({ uri }) => {
   const navigate = useNavigate();
@@ -127,9 +72,9 @@ export const HomeFeedWithUniverse = ({ uri }) => {
           B5B (Railway.app) - https://universe.b5b.xyz/graphql
         </option>
       </Select>
-      <HomeFeedWithApolloProvider uri={uri} />
+      <HomeFeed />
     </>
   );
 };
 
-export const HomeFeedWithUniverseSelect = withQueryParams(HomeFeedWithUniverse);
+export const HomeFeedWithUniverseSelect = HomeFeedWithUniverse;

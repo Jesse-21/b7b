@@ -4,7 +4,10 @@ import { SearchDimensionInput } from "../components/input/SearchDimensionInput";
 
 import { HomeFeedWithUniverseSelect } from "./etc/HomeFeedWithUniverseSelect";
 
-export const Home = () => {
+import { withUriQueryParams } from "../helpers/hoc/withUriQueryParams";
+import { withUriApolloProvider } from "../helpers/hoc/withUriApolloProvider";
+
+export const HomeContent = () => {
   return (
     <Box
       display={"flex"}
@@ -129,3 +132,5 @@ export const Home = () => {
     </Box>
   );
 };
+
+export const Home = withUriQueryParams(withUriApolloProvider(HomeContent));
