@@ -1,4 +1,5 @@
 import { Text, Box, Link } from "@chakra-ui/layout";
+import { Button } from "@chakra-ui/button";
 import { SearchDimensionInput } from "../components/input/SearchDimensionInput";
 
 import { HomeFeedWithUniverseSelect } from "./etc/HomeFeedWithUniverseSelect";
@@ -107,6 +108,22 @@ export const Home = () => {
             B7B are not responsible for the content of dimensions. Contact the
             host of the appropriate dimension to report any concerns.
           </Text>
+        </Box>
+        <Box mt={4}>
+          <Button w="100%" rounded="full" colorScheme={"pink"}>
+            Create Post
+          </Button>
+          <Button
+            w="100%"
+            rounded="full"
+            variant={"outline"}
+            mt={2}
+            as="a"
+            href="https://beb.domains"
+            target="_blank"
+          >
+            Create Community
+          </Button>
         </Box>
       </Box>
     </Box>
