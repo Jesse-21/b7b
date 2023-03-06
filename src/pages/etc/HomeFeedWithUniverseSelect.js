@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Text } from "@chakra-ui/layout";
 import { Select } from "@chakra-ui/select";
+import amplitude from "amplitude-js";
 
 import {
   withPostFeedContext,
@@ -24,6 +25,10 @@ const ResetOnUniverseChange = (universe) => {
 };
 
 const HomeFeed = () => {
+  React.useEffect(() => {
+    amplitude.getInstance().logEvent("B7B Feed Load");
+  }, []);
+
   return (
     <PostFeedContextProvider
       filters={{
