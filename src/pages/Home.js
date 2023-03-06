@@ -122,7 +122,7 @@ export const HomeContent = ({ uri }) => {
               href="https://beb.domains"
               target="_blank"
             >
-              Create Community
+              Create Domain
             </Button>
           </Box>
         </Box>
