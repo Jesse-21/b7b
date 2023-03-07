@@ -123,7 +123,7 @@ export const HomeContent = ({ uri }) => {
               href="https://beb.domains"
               target="_blank"
             >
-              Create Free Domain
+              Create a Free Domain
             </Button>
           </Box>
         </Box>
