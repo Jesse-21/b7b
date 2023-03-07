@@ -46,7 +46,8 @@
   },
   "scripts": {
     "dev": "GENERATE_SOURCEMAP=false PORT=4000 react-scripts start",
-    "deploy": "PUBLIC_URL=https://b7b.xyz react-scripts build && rm -rf docs/static/* && cp -R build/* docs",
+    "deploy-dev": "rm -rf build && PUBLIC_URL=https://b5b.xyz react-scripts build && rm -rf docs/static/* && cp -R build/* docs",
+    "deploy-prod": "rm -rf build && PUBLIC_URL=https://b7b.xyz react-scripts build && rm -rf prod/static/* && cp -R build/* prod",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "start": "node server.js"

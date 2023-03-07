@@ -5,13 +5,13 @@
 
 const express = require("express");
 const app = express();
-app.use(express.static("docs"));
+app.use(express.static("prod"));
 const fs = require("fs");
 
 // route everything to the index.html file
 app.get("*", (req, res) => {
   // read the index.html file from the docs directory as a string
-  const index = fs.readFileSync("docs/index.html", "utf8");
+  const index = fs.readFileSync("prod/index.html", "utf8");
   let html = index;
 
   if (req.originalUrl) {
