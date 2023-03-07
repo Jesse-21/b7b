@@ -14,8 +14,6 @@ app.get("*", (req, res) => {
   const index = fs.readFileSync("docs/index.html", "utf8");
   let html = index;
 
-  console.log(req.originalUrl);
-
   if (req.originalUrl) {
     const title = "B7B, an open-source BEB dimension browser";
 
