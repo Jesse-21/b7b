@@ -8,7 +8,8 @@ export const PostOrReplyRichBlockImage = ({
   size = "xs",
 }) => {
   const { isOpen, onClose, onToggle } = useDisclosure();
-  const block = _block.image;
+  const block = _block?.image;
+  if (!block) return <></>;
   return (
     <Flex
       width="100%"
