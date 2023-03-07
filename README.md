@@ -4,7 +4,16 @@ _See [bebverse/universe](https://github.com/bebverse/universe) for the active de
 
 <img src="./b7b_logo.png" width="200" />
 
-B7B is a static web client for the open BEB Protocol. It is not tied to or centralized to BEBverse servers, and uses an open-source [resolver contract](https://github.com/bebverse/contracts) to browse and query dimensions.
+[B7B](https://b7b.xyz) is a static web client for the open BEB Protocol. It is not tied to or centralized to BEBverse servers, and uses an open-source [resolver contract](https://github.com/bebverse/contracts) to browse and query dimensions.
+
+### Deployments:
+
+- **Production (railway server):** [b7b.xyz](https://b7b.xyz)
+  - Deployed manually with `railway up`, served with `yarn start`.
+- _Development:_ [b5b.xyz](https://b5b.xyz)
+  - Latest commit, deployed from `docs/` to Github Pages
+- _B5B Universe Development:_ [universe.b5b.xyz/graphql](https://universe.b5b.xyz/graphql)
+  - Deployed manually with `railway up` using [bebverse/universe](https://github.com/bebverse/universe)
 
 ## Contribution Guidelines
 
@@ -22,9 +31,11 @@ $ yarn dev
 
 ### Testing Production
 
-Production is static files with hash routing, you can serve these files with any tool, e.g.:
+Production is comprised of static files, you can serve these files with any tool, e.g.:
 
 ```
 $ cd docs
 $ python3 -m http.server
 ```
+
+or `yarn start`.
