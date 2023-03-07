@@ -8,9 +8,7 @@ const app = express();
 app.use(express.static("prod"));
 const fs = require("fs");
 
-// route everything to the index.html file
 app.get("*", (req, res) => {
-  // read the index.html file from the docs directory as a string
   const index = fs.readFileSync("prod/index.html", "utf8");
   let html = index;
 
@@ -18,14 +16,12 @@ app.get("*", (req, res) => {
     const title = "B7B, an open-source BEB dimension browser";
 
     const newTitle = req.originalUrl.split("/")[1] + " - " + title;
-    // replace the string title with the req.query.url
     html = index.replace(
       `<title>${title}</title>`,
       `<title>${newTitle}</title>`
     );
   }
 
-  // send the modified html file to the client
   res.send(html);
 });
 
