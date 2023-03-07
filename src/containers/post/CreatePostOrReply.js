@@ -1,5 +1,6 @@
 import React from "react";
 import debounce from "lodash/debounce";
+import { useLazyQuery } from "@apollo/client";
 import { IconButton, Button } from "@chakra-ui/button";
 import { Flex, Box, Text } from "@chakra-ui/layout";
 import { ChevronRightIcon, ChatIcon } from "@chakra-ui/icons";
@@ -10,8 +11,9 @@ import { RichEditor } from "../../components/richText/RichEditor";
 import { useErrorToast } from "../../helpers/hooks/useErrorToast";
 import { useRichEditor } from "../../helpers/hooks/richText/useRichEditor";
 import { useCreatePostOrReply } from "../../helpers/hooks/useCreatePostOrReply";
-
 import { getDimensionHostUri } from "../../helpers/make-apollo-client";
+
+import { GET_COMMUNITY_ID_BY_DOMAIN_OR_TOKEN_ID } from "../../graphql/queries/GET_COMMUNITY_ID_BY_DOMAIN_OR_TOKEN_ID";
 
 export const CreatePostOrReply = ({
   parentId,
@@ -125,15 +127,30 @@ export const CreatePostOrReply = ({
   );
 };
 
-const ChangeCommunity = ({ bebdomain, setUri, setLoading }) => {
+const ChangeCommunity = ({ bebdomain, setUri, setLoading, setCommunityId }) => {
+  const [getCommunityByBebdomain] = useLazyQuery(
+    GET_COMMUNITY_ID_BY_DOMAIN_OR_TOKEN_ID
+  );
   const debounceGetUri = React.useCallback(
     debounce(() => {
-      getDimensionHostUri(bebdomain).then((uri) => {
-        setUri(uri?.toString());
-        setLoading(false);
+      getDimensionHostUri(bebdomain).then((_uri) => {
+        setUri(_uri?.toString());
+        getCommunityByBebdomain({
+          variables: { bebdomain, tld: "beb" },
+          skip: !bebdomain || !_uri,
+          context: {
+            uri: _uri,
+          },
+          onCompleted: (_data) => {
+            setLoading(false);
+            setCommunityId(
+              _data?.CommunityQuery?.getCommunityByDomainOrTokenId?._id
+            );
+          },
+        });
       });
     }, 300),
-    [bebdomain, setUri, setLoading]
+    [bebdomain, setUri, setLoading, setCommunityId, getCommunityByBebdomain]
   );
 
   React.useEffect(() => {
@@ -160,15 +177,11 @@ export const CreatePostOrReplyWithSelectCommunity = ({
     bebdomain || "playground"
   );
   const [uri, setUri] = React.useState("");
+  const [communityId, setCommunityId] = React.useState("");
   const [loading, setLoading] = React.useState(false);
 
   return (
     <Box>
-      <ChangeCommunity
-        bebdomain={selectedBebDomain}
-        setUri={setUri}
-        setLoading={setLoading}
-      />
       <Text color="text.secondary" lineHeight={1.2} mb={1}>
         Choose a community. Examples:{" "}
         <Text
@@ -206,7 +219,20 @@ export const CreatePostOrReplyWithSelectCommunity = ({
         ></Input>
         <InputRightAddon>.beb</InputRightAddon>
       </InputGroup>
-      <CreatePostOrReply {...props} size={size} disabled={loading} uri={uri} />
+      <CreatePostOrReply
+        {...props}
+        size={size}
+        disabled={loading || !communityId}
+        uri={uri}
+        communityId={communityId}
+      />
+      <ChangeCommunity
+        bebdomain={selectedBebDomain}
+        setUri={setUri}
+        setLoading={setLoading}
+        setCommunityId={setCommunityId}
+        uri={uri}
+      />
     </Box>
   );
 };
