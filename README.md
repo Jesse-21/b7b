@@ -8,7 +8,7 @@ _See [bebverse/universe](https://github.com/bebverse/universe) for the active de
 
 ### Deployments:
 
-- **Production (railway server):** [b7b.xyz](https://b7b.xyz)
+- **Production:** [b7b.xyz](https://b7b.xyz)
   - Deployed manually with `railway up`, served with `yarn start`.
 - _Development:_ [b5b.xyz](https://b5b.xyz)
   - Latest commit, deployed from `docs/` to Github Pages
