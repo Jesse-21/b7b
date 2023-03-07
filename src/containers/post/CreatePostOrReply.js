@@ -75,7 +75,7 @@ export const CreatePostOrReply = ({
     });
 
     if (res?.data.createPostOrReplyForAccount?.success && !editor.isDestroyed) {
-      callback?.();
+      callback?.(res?.data.createPostOrReplyForAccount?.post);
     }
   };
 
