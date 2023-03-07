@@ -1,5 +1,5 @@
 import React from "react";
-
+import debounce from "lodash/debounce";
 import { IconButton, Button } from "@chakra-ui/button";
 import { Flex, Box, Text } from "@chakra-ui/layout";
 import { ChevronRightIcon, ChatIcon } from "@chakra-ui/icons";
@@ -10,6 +10,8 @@ import { RichEditor } from "../../components/richText/RichEditor";
 import { useErrorToast } from "../../helpers/hooks/useErrorToast";
 import { useRichEditor } from "../../helpers/hooks/richText/useRichEditor";
 import { useCreatePostOrReply } from "../../helpers/hooks/useCreatePostOrReply";
+
+import { getDimensionHostUri } from "../../helpers/make-apollo-client";
 
 export const CreatePostOrReply = ({
   parentId,
@@ -24,7 +26,7 @@ export const CreatePostOrReply = ({
   // eslint-disable-next-line no-empty-function
   callback = () => {},
   editorProps = {},
-  context = {},
+  uri,
 }) => {
   const { loading, error, createPostOrReply } = useCreatePostOrReply();
   useErrorToast(error);
@@ -59,20 +61,16 @@ export const CreatePostOrReply = ({
       // this happens when the editor is destroyed on dev? see https://github.com/ueberdosis/tiptap/issues/1451
     }
 
-    const res = await createPostOrReply(
-      {
-        contentRaw: raw,
-        contentJson: json,
-        contentHtml: html,
-        channelId,
-        blocks,
-        parentId,
-        communityId,
-      },
-      {
-        context,
-      }
-    );
+    const res = await createPostOrReply({
+      contentRaw: raw,
+      contentJson: json,
+      contentHtml: html,
+      channelId,
+      blocks,
+      parentId,
+      communityId,
+      uri,
+    });
 
     if (res?.data.createPostOrReplyForAccount?.success && !editor.isDestroyed) {
       callback?.();
@@ -127,6 +125,32 @@ export const CreatePostOrReply = ({
   );
 };
 
+const ChangeCommunity = ({ bebdomain, setUri, setLoading }) => {
+  const debounceGetUri = React.useCallback(
+    debounce(() => {
+      getDimensionHostUri(bebdomain).then((uri) => {
+        setUri(uri?.toString());
+        setLoading(false);
+      });
+    }, 300),
+    [bebdomain, setUri, setLoading]
+  );
+
+  React.useEffect(() => {
+    let mounted = true;
+    setLoading(true);
+    if (mounted) {
+      debounceGetUri();
+    }
+
+    return () => {
+      mounted = false;
+    };
+  }, [bebdomain]);
+
+  return <></>;
+};
+
 export const CreatePostOrReplyWithSelectCommunity = ({
   size,
   bebdomain,
@@ -135,8 +159,16 @@ export const CreatePostOrReplyWithSelectCommunity = ({
   const [selectedBebDomain, setSelectedBebDomain] = React.useState(
     bebdomain || "playground"
   );
+  const [uri, setUri] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
+
   return (
     <Box>
+      <ChangeCommunity
+        bebdomain={selectedBebDomain}
+        setUri={setUri}
+        setLoading={setLoading}
+      />
       <Text color="text.secondary" lineHeight={1.2} mb={1}>
         Choose a community. Examples:{" "}
         <Text
@@ -174,7 +206,7 @@ export const CreatePostOrReplyWithSelectCommunity = ({
         ></Input>
         <InputRightAddon>.beb</InputRightAddon>
       </InputGroup>
-      <CreatePostOrReply {...props} size={size} />
+      <CreatePostOrReply {...props} size={size} disabled={loading} uri={uri} />
     </Box>
   );
 };

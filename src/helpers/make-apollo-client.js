@@ -45,13 +45,13 @@ const createDimensionAuthLink = (hostUri) => {
 
     return {
       headers: {
-        ...headers,
         authorization: token ? `Bearer ${token}` : "",
+        ...headers,
       },
     };
   });
 };
-const getDimensionHostUri = async (dimension) => {
+export const getDimensionHostUri = async (dimension) => {
   if (!dimension) {
     return config.DEFAULT_URI;
   }

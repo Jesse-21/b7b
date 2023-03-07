@@ -1,11 +1,13 @@
 /* eslint-disable no-inline-comments */
 import { useMutation, useApolloClient } from "@apollo/client";
+import Cookies from "js-cookie";
 
 import { CREATE_POST_OR_REPLY_FOR_ACCOUNT } from "../../graphql/mutations/CREATE_POST_OR_REPLY_FOR_ACCOUNT";
 import { CORE_POST_FIELDS } from "../../graphql/fragments/CORE_POST_FIELDS";
 import { CORE_COMMENT_FIELDS } from "../../graphql/fragments/CORE_COMMENT_FIELDS";
 
 import { makeOptimisticPost } from "../optimisticTemplates/post";
+import { createCookiesAuthKey } from "../create-cookies-auth-key";
 
 export const useCreatePostOrReply = () => {
   const [
@@ -14,7 +16,7 @@ export const useCreatePostOrReply = () => {
   ] = useMutation(CREATE_POST_OR_REPLY_FOR_ACCOUNT);
   const client = useApolloClient();
 
-  const createPostOrReply = (variables = {}, { context } = {}) => {
+  const createPostOrReply = (variables = {}) => {
     const post = makeOptimisticPost({
       contentRaw: variables.contentRaw,
       contentHtml: variables.contentHtml,
@@ -24,6 +26,18 @@ export const useCreatePostOrReply = () => {
       channelId: variables.channelId,
       client,
     });
+    let context = {};
+    if (variables.uri) {
+      const authKey = createCookiesAuthKey(variables.uri);
+      const token = Cookies.get(authKey);
+
+      context = {
+        uri: variables.uri,
+        headers: {
+          authorization: token ? `Bearer ${token}` : "",
+        },
+      };
+    }
 
     if (!variables.contentRaw && !variables.blocks?.length) return;
     return _createPostOrReply({
