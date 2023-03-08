@@ -6,16 +6,21 @@ import { ModalPrimary } from "../../components/modal/ModalPrimary";
 
 import { CreatePostOrReplyWithSelectCommunity } from "./CreatePostOrReply";
 
-export const CreatePostModalWrapper = ({ children }) => {
+export const CreatePostModalWrapper = ({ children, initialDomain }) => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   return (
     <>
       {children({ onClose, onOpen })}
-      <CreatePostModal isOpen={isOpen} onClose={onClose} onOpen={onOpen} />
+      <CreatePostModal
+        isOpen={isOpen}
+        onClose={onClose}
+        onOpen={onOpen}
+        initialDomain={initialDomain}
+      />
     </>
   );
 };
-export const CreatePostModal = ({ isOpen, onClose }) => {
+export const CreatePostModal = ({ isOpen, onClose, initialDomain }) => {
   return (
     <ModalPrimary
       isOpen={isOpen}
@@ -29,14 +34,18 @@ export const CreatePostModal = ({ isOpen, onClose }) => {
       }
     >
       <ModalBody>
-        <CreatePostOrReplyWithSelectCommunity />
+        <CreatePostOrReplyWithSelectCommunity initialDomain={initialDomain} />
       </ModalBody>
     </ModalPrimary>
   );
 };
-export const CreatePostModalButton = ({ children, ...props }) => {
+export const CreatePostModalButton = ({
+  children,
+  initialDomain,
+  ...props
+}) => {
   return (
-    <CreatePostModalWrapper>
+    <CreatePostModalWrapper initialDomain={initialDomain}>
       {({ onOpen }) => (
         <Button
           w="100%"
