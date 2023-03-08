@@ -12,7 +12,7 @@ export const withMustLogin = (Component) => {
     const { currentAccount } = useAuthContext();
 
     if (!currentAccount) {
-      return props.children || <ProfileButton />;
+      return props.children || <ProfileButton text={"Log In"}></ProfileButton>;
     }
 
     return <Memo {...props} />;

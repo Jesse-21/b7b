@@ -14,7 +14,7 @@ import { useAuthContext } from "../../context/AuthContext";
 
 import { shortenAddress } from "../../helpers/shorten-address";
 
-export const ProfileButton = ({ size = "large" }) => {
+export const ProfileButton = ({ size = "large", text = "Enter BEB" }) => {
   const { loading, currentAccount, onSignOut, activeAddress } =
     useAuthContext();
   const { dimension } = useParams();
@@ -90,7 +90,7 @@ export const ProfileButton = ({ size = "large" }) => {
         </Menu>
       ) : (
         <Button {...connectButtonPtops}>
-          {size === "large" ? <>Enter BEB</> : <MetamaskIcon />}
+          {size === "large" ? <>{text}</> : <MetamaskIcon />}
         </Button>
       )}
     </>
