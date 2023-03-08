@@ -5,6 +5,7 @@ import {
   darkTheme,
 } from "@rainbow-me/rainbowkit";
 import { AuthContextProvider } from "../../context/AuthContext";
+import { AuthModalContextProvider } from "../../context/AuthModal";
 import { WalletContextProvider } from "../../context/WalletContext";
 
 import "@rainbow-me/rainbowkit/styles.css";
@@ -25,8 +26,10 @@ export const DimensionRoutesLayout = ({ children }) => {
       >
         <WalletContextProvider>
           <AuthContextProvider>
-            <DimensionHeader />
-            {children}
+            <AuthModalContextProvider>
+              <DimensionHeader />
+              {children}
+            </AuthModalContextProvider>
           </AuthContextProvider>
         </WalletContextProvider>
       </RainbowKitProvider>
