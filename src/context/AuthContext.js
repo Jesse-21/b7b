@@ -24,7 +24,7 @@ export const AuthContext = React.createContext({
   onDisconnectWallet: () => {},
   currentWallet: null,
   setCurrentWallet: () => {},
-  onGuestSignin: () => {},
+  onGuestSignin: async () => {},
 });
 AuthContext.displayName = "AuthContext";
 
@@ -93,6 +93,7 @@ export const AuthContextProvider = ({ children }) => {
         if (!data?.authBySignature?.success) {
           throw new Error("Unable to sign in. Please try again later.");
         }
+
         Cookies.set(authKey, data.authBySignature.accessToken, {
           domain: config.COOKIE_DOMAIN,
           expires: 180,
@@ -148,13 +149,8 @@ export const AuthContextProvider = ({ children }) => {
   const onGuestSignin = async (wallet) => {
     toggleLoading(true);
     setError(null);
-    try {
-      // 1. get message to sign
-      const { data } = await getAccountSigninMessage({
-        address: wallet.address,
-        chainId: 1,
-      });
 
+    const onCompleted = async (data) => {
       const message = data?.AccountQuery?.getAccountSigninMessage;
 
       // 2. sign message
@@ -165,10 +161,18 @@ export const AuthContextProvider = ({ children }) => {
       await _onSigninCallback();
 
       toggleLoading(false);
-    } catch (e) {
-      toggleLoading(false);
-      setError(e.message);
-    }
+    };
+
+    // 1. get message to sign
+    getAccountSigninMessage(
+      {
+        address: wallet.address,
+        chainId: 1,
+      },
+      {
+        onCompleted,
+      }
+    );
   };
 
   const onSignOut = async () => {
