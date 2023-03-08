@@ -6,6 +6,7 @@ import { DimensionRoutesLayout } from "./layout/DimensionRoutesLayout";
 
 import { withUriQueryParams } from "../helpers/hoc/withUriQueryParams";
 import { withUriApolloProvider } from "../helpers/hoc/withUriApolloProvider";
+import { getInitialDomain } from "../helpers/get-initial-domain";
 
 import { CreatePostModalButton } from "../containers/post/CreatePostModal";
 export const HomeContent = ({ uri }) => {
@@ -111,7 +112,12 @@ export const HomeContent = ({ uri }) => {
             </Text>
           </Box>
           <Box mt={4}>
-            <CreatePostModalButton w="100%" rounded="full" colorScheme={"pink"}>
+            <CreatePostModalButton
+              w="100%"
+              rounded="full"
+              colorScheme={"pink"}
+              initialDomain={getInitialDomain(uri)}
+            >
               Create Post
             </CreatePostModalButton>
             <Button
