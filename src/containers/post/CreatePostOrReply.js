@@ -2,6 +2,7 @@ import React from "react";
 import debounce from "lodash/debounce";
 import { useLazyQuery } from "@apollo/client";
 import { IconButton, Button } from "@chakra-ui/button";
+import { useNavigate } from "react-router-dom";
 import { Flex, Box, Text } from "@chakra-ui/layout";
 import { ChevronRightIcon, ChatIcon } from "@chakra-ui/icons";
 import { Input, InputGroup, InputRightAddon } from "@chakra-ui/input";
@@ -141,10 +142,15 @@ const ChangeCommunity = ({ bebdomain, setUri, setLoading, setCommunityId }) => {
   const [getCommunityByBebdomain] = useLazyQuery(
     GET_COMMUNITY_ID_BY_DOMAIN_OR_TOKEN_ID
   );
+  const navigate = useNavigate();
   const debounceGetUri = React.useCallback(
     debounce(() => {
       getDimensionHostUri(bebdomain).then((_uri) => {
+        if (!_uri) return;
         setUri(_uri?.toString());
+        navigate(`?uri=${_uri?.toString()}`, {
+          relative: "path",
+        });
         getCommunityByBebdomain({
           variables: { bebdomain, tld: "beb" },
           skip: !bebdomain || !_uri,
@@ -180,11 +186,11 @@ const ChangeCommunity = ({ bebdomain, setUri, setLoading, setCommunityId }) => {
 
 export const CreatePostOrReplyWithSelectCommunity = ({
   size,
-  bebdomain,
+  initialDomain,
   ...props
 }) => {
   const [selectedBebDomain, setSelectedBebDomain] = React.useState(
-    bebdomain || "playground"
+    initialDomain || "playground"
   );
   const [uri, setUri] = React.useState("");
   const [communityId, setCommunityId] = React.useState("");
