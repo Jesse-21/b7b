@@ -84,7 +84,7 @@ const withCommunityAndAuthContext = (Component) => {
 
   // eslint-disable-next-line react/display-name
   return () => {
-    const { activeAddress } = useAuthContext();
+    const { currentAccount } = useAuthContext();
     const { community } = useCommunityContext();
     const { onRegisterCommunity, loading: registerCommunityLoading } =
       useRegisterCommunity();
@@ -100,8 +100,11 @@ const withCommunityAndAuthContext = (Component) => {
       const tokenOwnerAddress =
         data?.CommunityQuery?.getCommunityByDomainOrTokenId?.tokenOwnerAddress;
       if (!tokenOwnerAddress) return false;
-      return activeAddress?.toLowerCase() === tokenOwnerAddress?.toLowerCase();
-    }, [activeAddress, data]);
+      return (
+        currentAccount?.address?.address?.toLowerCase() ===
+        tokenOwnerAddress?.toLowerCase()
+      );
+    }, [currentAccount, data]);
     const isLoading = React.useMemo(() => {
       return loading || registerCommunityLoading;
     }, [loading, registerCommunityLoading]);
