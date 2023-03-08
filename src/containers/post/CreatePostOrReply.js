@@ -12,9 +12,26 @@ import { useErrorToast } from "../../helpers/hooks/useErrorToast";
 import { useRichEditor } from "../../helpers/hooks/richText/useRichEditor";
 import { useCreatePostOrReply } from "../../helpers/hooks/useCreatePostOrReply";
 import { getDimensionHostUri } from "../../helpers/make-apollo-client";
+import { withMustLogin } from "../../helpers/hoc/withMustLogin";
 
 import { GET_COMMUNITY_ID_BY_DOMAIN_OR_TOKEN_ID } from "../../graphql/queries/GET_COMMUNITY_ID_BY_DOMAIN_OR_TOKEN_ID";
 
+const CreatePostOrReplyButton = withMustLogin(
+  ({ onClick, isDisabled, isReply }) => {
+    return (
+      <Button
+        onClick={onClick}
+        isDisabled={isDisabled}
+        colorScheme={"pink"}
+        size={"md"}
+        rounded="full"
+        leftIcon={<ChatIcon />}
+      >
+        {isReply ? "Comment" : "Send"}
+      </Button>
+    );
+  }
+);
 export const CreatePostOrReply = ({
   parentId,
   content,
@@ -22,7 +39,6 @@ export const CreatePostOrReply = ({
   placeholder,
   disabled,
   size = "lg",
-  colorScheme = "purple",
   id,
   channelId,
   // eslint-disable-next-line no-empty-function
@@ -98,16 +114,11 @@ export const CreatePostOrReply = ({
         footer={
           <>
             {size === "lg" && (
-              <Button
+              <CreatePostOrReplyButton
                 onClick={onSubmitPostOrReply}
                 isDisabled={loading || disabled}
-                colorScheme={colorScheme}
-                size={"md"}
-                rounded="full"
-                leftIcon={<ChatIcon />}
-              >
-                {parentId ? "Comment" : "Send"}
-              </Button>
+                isReply={!!parentId}
+              />
             )}
           </>
         }
@@ -118,7 +129,6 @@ export const CreatePostOrReply = ({
           icon={<ChevronRightIcon />}
           onClick={onSubmitPostOrReply}
           isDisabled={loading || disabled}
-          colorScheme={colorScheme}
           size={"md"}
           rounded="2xl"
         ></IconButton>
