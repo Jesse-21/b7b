@@ -34,13 +34,11 @@ export const HomeContent = ({ uri }) => {
             BEB dimension browser
           </Text>
           <Text>
-            The BEB (Blockchain-Enabled Broadcast) protocol is an open messaging
-            protocol for communities. It is simple enough for anyone to deploy
-            their own self-hosted server, known as a {"dimension"} host. A
-            server can host multiple dimensions!
+            The BEB protocol is a decentralized social protocol for communities,
+            similar to reddit.
           </Text>
           <Text marginTop={2}>
-            Dimensions are queried against the{" "}
+            Dimensions (communities) are queried against the{" "}
             <Link
               target="_blank"
               rel="noopener noreferrer"
@@ -62,9 +60,9 @@ export const HomeContent = ({ uri }) => {
           </Text>
 
           <Box marginTop={4}>
-            <Text fontSize="xl" fontWeight="bold">
+            <Text fontWeight="bold">
               Here are some useful links to learn about the BEB protocol:
-              <Text fontSize="xl" fontWeight="bold">
+              <Text fontWeight="bold">
                 <Box marginLeft={10}>
                   <ul>
                     <li>
@@ -97,6 +95,26 @@ export const HomeContent = ({ uri }) => {
                         github.com/bebverse/b7b
                       </Link>
                     </li>
+                    <li>
+                      <Link
+                        color="blue.600"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href="https://beb.xyz"
+                      >
+                        BEBverse
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        color="blue.600"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href="https://beb.domains"
+                      >
+                        BEB Dimensions
+                      </Link>
+                    </li>
                   </ul>
                 </Box>
               </Text>
@@ -104,11 +122,14 @@ export const HomeContent = ({ uri }) => {
           </Box>
 
           <Box marginTop={4}>
-            <Text fontSize="md">
-              <b>Disclaimer:</b> B7B is a browser for BEB dimensions, which are
-              entirely self-hosted by third-parties. The developers and hosts of
-              B7B are not responsible for the content of dimensions. Contact the
-              host of the appropriate dimension to report any concerns.
+            <Text fontSize="sm">
+              <i>
+                <b>Disclaimer:</b> B7B is a browser for BEB dimensions, which
+                are entirely self-hosted by third-parties. The developers and
+                hosts of B7B are not responsible for the content of dimensions.
+                Contact the host of the appropriate dimension to report any
+                concerns.
+              </i>
             </Text>
           </Box>
           <Box mt={4}>
