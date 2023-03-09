@@ -23,9 +23,9 @@ export const GuestLogin = () => {
     setWallet(generatedWallet);
   }, []);
 
-  const onClick = React.useCallback(async () => {
+  const onClick = React.useCallback(() => {
     if (wallet) {
-      await onGuestSignin(wallet);
+      onGuestSignin(wallet);
     }
   }, [wallet, onGuestSignin]);
 

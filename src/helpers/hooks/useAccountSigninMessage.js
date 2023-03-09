@@ -9,13 +9,13 @@ export const useAccountSigninMessage = () => {
     { loading: getAccountLoading, error: getAccountError, data },
   ] = useLazyQuery(GET_ACCOUNT_SIGNIN_MESSAGE);
 
-  const getAccountSigninMessage = ({ address, chainId }, opts = {}) => {
+  const getAccountSigninMessage = ({ address, chainId }) => {
     return _getAccountSigninMessage({
       variables: {
         address,
         chainId,
       },
-      ...opts,
+      skip: !address || !chainId,
     });
   };
 
