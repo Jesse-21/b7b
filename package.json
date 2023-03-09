@@ -1,8 +1,9 @@
 {
   "name": "app",
+  "author": "Beb, inc",
   "version": "0.1.0",
   "license": "AGPL-3.0",
-  "private": true,
+  "private": false,
   "homepage": "https://b7b.xyz",
   "dependencies": {
     "@apollo/client": "^3.7.7",
