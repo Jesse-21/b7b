@@ -44,7 +44,7 @@ export const ApproveWalletSignIn = () => {
           onClick={onSignIn}
           isDisabled={loading || !activeAddress}
         >
-          Login/Join
+          Join or Login
         </Button>
       </Flex>
       <ModalFooter mt={4}>

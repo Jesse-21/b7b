@@ -35,7 +35,7 @@ export const AuthModal = () => {
       isCentered
       header={
         <>
-          {step === AuthModalSteps.CONNECT && "Login/Join"}
+          {step === AuthModalSteps.CONNECT && "Join or Login"}
           {(step === AuthModalSteps.SIGN_IN ||
             step === AuthModalSteps.EMAIL_SIGN_IN) && (
             <Flex>
