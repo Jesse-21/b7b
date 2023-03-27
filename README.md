@@ -2,7 +2,7 @@
 
 _See [bebverse/universe](https://github.com/bebverse/universe) for the active development of BEB dimensions._
 
-<img src="./b7b_logo.png" width="200" />
+<img src="./b7b_logo.png" width="201" />
 
 [B7B](https://b7b.xyz) is a static web client for the open BEB Protocol. It is not tied to or centralized to BEBverse servers, and uses an open-source [resolver contract](https://github.com/bebverse/contracts) to browse and query dimensions.
 
