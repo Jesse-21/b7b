@@ -44,7 +44,7 @@ export const useBasicEditor = ({
       ParagraphExtended,
       Text,
       Link.configure({
-        protocols: ["farcaster"],
+        protocols: [{ scheme: "farcaster", optionalSlashes: true }],
         autolink: true,
         linkOnPaste: true,
         HTMLAttributes: {
