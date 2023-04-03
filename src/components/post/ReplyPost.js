@@ -60,6 +60,7 @@ export const ReplyPost = ({ post, index }) => {
         <PostRichContent
           content={post?.richContent?.content}
           blocks={post?.richContent?.blocks}
+          isHidden={post?.isHidden}
         />
       </Box>
       <ReplyPostFooterMemo
