@@ -33,12 +33,9 @@ export const HomeContent = ({ uri }) => {
             </Link>{" "}
             BEB dimension browser
           </Text>
-          <Text>
-            The BEB protocol is a decentralized social protocol for communities,
-            similar to reddit.
-          </Text>
+          <Text>BEB is an abstract, decentralized social protocol.</Text>
           <Text marginTop={2}>
-            Dimensions (communities) are queried against the{" "}
+            Dimensions (domains) are queried against the{" "}
             <Link
               target="_blank"
               rel="noopener noreferrer"
