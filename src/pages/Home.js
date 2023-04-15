@@ -33,7 +33,10 @@ export const HomeContent = ({ uri }) => {
             </Link>{" "}
             BEB dimension browser
           </Text>
-          <Text>BEB is an abstract, decentralized social protocol.</Text>
+          <Text>
+            BEB is an abstract, decentralized social protocol for a post-AI
+            world.
+          </Text>
           <Text marginTop={2}>
             Dimensions (domains) are queried against the{" "}
             <Link
