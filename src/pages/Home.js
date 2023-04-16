@@ -150,7 +150,7 @@ export const HomeContent = ({ uri }) => {
               href="https://beb.domains"
               target="_blank"
             >
-              Create a Free Domain
+              Create a Free Dimension
             </Button>
           </Box>
         </Box>
