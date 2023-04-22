@@ -96,15 +96,18 @@ const withCommunityAndAuthContext = (Component) => {
       skip: !community?.bebdomain,
     });
 
+    const tokenOwnerAddress = React.useMemo(() => {
+      return data?.CommunityQuery?.getCommunityByDomainOrTokenId
+        ?.tokenOwnerAddress;
+    }, [data]);
+
     const isOwner = React.useMemo(() => {
-      const tokenOwnerAddress =
-        data?.CommunityQuery?.getCommunityByDomainOrTokenId?.tokenOwnerAddress;
       if (!tokenOwnerAddress) return false;
       return (
         currentAccount?.address?.address?.toLowerCase() ===
         tokenOwnerAddress?.toLowerCase()
       );
-    }, [currentAccount, data]);
+    }, [currentAccount, tokenOwnerAddress]);
     const isLoading = React.useMemo(() => {
       return loading || registerCommunityLoading;
     }, [loading, registerCommunityLoading]);
@@ -121,7 +124,7 @@ const withCommunityAndAuthContext = (Component) => {
       <Memo
         loading={isLoading}
         isOwner={isOwner}
-        tokenOwnerAddress={community?.tokenOwnerAddress}
+        tokenOwnerAddress={tokenOwnerAddress}
         onRegisterCommunity={onRegisterCommunityClick}
       />
     );
