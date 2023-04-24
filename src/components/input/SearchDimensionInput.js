@@ -18,9 +18,11 @@ export const SearchDimensionInput = ({ size, ...props }) => {
 
   const handleClick = React.useCallback(
     (e) => {
+      const domain = (value || "").replace(".beb", "").toLowerCase().trim();
+
       e.preventDefault();
       e.stopPropagation();
-      navigate(`/${(value || "").replace(".beb", "")}.beb`, { replace: true });
+      navigate(`/${domain}.beb`, { replace: true });
     },
     [navigate, value]
   );
