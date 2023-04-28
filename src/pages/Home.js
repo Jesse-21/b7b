@@ -34,8 +34,15 @@ export const HomeContent = ({ uri }) => {
             BEB dimension browser
           </Text>
           <Text>
-            BEB is an abstract, decentralized reputation protocol for AI
-            Defense.
+            <Link
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://docs.beb.xyz"
+              color="blue.600"
+            >
+              BEB 2.0
+            </Link>{" "}
+            is a decentralized social protocol for AI Defense.
           </Text>
           <Text marginTop={2}>
             Dimensions (domains) are queried against the{" "}
