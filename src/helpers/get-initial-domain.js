@@ -9,6 +9,8 @@ export const getInitialDomain = (uri) => {
     uri === "https://universe.b5b.xyz/graphql"
   ) {
     return "realcrypto";
+  } else if (uri === "https://beb.thirdy.xyz/graphql") {
+    return "thirdyverse";
   } else {
     return "playground";
   }
