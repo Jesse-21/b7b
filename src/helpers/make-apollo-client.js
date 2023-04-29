@@ -71,6 +71,10 @@ export const getDimensionHostUri = async (dimension) => {
       hostUri = "http://" + hostUri;
     }
     try {
+      // strip trailing slash
+      hostUri = hostUri.replace(/\/$/, "");
+      // strip whitespace
+      hostUri = hostUri.replace(/\s/g, "");
       uri = new URL(hostUri);
     } catch (e) {
       // invalid uri
