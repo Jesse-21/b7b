@@ -45,7 +45,7 @@ export const HomeContent = ({ uri }) => {
             is a decentralized social protocol for AI Defense.
           </Text>
           <Text marginTop={2}>
-            Dimensions (domains) are queried against the{" "}
+            Dimensions are queried against the{" "}
             <Link
               target="_blank"
               rel="noopener noreferrer"
@@ -54,7 +54,7 @@ export const HomeContent = ({ uri }) => {
             >
               deployed resolver contract
             </Link>
-            , which allows domain holders to map their domain to their{" "}
+            , which allows dimension holders to map their domain to their{" "}
             <Link
               target="_blank"
               rel="noopener noreferrer"
