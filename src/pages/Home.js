@@ -40,9 +40,8 @@ export const HomeContent = ({ uri }) => {
               href="https://docs.beb.xyz"
               color="blue.600"
             >
-              BEB 2.0
-            </Link>{" "}
-            is a decentralized social protocol for AI Defense.
+              BEB is a protocol creating trust in a trustless world.
+            </Link>
           </Text>
           <Text marginTop={2}>
             Dimensions are queried against the{" "}
