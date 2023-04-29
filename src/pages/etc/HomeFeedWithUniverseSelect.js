@@ -76,6 +76,9 @@ export const HomeFeedWithUniverse = ({ uri }) => {
         <option value="https://universe.b5b.xyz/graphql">
           B5B (Railway.app) - https://universe.b5b.xyz/graphql
         </option>
+        <option value="https://beb.thirdy.xyz/graphql">
+          Thirdyverse - https://beb.thirdy.xyz/graphql
+        </option>
       </Select>
       <HomeFeed />
     </>
