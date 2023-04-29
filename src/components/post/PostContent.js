@@ -10,9 +10,11 @@ export const PostContent = ({ content, isHidden }) => {
     );
   }
 
-  if (content?.raw?.length >= 0) {
+  if (content) {
     return (
-      <Text whiteSpace={"pre-wrap"} lineHeight="1.15">{`${content?.raw}`}</Text>
+      <Text whiteSpace={"pre-wrap"} lineHeight="1.15">{`${
+        content?.raw || ""
+      }`}</Text>
     );
   }
 
