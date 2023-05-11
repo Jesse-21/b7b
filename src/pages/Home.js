@@ -40,8 +40,8 @@ export const HomeContent = ({ uri }) => {
               href="https://docs.beb.xyz"
               color="blue.600"
             >
-              BEB is a decentralized social protocol creating trust in a
-              trustless AI-driven world.
+              BEB is a social protocol creating trust in a trustless AI-driven
+              world.
             </Link>
           </Text>
           <Text marginTop={2}>
