@@ -22,7 +22,7 @@ export const HomeContent = ({ uri }) => {
         </Box>
         <Box w={["100%", null, null, "sm"]} mb={[8, null, null, 0]}>
           <Text fontSize="3xl" fontWeight="bold" lineHeight={1.15} mb={4}>
-            An{" "}
+            B7B is an{" "}
             <Link
               target="_blank"
               rel="noopener noreferrer"
@@ -31,19 +31,19 @@ export const HomeContent = ({ uri }) => {
             >
               open-source
             </Link>{" "}
-            BEB dimension browser, similar to a decentralized reddit
+            reddit-like platform built on the decentralized BEB protocol
           </Text>
           <Text>
+            B7B is powered by{" "}
             <Link
               target="_blank"
               rel="noopener noreferrer"
               href="https://docs.beb.xyz"
               color="blue.600"
             >
-              BEB is a social protocol
+              BEB, a social protocol
             </Link>{" "}
-            creating trust in a world run by AI. B7B is powered by the BEB
-            protocol.
+            creating trust in a world run by AI.
           </Text>
           <Text marginTop={2}>
             Dimensions are queried against the{" "}
