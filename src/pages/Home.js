@@ -40,8 +40,10 @@ export const HomeContent = ({ uri }) => {
               href="https://docs.beb.xyz"
               color="blue.600"
             >
-              BEB is a social protocol creating trust in a world run by AI.
-            </Link>
+              BEB is a social protocol
+            </Link>{" "}
+            creating trust in a world run by AI. B7B is powered by the BEB
+            protocol.
           </Text>
           <Text marginTop={2}>
             Dimensions are queried against the{" "}

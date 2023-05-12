@@ -14,7 +14,7 @@ export const DimensionHeader = () => {
         py={2}
         px={[2, null, null, 4]}
       >
-        <Text fontWeight={"bold"} fontSize="2xl">
+        <Text fontWeight={"bold"} fontSize="2xl" paddingRight={"1"}>
           <a href="/">B7B</a>
         </Text>
         <Box display={"flex"}>
