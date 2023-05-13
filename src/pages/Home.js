@@ -134,9 +134,9 @@ export const HomeContent = ({ uri }) => {
               <i>
                 <b>Disclaimer:</b> B7B is a browser to explore BEB dimensions,
                 which are decentralized and self-hosted by third-parties. As a
-                result, the developers and hosts of B7B do not moderate or
-                control the content of dimensions, and does not assume
-                responsibility. Contact the host of the appropriate dimension to
+                result, the developers and hosts of B7B do not assume
+                responsibility as B7B does not moderate or control the content
+                of dimensions. Contact the host of the appropriate dimension to
                 report any concerns.
               </i>
             </Text>
