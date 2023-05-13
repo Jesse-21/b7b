@@ -59,10 +59,12 @@ export const ConnectToWallets = () => {
             )}
             <Text pt={2} fontSize="sm" color="text.secondary">
               <i>
-                B7B is a browser for BEB dimensions, which are entirely
-                self-hosted by third-parties. The developers and hosts of B7B
-                are not responsible for the content of dimensions. Contact the
-                host of the appropriate dimension to report any concerns.
+                B7B is a browser to explore BEB dimensions, which are
+                decentralized and self-hosted by third-parties. As a result, the
+                developers and hosts of B7B do not moderate or control the
+                content of dimensions, and does not assume responsibility.
+                Contact the host of the appropriate dimension to report any
+                concerns.
               </i>
             </Text>
           </VStack>
