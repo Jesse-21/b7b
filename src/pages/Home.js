@@ -43,7 +43,7 @@ export const HomeContent = ({ uri }) => {
             >
               BEB, a social protocol
             </Link>{" "}
-            creating trust in a world run by AI.
+            keeping the internet human.
           </Text>
           <Text marginTop={2}>
             Dimensions are queried against the{" "}
