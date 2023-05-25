@@ -41,7 +41,7 @@ export const HomeContent = ({ uri }) => {
               href="https://docs.beb.xyz"
               color="blue.600"
             >
-              BEB, a social protocol
+              bebOS, a social protocol
             </Link>{" "}
             keeping the internet human.
           </Text>
