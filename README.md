@@ -4,7 +4,7 @@ _See [bebverse/universe](https://github.com/bebverse/universe) for the active de
 
 <img src="./b7b_logo.png" width="200" />
 
-[B7B](https://b7b.xyz) is a static web client for the open BEB Protocol. It is not tied to or centralized to BEBverse servers, and uses an open-source [resolver contract](https://github.com/bebverse/contracts) to browse and query dimensions.
+[B7B](https://b7b.xyz) is a static web client for bebOS. It is not tied to or centralized to BEBverse servers, and uses an open-source [resolver contract](https://github.com/bebverse/contracts) to browse and query dimensions.
 
 ### Deployments:
 

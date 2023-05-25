@@ -31,7 +31,7 @@ export const HomeContent = ({ uri }) => {
             >
               open-source
             </Link>{" "}
-            reddit-like platform built on the decentralized BEB protocol
+            reddit-like platform built on bebOS
           </Text>
           <Text>
             B7B is powered by{" "}
@@ -69,7 +69,7 @@ export const HomeContent = ({ uri }) => {
 
           <Box marginTop={4}>
             <Text fontWeight="bold">
-              Here are some useful links to learn about the BEB protocol:
+              Here are some useful links to learn about bebOS:
               <Text fontWeight="bold">
                 <Box marginLeft={10}>
                   <ul>
