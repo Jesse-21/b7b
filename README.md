@@ -1,6 +1,6 @@
 # B7B - an open-source [BEB](https://github.com/bebverse/protocol) dimension browser
 
-_See [bebverse/universe](https://github.com/bebverse/universe) for the active development of BEB dimensions._
+_See [bebverse/universe](https://github.com/bebverse/universe) for the active development of bebOS dimensions._
 
 <img src="./b7b_logo.png" width="200" />
 

@@ -120,7 +120,7 @@ export const HomeContent = ({ uri }) => {
                         rel="noopener noreferrer"
                         href="https://beb.domains"
                       >
-                        BEB Dimensions
+                        bebOS Dimensions
                       </Link>
                     </li>
                   </ul>
@@ -132,7 +132,7 @@ export const HomeContent = ({ uri }) => {
           <Box marginTop={4}>
             <Text fontSize="sm">
               <i>
-                <b>Disclaimer:</b> B7B is a browser to explore BEB dimensions,
+                <b>Disclaimer:</b> B7B is a browser to explore bebOS dimensions,
                 which are decentralized and self-hosted by third-parties. As a
                 result, the developers and hosts of B7B do not assume
                 responsibility as B7B does not moderate or control the content
