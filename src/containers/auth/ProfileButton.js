@@ -35,7 +35,7 @@ export const ProfileButton = ({ size = "large", text = "Enter BEB" }) => {
   };
 
   const onDeveloperClick = () => {
-    window.open("https://github.com/bebverse/protocol", "_blank");
+    window.open("https://github.com/bebdomains/protocol", "_blank");
   };
   const onSettingsClick = () => {
     navigate(`/${dimension || "playground"}/settings`);

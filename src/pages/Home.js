@@ -26,7 +26,7 @@ export const HomeContent = ({ uri }) => {
             <Link
               target="_blank"
               rel="noopener noreferrer"
-              href="https://github.com/bebverse/b7b"
+              href="https://github.com/bebdomains/b7b"
               color="blue.600"
             >
               open-source
@@ -50,7 +50,7 @@ export const HomeContent = ({ uri }) => {
             <Link
               target="_blank"
               rel="noopener noreferrer"
-              href="https://github.com/bebverse/contracts/blob/main/src/Resolver.sol"
+              href="https://github.com/bebdomains/contracts/blob/main/src/Resolver.sol"
               color="blue.600"
             >
               deployed resolver contract
@@ -59,7 +59,7 @@ export const HomeContent = ({ uri }) => {
             <Link
               target="_blank"
               rel="noopener noreferrer"
-              href="https://github.com/bebverse/universe"
+              href="https://github.com/bebdomains/universe"
               color="blue.600"
             >
               self-hosted server
@@ -78,9 +78,9 @@ export const HomeContent = ({ uri }) => {
                         color="blue.600"
                         target="_blank"
                         rel="noopener noreferrer"
-                        href="https://github.com/bebverse/protocol"
+                        href="https://github.com/bebdomains/protocol"
                       >
-                        github.com/bebverse/protocol
+                        github.com/bebdomains/protocol
                       </Link>
                     </li>
                     <li>
@@ -88,9 +88,9 @@ export const HomeContent = ({ uri }) => {
                         color="blue.600"
                         target="_blank"
                         rel="noopener noreferrer"
-                        href="https://github.com/bebverse/universe"
+                        href="https://github.com/bebdomains/universe"
                       >
-                        github.com/bebverse/universe
+                        github.com/bebdomains/universe
                       </Link>
                     </li>
                     <li>
@@ -98,9 +98,9 @@ export const HomeContent = ({ uri }) => {
                         color="blue.600"
                         target="_blank"
                         rel="noopener noreferrer"
-                        href="https://github.com/bebverse/b7b"
+                        href="https://github.com/bebdomains/b7b"
                       >
-                        github.com/bebverse/b7b
+                        github.com/bebdomains/b7b
                       </Link>
                     </li>
                     <li>
