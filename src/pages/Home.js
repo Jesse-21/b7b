@@ -38,7 +38,7 @@ export const HomeContent = ({ uri }) => {
             <Link
               target="_blank"
               rel="noopener noreferrer"
-              href="https://docs.beb.xyz"
+              href="https://docs.beb.domains"
               color="blue.600"
             >
               bebOS, a social protocol
