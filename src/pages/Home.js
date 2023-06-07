@@ -43,7 +43,7 @@ export const HomeContent = ({ uri }) => {
             >
               bebOS, a social protocol
             </Link>{" "}
-            keeping the internet human.
+            simplifying crypto apps.
           </Text>
           <Text marginTop={2}>
             Dimensions are queried against the{" "}
