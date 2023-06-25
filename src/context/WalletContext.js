@@ -1,7 +1,7 @@
 /* eslint-disable no-inline-comments */
 /* eslint-disable no-empty-function */
 import React from "react";
-import { useAccount, useProvider, useSignMessage, useDisconnect } from "wagmi";
+import { useAccount, useSignMessage, useDisconnect } from "wagmi";
 import Cookies from "js-cookie";
 
 import { config } from "../config";
@@ -40,7 +40,6 @@ export const WalletContextProvider = ({ children }) => {
 
   const { address, isConnecting, isReconnecting, connector } = useAccount();
   const { disconnect } = useDisconnect();
-  const provider = useProvider();
   const { signMessageAsync } = useSignMessage();
 
   const isLoading = React.useMemo(() => {
@@ -92,7 +91,6 @@ export const WalletContextProvider = ({ children }) => {
         currentAddress: address,
         onSignMessage,
         currentWallet,
-        provider,
         error,
         setCurrentWallet,
         onDisconnect,

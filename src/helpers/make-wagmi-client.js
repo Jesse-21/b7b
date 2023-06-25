@@ -1,8 +1,8 @@
-import { configureChains, createClient, mainnet } from "wagmi";
+import { configureChains, createConfig, mainnet } from "wagmi";
 import { publicProvider } from "wagmi/providers/public";
 import { getDefaultWallets } from "@rainbow-me/rainbowkit";
 
-const { chains, provider, webSocketProvider } = configureChains(
+const { chains, provider, webSocketProvider, publicClient } = configureChains(
   [mainnet],
   [publicProvider()]
 );
@@ -10,13 +10,14 @@ const { chains, provider, webSocketProvider } = configureChains(
 const { connectors } = getDefaultWallets({
   appName: "b7b.xyz",
   chains,
+  // Grab one from https://cloud.walletconnect.com
+  projectId: "07d315dc8689f7c6c9fbef9a78fa6e1c",
 });
 
-export const wagmiClient = createClient({
+export const wagmiClient = createConfig({
   autoConnect: true,
   connectors,
-  provider,
-  webSocketProvider,
+  publicClient,
 });
 
 export const config = {

@@ -16,7 +16,7 @@ import { DimensionHeader } from "../../containers/navigation/DimensionHeader";
 
 export const DimensionRoutesLayout = ({ children }) => {
   return (
-    <WagmiConfig client={wagmiClient}>
+    <WagmiConfig config={wagmiClient}>
       <RainbowKitProvider
         chains={config.chains}
         theme={{
