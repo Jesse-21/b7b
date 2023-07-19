@@ -38,7 +38,7 @@ export const HomeContent = ({ uri }) => {
             <Link
               target="_blank"
               rel="noopener noreferrer"
-              href="https://docs.beb.domains"
+              href="https://docs.beb.quest"
               color="blue.600"
             >
               bebOS, a social protocol
@@ -118,7 +118,7 @@ export const HomeContent = ({ uri }) => {
                         color="blue.600"
                         target="_blank"
                         rel="noopener noreferrer"
-                        href="https://beb.domains"
+                        href="https://beb.quest"
                       >
                         bebOS Dimensions
                       </Link>
@@ -156,7 +156,7 @@ export const HomeContent = ({ uri }) => {
               variant={"outline"}
               mt={2}
               as="a"
-              href="https://beb.domains"
+              href="https://beb.quest"
               target="_blank"
             >
               Create a Free Dimension

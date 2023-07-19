@@ -31,7 +31,7 @@ export const ProfileButton = ({ size = "large", text = "Enter BEB" }) => {
   }, [step]);
 
   const onBebdomainClick = () => {
-    window.open("https://beb.domains", "_blank");
+    window.open("https://beb.quest", "_blank");
   };
 
   const onDeveloperClick = () => {
@@ -83,7 +83,7 @@ export const ProfileButton = ({ size = "large", text = "Enter BEB" }) => {
           </MenuButton>
           <MenuList>
             <MenuItem onClick={onSettingsClick}>Settings</MenuItem>
-            <MenuItem onClick={onBebdomainClick}>Register BEB.domains</MenuItem>
+            <MenuItem onClick={onBebdomainClick}>Register BEB.quest</MenuItem>
             <MenuItem onClick={onDeveloperClick}>Developers</MenuItem>
             <MenuItem onClick={onSignOut}>Log out</MenuItem>
           </MenuList>
