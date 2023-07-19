@@ -13,7 +13,7 @@ app.get("*", (req, res) => {
   let html = index;
 
   if (req.originalUrl) {
-    const title = "B7B, an open-source bebOS browser";
+    const title = "B7B, an open-source beb.quest browser";
 
     const newTitle = req.originalUrl.split("/")[1] + " - " + title;
     html = index.replace(

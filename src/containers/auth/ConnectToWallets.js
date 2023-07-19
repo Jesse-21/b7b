@@ -59,7 +59,7 @@ export const ConnectToWallets = () => {
             )}
             <Text pt={2} fontSize="sm" color="text.secondary">
               <i>
-                B7B is a browser to explore bebOS dimensions, which are
+                B7B is a browser to explore beb.quest dimensions, which are
                 decentralized and self-hosted by third-parties. As a result, the
                 developers and hosts do not assume responsibility as B7B does
                 not moderate or control the content of dimensions. Contact the

@@ -31,7 +31,7 @@ export const HomeContent = ({ uri }) => {
             >
               open-source
             </Link>{" "}
-            reddit-like platform built on bebOS
+            reddit-like platform built on beb.quest
           </Text>
           <Text>
             B7B is powered by{" "}
@@ -41,7 +41,7 @@ export const HomeContent = ({ uri }) => {
               href="https://docs.beb.quest"
               color="blue.600"
             >
-              bebOS, a social protocol
+              beb.quest, a social protocol
             </Link>{" "}
             simplifying crypto apps.
           </Text>
@@ -69,7 +69,7 @@ export const HomeContent = ({ uri }) => {
 
           <Box marginTop={4}>
             <Text fontWeight="bold">
-              Here are some useful links to learn about bebOS:
+              Here are some useful links to learn about beb.quest:
               <Text fontWeight="bold">
                 <Box marginLeft={10}>
                   <ul>
@@ -120,7 +120,7 @@ export const HomeContent = ({ uri }) => {
                         rel="noopener noreferrer"
                         href="https://beb.quest"
                       >
-                        bebOS Dimensions
+                        beb.quest Dimensions
                       </Link>
                     </li>
                   </ul>
@@ -132,12 +132,12 @@ export const HomeContent = ({ uri }) => {
           <Box marginTop={4}>
             <Text fontSize="sm">
               <i>
-                <b>Disclaimer:</b> B7B is a browser to explore bebOS dimensions,
-                which are decentralized and self-hosted by third-parties. As a
-                result, the developers and hosts of B7B do not assume
-                responsibility as B7B does not moderate or control the content
-                of dimensions. Contact the host of the appropriate dimension to
-                report any concerns.
+                <b>Disclaimer:</b> B7B is a browser to explore beb.quest
+                dimensions, which are decentralized and self-hosted by
+                third-parties. As a result, the developers and hosts of B7B do
+                not assume responsibility as B7B does not moderate or control
+                the content of dimensions. Contact the host of the appropriate
+                dimension to report any concerns.
               </i>
             </Text>
           </Box>
